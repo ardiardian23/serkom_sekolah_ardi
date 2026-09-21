@@ -1,222 +1,195 @@
-<div class="sidebar-wrapper active">
+<div id="sidebar" class="active">
 
-    <div class="sidebar-header">
-        <div class="d-flex justify-content-between">
+    <div class="sidebar-wrapper active">
 
-            <div class="logo">
-                <a href="{{ route('admin.index') }}">
-                    <img src="{{ asset('assets/images/logo/logo.png') }}"
-                         alt="Logo">
-                </a>
-            </div>
+        <div class="sidebar-header">
 
-            <div class="toggler">
-                <a href="#"
-                   class="sidebar-hide d-xl-none d-block">
-                    <i class="bi bi-x bi-middle"></i>
-                </a>
+            <div class="d-flex justify-content-between">
+
+                <div class="logo">
+                    <a href="{{ route('admin.index') }}">
+                        <img
+                            src="{{ asset('assets/images/logo/logo.png') }}"
+                            alt="Logo">
+                    </a>
+                </div>
+
+                <div class="toggler">
+                    <a href="#" class="sidebar-hide d-xl-none d-block">
+                        <i class="bi bi-x bi-middle"></i>
+                    </a>
+                </div>
+
             </div>
 
         </div>
-    </div>
 
 
-    <div class="sidebar-menu">
+        <div class="sidebar-menu">
 
-        <ul class="menu">
+            <ul class="menu">
 
-            {{-- ================= MENU UTAMA ================= --}}
-            <li class="sidebar-title">
-                MENU UTAMA
-            </li>
+                {{-- MENU --}}
+                <li class="sidebar-title">
+                    Menu
+                </li>
 
 
-            {{-- Dashboard --}}
-            <li class="sidebar-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
+                {{-- DASHBOARD --}}
+                <li class="sidebar-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
 
-                <a href="{{ route('admin.index') }}"
-                   class="sidebar-link">
+                    <a href="{{ route('admin.index') }}"
+                       class="sidebar-link">
 
-                    <i class="bi bi-grid-fill"></i>
+                        <i class="bi bi-grid-fill"></i>
 
-                    <span>Dashboard</span>
+                        <span>Dashboard</span>
 
-                </a>
+                    </a>
 
-            </li>
+                </li>
 
 
-            {{-- ================= PROFIL SEKOLAH ================= --}}
-            <li class="sidebar-title">
-                PROFIL SEKOLAH
-            </li>
+                {{-- PROFIL SEKOLAH --}}
+                <li class="sidebar-item has-sub">
 
+                    <a href="#" class="sidebar-link">
 
-            {{-- Profil Sekolah --}}
-            <li class="sidebar-item">
+                        <i class="bi bi-stack"></i>
 
-                <a href="#"
-                   class="sidebar-link">
+                        <span>Profil Sekolah</span>
 
-                    <i class="bi bi-building"></i>
+                    </a>
 
-                    <span>Profil Sekolah</span>
+                    <ul class="submenu">
 
-                </a>
+                        <li class="submenu-item">
 
-            </li>
+                            <a href="#">
+                                Profil sekolah
+                            </a>
 
+                        </li>
 
-            {{-- Visi & Misi --}}
-            <li class="sidebar-item">
+                        <li class="submenu-item">
 
-                <a href="#"
-                   class="sidebar-link">
+                            <a href="#">
+                                Visi dan Misi
+                            </a>
 
-                    <i class="bi bi-book"></i>
+                        </li>
 
-                    <span>Visi & Misi</span>
+                    </ul>
 
-                </a>
+                </li>
 
-            </li>
 
+                {{-- DATA SEKOLAH --}}
+                <li class="sidebar-item has-sub">
 
-            {{-- ================= DATA SEKOLAH ================= --}}
-            <li class="sidebar-title">
-                DATA SEKOLAH
-            </li>
+                    <a href="#" class="sidebar-link">
 
+                        <i class="bi bi-collection-fill"></i>
 
-            {{-- Guru --}}
-            <li class="sidebar-item">
+                        <span>Data Sekolah</span>
 
-                <a href="#"
-                   class="sidebar-link">
+                    </a>
 
-                    <i class="bi bi-person-badge-fill"></i>
+                    <ul class="submenu">
 
-                    <span>Guru & Staff</span>
+                        {{-- DATA GURU --}}
+                        <li class="submenu-item {{ request()->routeIs('admin.guru.*') ? 'active' : '' }}">
 
-                </a>
+                            <a href="{{ route('admin.guru.create') }}">
+                                Data Guru
+                            </a>
 
-            </li>
+                        </li>
 
 
-            {{-- Siswa --}}
-            <li class="sidebar-item">
+                        {{-- DATA SISWA --}}
+                        <li class="submenu-item
+                            {{ request()->routeIs('admin.siswa.*') ? 'active' : '' }}">
 
-                <a href="#"
-                   class="sidebar-link">
+                            <a href="{{ route('admin.siswa.create') }}">
+                                Data Siswa
+                            </a>
 
-                    <i class="bi bi-people-fill"></i>
+                        </li>
 
-                    <span>Siswa</span>
 
-                </a>
+                        {{-- EKSTRAKURIKULER --}}
+                        <li class="submenu-item">
 
-            </li>
+                            <a href="#">
+                                Ekstrakulikuler
+                            </a>
 
+                        </li>
 
-            {{-- Ekstrakurikuler --}}
-            <li class="sidebar-item">
+                    </ul>
 
-                <a href="#"
-                   class="sidebar-link">
+                </li>
 
-                    <i class="bi bi-trophy-fill"></i>
 
-                    <span>Ekstrakurikuler</span>
+                {{-- INFORMASI --}}
+                <li class="sidebar-item has-sub">
 
-                </a>
+                    <a href="#" class="sidebar-link">
 
-            </li>
+                        <i class="bi bi-grid-1x2-fill"></i>
 
+                        <span>Informasi</span>
 
-            {{-- ================= INFORMASI ================= --}}
-            <li class="sidebar-title">
-                INFORMASI
-            </li>
+                    </a>
 
+                    <ul class="submenu">
 
-            {{-- Berita --}}
-            <li class="sidebar-item">
+                        <li class="submenu-item">
 
-                <a href="#"
-                   class="sidebar-link">
+                            <a href="#">
+                                Berita
+                            </a>
 
-                    <i class="bi bi-newspaper"></i>
+                        </li>
 
-                    <span>Berita</span>
+                        <li class="submenu-item">
 
-                </a>
+                            <a href="#">
+                                Pengumuman
+                            </a>
 
-            </li>
+                        </li>
 
+                    </ul>
 
-            {{-- Pengumuman --}}
-            <li class="sidebar-item">
+                </li>
 
-                <a href="#"
-                   class="sidebar-link">
 
-                    <i class="bi bi-megaphone-fill"></i>
+                {{-- GALERI --}}
+                <li class="sidebar-item has-sub">
 
-                    <span>Pengumuman</span>
+                    <a href="#" class="sidebar-link">
 
-                </a>
+                        <i class="bi bi-hexagon-fill"></i>
 
-            </li>
+                        <span>Galeri</span>
 
+                    </a>
 
-            {{-- ================= GALERI ================= --}}
-            <li class="sidebar-title">
-                GALERI
-            </li>
+                </li>
 
+            </ul>
 
-            <li class="sidebar-item">
+        </div>
 
-                <a href="#"
-                   class="sidebar-link">
 
-                    <i class="bi bi-images"></i>
+        <button class="sidebar-toggler btn x">
 
-                    <span>Galeri</span>
+            <i data-feather="x"></i>
 
-                </a>
-
-            </li>
-
-
-            {{-- ================= PENGGUNA ================= --}}
-            <li class="sidebar-title">
-                PENGATURAN
-            </li>
-
-
-            {{-- User --}}
-            <li class="sidebar-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
-
-                <a href="{{ route('admin.user.index') }}"
-                   class="sidebar-link">
-
-                    <i class="bi bi-person-fill-gear"></i>
-
-                    <span>User</span>
-
-                </a>
-
-            </li>
-
-
-        </ul>
+        </button>
 
     </div>
-
-
-    <button class="sidebar-toggler btn x">
-        <i data-feather="x"></i>
-    </button>
 
 </div>

@@ -1,172 +1,130 @@
-@extends('layouts.admin')
 
-@section('title', 'Data User')
 
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="page-heading">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mazer Admin Dashboard</title>
 
-    <div class="page-title">
-        <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data User</h3>
-                <p class="text-subtitle text-muted">
-                    Kelola akun pengguna sistem.
-                </p>
-            </div>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css')}}">
 
-            <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb"
-                     class="breadcrumb-header float-start float-lg-end">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/iconly/bold.css')}}">
+
+    <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css')}}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg')}}" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
                             <a href="{{ route('admin.index') }}">
-                                Dashboard
+    <img src="{{ asset('assets/images/logo/logo.png') }}" alt="Logo">
+</a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item active ">
+                            <a href="{{ route('admin.index') }}" class="sidebar-link">
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">
-                            User
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Profil Sekolah</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="extra-component-avatar.html"> Profil sekolah</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="extra-component-sweetalert.html">Visi dan Misi</a>
+                                </li>                                                         
+                            </ul>
                         </li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
 
-</div>
 
-<div class="page-content">
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-collection-fill"></i>
+                                <span>Data Sekolah</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                   <a href="{{ route('admin.guru.create') }}"> Data Guru</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="{{ route('admin.siswa.create') }}">Data Siswa</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="extra-component-toastify.html">Ekstrakulikuler</a>
+                                </li>                                                         
+                            </ul>
+                        </li>
 
-    {{-- Pesan sukses --}}
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Informasi</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="layout-default.html">Berita</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="layout-vertical-1-column.html">Pengumuman</a>
+                                </li>                                                          
+                            </ul>
+                        </li>
 
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-            </button>
-        </div>
-    @endif
-
-    <section class="section">
-
-        <div class="card">
-
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="card-title">
-                    Data User
-                </h4>
-
-                <a href="{{ route('admin.user.create') }}"
-                   class="btn btn-primary">
-                    <i class="bi bi-plus-circle"></i>
-                    Tambah User
-                </a>
-            </div>
-
-            <div class="card-body">
-
-                <div class="table-responsive">
-
-                    <table class="table table-striped"
-                           id="table1">
-
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Username</th>
-                                <th>Role</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            @forelse($users as $user)
-
-                                <tr>
-
-                                    <td>
-                                        {{ $loop->iteration }}
-                                    </td>
-
-                                    <td>
-                                        {{ $user->username }}
-                                    </td>
-
-                                    <td>
-
-                                        @if($user->role == 'Admin')
-
-                                            <span class="badge bg-primary">
-                                                Admin
-                                            </span>
-
-                                        @else
-
-                                            <span class="badge bg-success">
-                                                Operator
-                                            </span>
-
-                                        @endif
-
-                                    </td>
-
-                                    <td>
-
-                                        <a href="{{ route('admin.user.show', $user->id_user) }}"
-                                           class="btn btn-info btn-sm">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-
-                                        <a href="{{ route('admin.user.edit', $user->id_user) }}"
-                                           class="btn btn-warning btn-sm">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-
-                                        <form action="{{ route('admin.user.destroy', $user->id_user) }}"
-                                              method="POST"
-                                              class="d-inline"
-                                              onsubmit="return confirm('Yakin ingin menghapus user ini?')">
-
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <button type="submit"
-                                                    class="btn btn-danger btn-sm">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-
-                                        </form>
-
-                                    </td>
-
-                                </tr>
-
-                            @empty
-
-                                <tr>
-                                    <td colspan="4"
-                                        class="text-center">
-                                        Belum ada data user.
-                                    </td>
-                                </tr>
-
-                            @endforelse
-
-                        </tbody>
-
-                    </table>
-
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-hexagon-fill"></i>
+                                <span>Galeri</span>
+                            </a>
+                        </li>                        
+                    </ul>
                 </div>
-
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
-
         </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
 
-    </section>
+            <div class="page-heading">
+                <h3>Selamat Datang di Website Sekolah</h3>
+            </div>
+            
+    <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 
-</div>
+    <script src="{{asset('assets/vendors/apexcharts/apexcharts.js')}}"></script>
+    <script src="{{asset('assets/js/pages/dashboard.js')}}"></script>
 
-@endsection
+    <script src="{{ asset('assets/js/main.js')}}"></script>
+</body>
+
+</html>
