@@ -52,35 +52,26 @@
 
                 {{-- PROFIL SEKOLAH --}}
                 <li class="sidebar-item has-sub">
-
                     <a href="#" class="sidebar-link">
-
                         <i class="bi bi-stack"></i>
-
                         <span>Profil Sekolah</span>
-
                     </a>
 
                     <ul class="submenu">
 
-                        <li class="submenu-item">
-
-                            <a href="#">
+                        <li class="submenu-item {{ request()->routeIs('profil.profil-sekolah.*') ? 'active' : '' }}">
+                            <a href="{{ route('profil.profil-sekolah.index') }}">
                                 Profil sekolah
                             </a>
-
                         </li>
 
-                        <li class="submenu-item">
-
-                            <a href="#">
+                        <li class="submenu-item {{ request()->routeIs('profil.profil-sekolah.*') ? 'active' : '' }}">
+                            <a href="{{ route('profil.profil-sekolah.edit') }}">
                                 Visi dan Misi
                             </a>
-
                         </li>
 
                     </ul>
-
                 </li>
 
 

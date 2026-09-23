@@ -4,14 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProfilSekolah extends Model
+class Profil extends Model
 {
+    //
     protected $table = 'profil_sekolah';
-
     protected $primaryKey = 'id_profil';
-
-    public $timestamps = false;
-
+    public $timestamps = true;
     protected $fillable = [
         'nama_sekolah',
         'kepala_sekolah',

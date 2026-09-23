@@ -28,7 +28,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="logo">
                             <a href="{{ route('admin.index') }}">
-    <img src="{{ asset('assets/images/logo/logo.png') }}" alt="Logo">
+    <span>SDN CITATAH</span>
 </a>
                         </div>
                         <div class="toggler">
@@ -47,20 +47,28 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
-                                <span>Profil Sekolah</span>
+                        <li class="sidebar-item has-sub">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-stack"></i>
+                        <span>Profil Sekolah</span>
+                    </a>
+
+                    <ul class="submenu">
+
+                        <li class="submenu-item">
+                            <a href="{{ route('profil.profil-sekolah.index') }}">
+                                Profil sekolah
                             </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html"> Profil sekolah</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">Visi dan Misi</a>
-                                </li>                                                         
-                            </ul>
                         </li>
+
+                        <li class="submenu-item">
+                            <a href="{{ route('profil.profil-sekolah.edit') }}">
+                                Visi dan Misi
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
 
 
                         <li class="sidebar-item  has-sub">
