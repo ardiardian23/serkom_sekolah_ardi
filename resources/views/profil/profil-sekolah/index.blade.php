@@ -7,14 +7,17 @@
 <div class="page-heading">
 
     <div class="page-title">
+
         <div class="row">
 
             <div class="col-12 col-md-6 order-md-1 order-last">
+
                 <h3>Profil Sekolah</h3>
 
                 <p class="text-subtitle text-muted">
-                    Informasi profil sekolah
+                    Informasi sekolah
                 </p>
+
             </div>
 
             <div class="col-12 col-md-6 order-md-2 order-first">
@@ -41,14 +44,20 @@
             </div>
 
         </div>
+
     </div>
 
 
-    {{-- Pesan sukses --}}
+    {{-- SUCCESS --}}
+
     @if(session('success'))
 
         <div class="alert alert-success">
+
+            <i class="bi bi-check-circle"></i>
+
             {{ session('success') }}
+
         </div>
 
     @endif
@@ -58,7 +67,6 @@
 
         <div class="card">
 
-            {{-- Header --}}
             <div class="card-header d-flex justify-content-between align-items-center">
 
                 <h4 class="card-title mb-0">
@@ -66,10 +74,10 @@
                 </h4>
 
                 <a href="{{ route('profil.profil-sekolah.edit') }}"
-                   class="btn btn-primary">
+                   class="btn btn-warning">
 
                     <i class="bi bi-pencil-square"></i>
-                    Edit Profil
+                    Edit
 
                 </a>
 
@@ -81,9 +89,11 @@
                 @if($profil)
 
                     {{-- FOTO DAN LOGO --}}
+
                     <div class="row mb-4">
 
-                        {{-- Foto Sekolah --}}
+                        {{-- FOTO SEKOLAH --}}
+
                         <div class="col-md-6 text-center">
 
                             <h6 class="mb-3">
@@ -92,37 +102,29 @@
 
                             @if($profil->foto)
 
-                                <img
-                                    src="{{ asset('assets/images/logo/' . $profil->foto) }}"
-                                    alt="Foto Sekolah"
-                                    style="
-                                        width: 220px;
-                                        height: 180px;
+                                <img src="{{ asset('storage/' . $profil->foto) }}"
+                                     alt="Foto Sekolah"
+                                     width="250"
+                                     height="170"
+                                     style="
                                         object-fit: cover;
-                                        border-radius: 12px;
-                                    "
-                                >
+                                        border-radius: 10px;
+                                        border: 1px solid #ddd;
+                                     ">
 
                             @else
 
-                                <div class="text-muted">
-
-                                    <i class="bi bi-image"
-                                       style="font-size: 60px;">
-                                    </i>
-
-                                    <p class="mt-2">
-                                        Belum ada foto sekolah
-                                    </p>
-
-                                </div>
+                                <p class="text-muted">
+                                    Foto belum tersedia
+                                </p>
 
                             @endif
 
                         </div>
 
 
-                        {{-- Logo Sekolah --}}
+                        {{-- LOGO SEKOLAH --}}
+
                         <div class="col-md-6 text-center">
 
                             <h6 class="mb-3">
@@ -131,29 +133,22 @@
 
                             @if($profil->logo)
 
-                                <img
-                                    src="{{ asset('storage/' . $profil->logo) }}"
-                                    alt="Logo Sekolah"
-                                    style="
-                                        width: 180px;
-                                        height: 180px;
+                                <img src="{{ asset('storage/' . $profil->logo) }}"
+                                     alt="Logo Sekolah"
+                                     width="170"
+                                     height="170"
+                                     style="
                                         object-fit: contain;
-                                    "
-                                >
+                                        border-radius: 10px;
+                                        border: 1px solid #ddd;
+                                        padding: 5px;
+                                     ">
 
                             @else
 
-                                <div class="text-muted">
-
-                                    <i class="bi bi-shield"
-                                       style="font-size: 60px;">
-                                    </i>
-
-                                    <p class="mt-2">
-                                        Belum ada logo sekolah
-                                    </p>
-
-                                </div>
+                                <p class="text-muted">
+                                    Logo belum tersedia
+                                </p>
 
                             @endif
 
@@ -165,49 +160,50 @@
                     <hr>
 
 
-                    {{-- DATA SEKOLAH --}}
+                    {{-- DATA --}}
+
                     <div class="row mt-4">
 
                         <div class="col-md-6">
 
-                            <div class="mb-3">
+                            <div class="mb-4">
 
-                                <strong>Nama Sekolah</strong>
+                                <h6>Nama Sekolah</h6>
 
-                                <p class="text-muted">
+                                <p>
                                     {{ $profil->nama_sekolah }}
                                 </p>
 
                             </div>
 
 
-                            <div class="mb-3">
+                            <div class="mb-4">
 
-                                <strong>Kepala Sekolah</strong>
+                                <h6>Kepala Sekolah</h6>
 
-                                <p class="text-muted">
+                                <p>
                                     {{ $profil->kepala_sekolah }}
                                 </p>
 
                             </div>
 
 
-                            <div class="mb-3">
+                            <div class="mb-4">
 
-                                <strong>NPSN</strong>
+                                <h6>NPSN</h6>
 
-                                <p class="text-muted">
+                                <p>
                                     {{ $profil->npsn }}
                                 </p>
 
                             </div>
 
 
-                            <div class="mb-3">
+                            <div class="mb-4">
 
-                                <strong>Tahun Berdiri</strong>
+                                <h6>Tahun Berdiri</h6>
 
-                                <p class="text-muted">
+                                <p>
                                     {{ $profil->tahun_berdiri }}
                                 </p>
 
@@ -218,33 +214,33 @@
 
                         <div class="col-md-6">
 
-                            <div class="mb-3">
+                            <div class="mb-4">
 
-                                <strong>Alamat</strong>
+                                <h6>Alamat</h6>
 
-                                <p class="text-muted">
+                                <p>
                                     {{ $profil->alamat }}
                                 </p>
 
                             </div>
 
 
-                            <div class="mb-3">
+                            <div class="mb-4">
 
-                                <strong>Kontak</strong>
+                                <h6>Kontak</h6>
 
-                                <p class="text-muted">
+                                <p>
                                     {{ $profil->kontak }}
                                 </p>
 
                             </div>
 
 
-                            <div class="mb-3">
+                            <div class="mb-4">
 
-                                <strong>Deskripsi</strong>
+                                <h6>Deskripsi</h6>
 
-                                <p class="text-muted">
+                                <p>
                                     {{ $profil->deskripsi }}
                                 </p>
 
@@ -259,37 +255,38 @@
 
 
                     {{-- VISI MISI --}}
-                    <h5 class="mb-3">
-                        Visi dan Misi
-                    </h5>
 
-                    <div class="border rounded p-3">
+                    <div class="mt-4">
 
-                        {!! nl2br(e($profil->visi_misi)) !!}
+                        <h5>
+                            Visi & Misi
+                        </h5>
+
+                        <div class="border rounded p-3 mt-3">
+
+                            {!! nl2br(e($profil->visi_misi)) !!}
+
+                        </div>
 
                     </div>
 
-
                 @else
 
-                    {{-- JIKA DATA BELUM ADA --}}
                     <div class="text-center py-5">
 
-                        <i class="bi bi-building fs-1 text-muted"></i>
-
-                        <h5 class="mt-3">
+                        <h5>
                             Data profil sekolah belum tersedia
                         </h5>
 
                         <p class="text-muted">
-                            Silakan tambahkan data profil sekolah.
+                            Silakan isi data profil sekolah.
                         </p>
 
                         <a href="{{ route('profil.profil-sekolah.edit') }}"
                            class="btn btn-primary">
 
                             <i class="bi bi-plus-circle"></i>
-                            Tambah Profil Sekolah
+                            Isi Profil Sekolah
 
                         </a>
 

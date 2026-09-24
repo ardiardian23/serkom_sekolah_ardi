@@ -11,10 +11,13 @@
         <div class="row">
 
             <div class="col-12 col-md-6 order-md-1 order-last">
+
                 <h3>Edit Profil Sekolah</h3>
+
                 <p class="text-subtitle text-muted">
-                    Perbarui informasi profil sekolah
+                    Kelola informasi profil sekolah
                 </p>
+
             </div>
 
             <div class="col-12 col-md-6 order-md-2 order-first">
@@ -51,12 +54,15 @@
     </div>
 
 
-    {{-- Error --}}
+    {{-- ERROR --}}
+
     @if($errors->any())
 
         <div class="alert alert-danger">
 
-            <ul class="mb-0">
+            <strong>Periksa data berikut:</strong>
+
+            <ul class="mb-0 mt-2">
 
                 @foreach($errors->all() as $error)
 
@@ -86,231 +92,227 @@
             <div class="card-body">
 
                 <form action="{{ route('profil.profil-sekolah.update') }}"
-                      method="POST">
+                      method="POST"
+                      enctype="multipart/form-data">
 
                     @csrf
+
                     @method('PUT')
 
 
-                    {{-- Nama Sekolah --}}
+                    {{-- NAMA SEKOLAH --}}
+
                     <div class="mb-3">
 
-                        <label for="nama_sekolah"
-                               class="form-label">
+                        <label class="form-label">
                             Nama Sekolah
                         </label>
 
                         <input type="text"
                                name="nama_sekolah"
-                               id="nama_sekolah"
-                               class="form-control @error('nama_sekolah') is-invalid @enderror"
+                               class="form-control"
                                value="{{ old('nama_sekolah', $profil->nama_sekolah ?? '') }}"
-                               placeholder="Masukkan nama sekolah">
-
-                        @error('nama_sekolah')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                               required>
 
                     </div>
 
 
-                    {{-- Kepala Sekolah --}}
+                    {{-- KEPALA SEKOLAH --}}
+
                     <div class="mb-3">
 
-                        <label for="kepala_sekolah"
-                               class="form-label">
+                        <label class="form-label">
                             Kepala Sekolah
                         </label>
 
                         <input type="text"
                                name="kepala_sekolah"
-                               id="kepala_sekolah"
-                               class="form-control @error('kepala_sekolah') is-invalid @enderror"
+                               class="form-control"
                                value="{{ old('kepala_sekolah', $profil->kepala_sekolah ?? '') }}"
-                               placeholder="Masukkan nama kepala sekolah">
-
-                        @error('kepala_sekolah')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                               required>
 
                     </div>
 
 
                     {{-- NPSN --}}
+
                     <div class="mb-3">
 
-                        <label for="npsn"
-                               class="form-label">
+                        <label class="form-label">
                             NPSN
                         </label>
 
                         <input type="text"
                                name="npsn"
-                               id="npsn"
-                               class="form-control @error('npsn') is-invalid @enderror"
+                               class="form-control"
                                value="{{ old('npsn', $profil->npsn ?? '') }}"
-                               placeholder="Masukkan NPSN">
-
-                        @error('npsn')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                               required>
 
                     </div>
 
 
-                    {{-- Tahun Berdiri --}}
+                    {{-- ALAMAT --}}
+
                     <div class="mb-3">
 
-                        <label for="tahun_berdiri"
-                               class="form-label">
-                            Tahun Berdiri
-                        </label>
-
-                        <input type="number"
-                               name="tahun_berdiri"
-                               id="tahun_berdiri"
-                               class="form-control @error('tahun_berdiri') is-invalid @enderror"
-                               value="{{ old('tahun_berdiri', $profil->tahun_berdiri ?? '') }}"
-                               placeholder="Contoh: 2005">
-
-                        @error('tahun_berdiri')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-
-                    </div>
-
-
-                    {{-- Alamat --}}
-                    <div class="mb-3">
-
-                        <label for="alamat"
-                               class="form-label">
-                            Alamat Sekolah
+                        <label class="form-label">
+                            Alamat
                         </label>
 
                         <textarea name="alamat"
-                                  id="alamat"
+                                  class="form-control"
                                   rows="3"
-                                  class="form-control @error('alamat') is-invalid @enderror"
-                                  placeholder="Masukkan alamat sekolah">{{ old('alamat', $profil->alamat ?? '') }}</textarea>
-
-                        @error('alamat')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                                  required>{{ old('alamat', $profil->alamat ?? '') }}</textarea>
 
                     </div>
 
 
-                    {{-- Kontak --}}
+                    {{-- KONTAK --}}
+
                     <div class="mb-3">
 
-                        <label for="kontak"
-                               class="form-label">
+                        <label class="form-label">
                             Kontak
                         </label>
 
                         <input type="text"
                                name="kontak"
-                               id="kontak"
-                               class="form-control @error('kontak') is-invalid @enderror"
+                               class="form-control"
                                value="{{ old('kontak', $profil->kontak ?? '') }}"
-                               placeholder="Contoh: 081234567890">
-
-                        @error('kontak')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                               required>
 
                     </div>
 
 
-                    {{-- Deskripsi --}}
+                    {{-- TAHUN BERDIRI --}}
+
                     <div class="mb-3">
 
-                        <label for="deskripsi"
-                               class="form-label">
-                            Deskripsi Sekolah
+                        <label class="form-label">
+                            Tahun Berdiri
+                        </label>
+
+                        <input type="number"
+                               name="tahun_berdiri"
+                               class="form-control"
+                               value="{{ old('tahun_berdiri', $profil->tahun_berdiri ?? '') }}"
+                               required>
+
+                    </div>
+
+
+                    {{-- DESKRIPSI --}}
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Deskripsi
                         </label>
 
                         <textarea name="deskripsi"
-                                  id="deskripsi"
-                                  rows="5"
                                   class="form-control"
-                                  placeholder="Masukkan deskripsi sekolah">{{ old('deskripsi', $profil->deskripsi ?? '') }}</textarea>
+                                  rows="4"
+                                  required>{{ old('deskripsi', $profil->deskripsi ?? '') }}</textarea>
 
                     </div>
 
 
-                    {{-- VISI --}}
+                    {{-- VISI MISI --}}
+
                     <div class="mb-3">
 
-                        <label for="visi_misi"
-                               class="form-label">
-                            Visi dan Misi
+                        <label class="form-label">
+                            Visi & Misi
                         </label>
 
                         <textarea name="visi_misi"
-                                  id="visi_misi"
-                                  rows="10"
                                   class="form-control"
-                                  placeholder="Masukkan visi dan misi sekolah">{{ old('visi_misi', $profil->visi_misi ?? '') }}</textarea>
+                                  rows="5"
+                                  required>{{ old('visi_misi', $profil->visi_misi ?? '') }}</textarea>
+
+                    </div>
+
+
+                    {{-- FOTO SEKOLAH --}}
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Foto Sekolah
+                        </label>
+
+                        @if(!empty($profil?->foto))
+
+                            <div class="mb-3">
+
+                                <img src="{{ asset('storage/' . $profil->foto) }}"
+                                     alt="Foto Sekolah"
+                                     width="220"
+                                     height="150"
+                                     style="
+                                        object-fit: cover;
+                                        border-radius: 10px;
+                                        border: 1px solid #ddd;
+                                     ">
+
+                            </div>
+
+                        @endif
+
+                        <input type="file"
+                               name="foto"
+                               class="form-control"
+                               accept=".jpg,.jpeg,.png">
 
                         <small class="text-muted">
-                            Pisahkan visi dan misi menggunakan baris baru.
+                            Pilih foto sekolah. Maksimal 2 MB.
                         </small>
 
                     </div>
 
 
-                    {{-- Foto --}}
-                    <div class="mb-3">
+                    {{-- LOGO SEKOLAH --}}
 
-                        <label for="foto"
-                               class="form-label">
-                            Foto Sekolah
-                        </label>
+                    <div class="mb-4">
 
-                        <input type="text"
-                               name="foto"
-                               id="foto"
-                               class="form-control"
-                               value="{{ old('foto', $profil->foto ?? '') }}"
-                               placeholder="Nama file foto">
-
-                    </div>
-
-
-                    {{-- Logo --}}
-                    <div class="mb-3">
-
-                        <label for="logo"
-                               class="form-label">
+                        <label class="form-label">
                             Logo Sekolah
                         </label>
 
-                        <input type="text"
+                        @if(!empty($profil?->logo))
+
+                            <div class="mb-3">
+
+                                <img src="{{ asset('storage/' . $profil->logo) }}"
+                                     alt="Logo Sekolah"
+                                     width="150"
+                                     height="150"
+                                     style="
+                                        object-fit: contain;
+                                        border-radius: 10px;
+                                        border: 1px solid #ddd;
+                                        padding: 5px;
+                                     ">
+
+                            </div>
+
+                        @endif
+
+                        <input type="file"
                                name="logo"
-                               id="logo"
                                class="form-control"
-                               value="{{ old('logo', $profil->logo ?? '') }}"
-                               placeholder="Nama file logo">
+                               accept=".jpg,.jpeg,.png">
+
+                        <small class="text-muted">
+                            Pilih logo sekolah. Maksimal 2 MB.
+                        </small>
 
                     </div>
 
 
-                    {{-- Tombol --}}
-                    <div class="d-flex gap-2">
+                    {{-- BUTTON --}}
+
+                    <div class="mt-4">
 
                         <button type="submit"
                                 class="btn btn-primary">
@@ -321,8 +323,9 @@
                         </button>
 
                         <a href="{{ route('profil.profil-sekolah.index') }}"
-                           class="btn btn-light-secondary">
+                           class="btn btn-secondary">
 
+                            <i class="bi bi-arrow-left"></i>
                             Kembali
 
                         </a>

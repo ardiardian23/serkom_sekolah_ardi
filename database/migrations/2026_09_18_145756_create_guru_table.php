@@ -12,6 +12,7 @@ return new class extends Migration
             $table->increments('id_guru');
             $table->string('nama_guru', 40);
             $table->string('nip', 15);
+            $table->string('jenis_kelamin');
             $table->string('mapel', 40);
             $table->string('foto', 100);
         });

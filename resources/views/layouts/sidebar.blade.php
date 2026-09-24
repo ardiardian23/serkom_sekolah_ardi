@@ -37,18 +37,12 @@
 
                 {{-- DASHBOARD --}}
                 <li class="sidebar-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
-
                     <a href="{{ route('admin.index') }}"
                        class="sidebar-link">
-
                         <i class="bi bi-grid-fill"></i>
-
                         <span>Dashboard</span>
-
                     </a>
-
                 </li>
-
 
                 {{-- PROFIL SEKOLAH --}}
                 <li class="sidebar-item has-sub">
@@ -56,59 +50,34 @@
                         <i class="bi bi-stack"></i>
                         <span>Profil Sekolah</span>
                     </a>
-
                     <ul class="submenu">
-
                         <li class="submenu-item {{ request()->routeIs('profil.profil-sekolah.*') ? 'active' : '' }}">
                             <a href="{{ route('profil.profil-sekolah.index') }}">
                                 Profil sekolah
                             </a>
                         </li>
-
-                        <li class="submenu-item {{ request()->routeIs('profil.profil-sekolah.*') ? 'active' : '' }}">
-                            <a href="{{ route('profil.profil-sekolah.edit') }}">
-                                Visi dan Misi
-                            </a>
-                        </li>
-
                     </ul>
                 </li>
-
-
                 {{-- DATA SEKOLAH --}}
                 <li class="sidebar-item has-sub">
-
                     <a href="#" class="sidebar-link">
-
                         <i class="bi bi-collection-fill"></i>
-
                         <span>Data Sekolah</span>
-
                     </a>
-
                     <ul class="submenu">
-
                         {{-- DATA GURU --}}
                         <li class="submenu-item {{ request()->routeIs('admin.guru.*') ? 'active' : '' }}">
-
                             <a href="{{ route('admin.guru.create') }}">
                                 Data Guru
                             </a>
-
                         </li>
-
-
                         {{-- DATA SISWA --}}
                         <li class="submenu-item
                             {{ request()->routeIs('admin.siswa.*') ? 'active' : '' }}">
-
                             <a href="{{ route('admin.siswa.create') }}">
                                 Data Siswa
                             </a>
-
                         </li>
-
-
                         {{-- EKSTRAKURIKULER --}}
                         <li class="submenu-item {{ request()->routeIs('admin.ekstrakurikuler.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.ekstrakurikuler.create') }}">
@@ -145,29 +114,16 @@
                             </a>
                         </li>
 
-                        <li class="submenu-item">
-
-                            <a href="#">
-                                Pengumuman
-                            </a>
-
-                        </li>
-
+                        <a href="{{ route('admin.pengumuman.index') }}" class="sidebar-link">
+                            <i class="bi bi-megaphone"></i>
+                            <span>Pengumuman</span>
+                        </a>
+                        <a href="{{ route('admin.galeri.index') }}" class="sidebar-link">
+                            <i class="bi bi-megaphone"></i>
+                            <span>Galeri</span>
+                        </a>
+                        
                     </ul>
-
-                </li>
-
-
-                {{-- GALERI --}}
-                <li class="sidebar-item has-sub">
-
-                    <a href="#" class="sidebar-link">
-
-                        <i class="bi bi-hexagon-fill"></i>
-
-                        <span>Galeri</span>
-
-                    </a>
 
                 </li>
 

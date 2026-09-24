@@ -192,7 +192,7 @@
                                     <a href="{{ route('admin.berita.create') }}">Berita</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">Pengumuman</a>
+                                    <a href="{{ route('admin.pengumuman.create') }}">Pengumuman</a>
                                 </li>   
                                 <li class="submenu-item ">
                                     <a href="{{ route('admin.prestasi.create') }}">Prestasi</a>
@@ -203,7 +203,7 @@
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-hexagon-fill"></i>
-                                <span>Galeri</span>
+                                <a href="{{ route('admin.galeri.create') }}">Galeri</a>
                             </a>
                         </li>                        
                     </ul>

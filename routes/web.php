@@ -10,17 +10,19 @@ use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\GaleriController;
 
 
 
 use App\Models\Profilsekolah;
 
-Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-Route::post('auth', [AuthController::class, 'auth'])->name('auth');
+// Route::get('login', [AuthController::class, 'login'])->name('login');
+// Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+// Route::post('auth', [AuthController::class, 'auth'])->name('auth');
 
 
-Route::middleware('checkauth')->group(function(){
+// Route::middleware('checkauth')->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])
         ->name('admin.index');
     
@@ -41,17 +43,23 @@ Route::middleware('checkauth')->group(function(){
     
     Route::resource('admin/user', UserController::class)
         ->names('admin.user');
+
+    Route::resource('admin/pengumuman', PengumumanController::class)
+    ->names('admin.pengumuman');
+
+    Route::resource('admin/galeri', GaleriController::class)
+    ->names('admin.galeri');
     
     
         // --Profilsekolah--
     
     Route::get('/admin/profil-sekolah', [ProfilController::class, 'index'])
-        ->name('profil.profil-sekolah.index');
-    
+    ->name('profil.profil-sekolah.index');
+
     Route::get('/admin/profil-sekolah/edit', [ProfilController::class, 'edit'])
         ->name('profil.profil-sekolah.edit');
-    
+
     Route::put('/admin/profil-sekolah', [ProfilController::class, 'update'])
         ->name('profil.profil-sekolah.update');
 
-});
+// });
