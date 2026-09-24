@@ -58,9 +58,10 @@
 
         <div class="card">
 
+            {{-- Header --}}
             <div class="card-header d-flex justify-content-between align-items-center">
 
-                <h4 class="card-title">
+                <h4 class="card-title mb-0">
                     Data Profil Sekolah
                 </h4>
 
@@ -79,7 +80,93 @@
 
                 @if($profil)
 
-                    <div class="row">
+                    {{-- FOTO DAN LOGO --}}
+                    <div class="row mb-4">
+
+                        {{-- Foto Sekolah --}}
+                        <div class="col-md-6 text-center">
+
+                            <h6 class="mb-3">
+                                Foto Sekolah
+                            </h6>
+
+                            @if($profil->foto)
+
+                                <img
+                                    src="{{ asset('assets/images/logo/' . $profil->foto) }}"
+                                    alt="Foto Sekolah"
+                                    style="
+                                        width: 220px;
+                                        height: 180px;
+                                        object-fit: cover;
+                                        border-radius: 12px;
+                                    "
+                                >
+
+                            @else
+
+                                <div class="text-muted">
+
+                                    <i class="bi bi-image"
+                                       style="font-size: 60px;">
+                                    </i>
+
+                                    <p class="mt-2">
+                                        Belum ada foto sekolah
+                                    </p>
+
+                                </div>
+
+                            @endif
+
+                        </div>
+
+
+                        {{-- Logo Sekolah --}}
+                        <div class="col-md-6 text-center">
+
+                            <h6 class="mb-3">
+                                Logo Sekolah
+                            </h6>
+
+                            @if($profil->logo)
+
+                                <img
+                                    src="{{ asset('storage/' . $profil->logo) }}"
+                                    alt="Logo Sekolah"
+                                    style="
+                                        width: 180px;
+                                        height: 180px;
+                                        object-fit: contain;
+                                    "
+                                >
+
+                            @else
+
+                                <div class="text-muted">
+
+                                    <i class="bi bi-shield"
+                                       style="font-size: 60px;">
+                                    </i>
+
+                                    <p class="mt-2">
+                                        Belum ada logo sekolah
+                                    </p>
+
+                                </div>
+
+                            @endif
+
+                        </div>
+
+                    </div>
+
+
+                    <hr>
+
+
+                    {{-- DATA SEKOLAH --}}
+                    <div class="row mt-4">
 
                         <div class="col-md-6">
 
@@ -171,6 +258,7 @@
                     <hr>
 
 
+                    {{-- VISI MISI --}}
                     <h5 class="mb-3">
                         Visi dan Misi
                     </h5>
@@ -181,8 +269,10 @@
 
                     </div>
 
+
                 @else
 
+                    {{-- JIKA DATA BELUM ADA --}}
                     <div class="text-center py-5">
 
                         <i class="bi bi-building fs-1 text-muted"></i>

@@ -104,8 +104,7 @@
 
             <div class="card-body">
 
-                <form action="{{ route('admin.guru.store') }}"
-                      method="POST">
+                <form action="{{ route('admin.guru.store') }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
 
@@ -208,7 +207,7 @@
 
                                 <input
                                     type="text"
-                                    id="mata_pelajaran"
+                                    id="mapel"
                                     name="mapel"
                                     class="form-control"
                                     value="{{ old('mata_pelajaran') }}"
@@ -218,6 +217,19 @@
 
                             </div>
 
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Foto Guru</label>
+                            <input
+                                type="file"
+                                name="foto"
+                                class="form-control"
+                                accept="image/*"
+                            >
+                            <small class="text-muted">
+                                Format JPG, JPEG, PNG. Maksimal 2 MB.
+                            </small>
                         </div>
 
                     </div>
@@ -274,99 +286,74 @@
                     <table class="table table-striped">
 
                         <thead>
-
                             <tr>
-
                                 <th>No</th>
                                 <th>NIP</th>
                                 <th>Nama Guru</th>
                                 <th>Jenis Kelamin</th>
                                 <th>Mata Pelajaran</th>
+                                <th>Foto</th>
                                 <th>Aksi</th>
-
                             </tr>
-
                         </thead>
 
 
                         <tbody>
-
                             @forelse($gurus as $guru)
-
                                 <tr>
+                                    <td>{{ $loop->iteration }}</td>
+
+                                    <td>{{ $guru->nip }}</td>
+
+                                    <td>{{ $guru->nama_guru }}</td>
+
+                                    <td>{{ $guru->jenis_kelamin ?? '-' }}</td>
+
+                                    <td>{{ $guru->mapel ?? '-' }}</td>
 
                                     <td>
-                                        {{ $loop->iteration }}
-                                    </td>
+                                    @if($guru->foto)
+                                        <img
+                                            src="{{ asset('storage/' . $guru->foto) }}"
+                                            alt="Foto {{ $guru->nama_guru }}"
+                                            width="70"
+                                            height="70"
+                                            style="object-fit: cover; border-radius: 8px;"
+                                        >
+                                    @else
+                                        <span class="text-muted">Tidak ada foto</span>
+                                    @endif
+</td>
 
                                     <td>
-                                        {{ $guru->nip }}
-                                    </td>
-
-                                    <td>
-                                        {{ $guru->nama_guru }}
-                                    </td>
-
-                                    <td>
-                                        {{ $guru->jenis_kelamin }}
-                                    </td>
-
-                                    <td>
-                                        {{ $guru->mata_pelajaran }}
-                                    </td>
-
-                                    <td>
-
-                                        <a
-                                            href="{{ route('admin.guru.edit', $guru->id_guru) }}"
-                                            class="btn btn-sm btn-warning">
-
+                                        <a href="{{ route('admin.guru.edit', $guru->id_guru) }}"
+                                        class="btn btn-warning btn-sm">
                                             <i class="bi bi-pencil-square"></i>
                                             Edit
-
                                         </a>
 
-
-                                        <form
-                                            action="{{ route('admin.guru.destroy', $guru->id_guru) }}"
+                                        <form action="{{ route('admin.guru.destroy', $guru->id_guru) }}"
                                             method="POST"
                                             class="d-inline">
-
                                             @csrf
-
                                             @method('DELETE')
 
-                                            <button
-                                                type="submit"
-                                                class="btn btn-sm btn-danger"
-                                                onclick="return confirm('Yakin ingin menghapus data guru ini?')">
-
+                                            <button type="submit"
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Yakin ingin menghapus data guru ini?')">
                                                 <i class="bi bi-trash"></i>
                                                 Hapus
-
                                             </button>
-
                                         </form>
-
                                     </td>
-
                                 </tr>
-
                             @empty
-
                                 <tr>
-
-                                    <td colspan="6"
-                                        class="text-center">
-
+                                    <td colspan="7" class="text-center">
                                         Belum ada data guru.
-
                                     </td>
-
                                 </tr>
-
                             @endforelse
-
                         </tbody>
 
                     </table>

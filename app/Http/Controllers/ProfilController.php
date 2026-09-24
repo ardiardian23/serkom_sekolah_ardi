@@ -12,7 +12,7 @@ class ProfilController extends Controller
         $profil = ProfilSekolah::first();
 
         return view('profil.profil-sekolah.index', compact('profil'));
-    }
+    }   
 
     public function edit()
     {
@@ -67,7 +67,7 @@ class ProfilController extends Controller
         }
 
         return redirect()
-            ->route('profil.profil_sekolah.index')
+            ->route('profil.profil-sekolah.index')
             ->with('success', 'Profil sekolah berhasil disimpan.');
     }
 }

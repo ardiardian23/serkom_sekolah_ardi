@@ -26,31 +26,28 @@ class GuruController extends Controller
         $request->validate([
             'nama_guru' => 'required|string|max:40',
             'nip' => 'required|string|max:15',
+            'jenis_kelamin' => 'required|string|max:20',
             'mapel' => 'required|string|max:40',
-            'foto' => 'nullable|string|max:100',
-        ], [
-            'nama_guru.required' => 'Nama guru wajib diisi.',
-            'nip.required' => 'NIP wajib diisi.',
-            'mapel.required' => 'Mata pelajaran wajib diisi.',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        $foto = null;
+
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto')->store('guru', 'public');
+        }
 
         Guru::create([
             'nama_guru' => $request->nama_guru,
             'nip' => $request->nip,
+            'jenis_kelamin' => $request->jenis_kelamin,
             'mapel' => $request->mapel,
-            'foto' => $request->foto,
+            'foto' => $foto,
         ]);
 
         return redirect()
             ->route('admin.guru.create')
             ->with('success', 'Data guru berhasil ditambahkan.');
-    }
-
-    public function edit($id)
-    {
-        $guru = Guru::findOrFail($id);
-
-        return view('admin.guru.edit', compact('guru'));
     }
 
     public function update(Request $request, $id)

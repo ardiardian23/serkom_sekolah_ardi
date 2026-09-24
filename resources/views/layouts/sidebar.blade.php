@@ -1,8 +1,8 @@
-<div id="sidebar" class="active">
+<div id="sidebar" class="active ">
 
     <div class="sidebar-wrapper active">
 
-        <div class="sidebar-header">
+        <div class="sidebar-header ">
 
             <div class="d-flex justify-content-between">
 
@@ -110,12 +110,15 @@
 
 
                         {{-- EKSTRAKURIKULER --}}
-                        <li class="submenu-item">
-
-                            <a href="#">
-                                Ekstrakulikuler
+                        <li class="submenu-item {{ request()->routeIs('admin.ekstrakurikuler.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.ekstrakurikuler.create') }}">
+                                Ekstrakurikuler
                             </a>
-
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('admin.prestasi.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.prestasi.create') }}">
+                                Prestasi
+                            </a>
                         </li>
 
                     </ul>
@@ -136,12 +139,10 @@
 
                     <ul class="submenu">
 
-                        <li class="submenu-item">
-
-                            <a href="#">
+                        <li class="submenu-item {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.berita.create') }}">
                                 Berita
                             </a>
-
                         </li>
 
                         <li class="submenu-item">
