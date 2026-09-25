@@ -1,234 +1,449 @@
+@extends('layouts.admin')
 
+@section('title', 'Dashboard')
 
-<!DOCTYPE html>
-<html lang="en">
+@section('content')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Mazer Admin Dashboard</title>
+<div class="page-heading">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css')}}">
-
-    <link rel="stylesheet" href="{{ asset('assets/vendors/iconly/bold.css')}}">
-
-    <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css')}}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg')}}" type="image/x-icon">
-</head>
-
-<body>
-
-    <header class="mb-3">
-
-    <nav class="navbar navbar-expand navbar-dark bg-primary navbar-top">
-
-        <div class="container-fluid">
-
-            {{-- Tombol sidebar mobile --}}
-            <a href="#" class="burger-btn d-block d-xl-none">
-                <i class="bi bi-justify fs-3"></i>
-            </a>
-
-            {{-- Nama halaman / sekolah --}}
-            <div class="d-none d-md-block text">
-                <h5 class="mb-0">
-                    Sistem Informasi Sekolah
-                </h5>
-                <small class="text-muted">
-                    SMAN 1 SINGAPARNA
-                </small>
+    <div class="page-title mb-4">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Dashboard</h3>
+                <p class="text-subtitle text-muted">
+                    Selamat datang di Website Sekolah
+                </p>
             </div>
 
-            {{-- Bagian kanan --}}
-            <div class="ms-auto">
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb"
+                     class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active">
+                            Dashboard
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
 
-                <ul class="navbar-nav">
 
-                    <li class="nav-item dropdown">
+    {{-- SELAMAT DATANG --}}
+    <div class="card mb-4">
+        <div class="card-body py-4 px-4">
 
-                        <a class="nav-link dropdown-toggle"
-                           href="#"
-                           data-bs-toggle="dropdown"
-                           aria-expanded="false">
+            <div class="row align-items-center">
 
-                            <div class="d-flex align-items-center">
+                <div class="col-md-8">
 
-                                <div class="avatar avatar-md">
-                                    <img
-                                        src="{{ asset('assets/images/faces/1.jpg') }}"
-                                        alt="User"
-                                    >
-                                </div>
+                    <h4 class="text-primary">
+                        Selamat Datang di Website Sekolah 👋
+                    </h4>
 
-                                <div class="ms-2 d-none d-md-block">
-                                    <span class="fw-bold">
-                                        Admin
-                                    </span>
-                                    <small class="d-block text-muted">
-                                        Administrator
-                                    </small>
-                                </div>
+                    <p class="text-muted mb-0">
+                        Kelola data dan informasi sekolah melalui
+                        dashboard administrasi.
+                    </p>
 
-                            </div>
+                </div>
 
-                        </a>
+                <div class="col-md-4 text-center">
 
-                        <ul class="dropdown-menu dropdown-menu-end">
+                    <i class="bi bi-building text-primary"
+                       style="font-size: 80px;">
+                    </i>
 
-                            <li>
-                                <a class="dropdown-item"
-                                   href="#">
-                                    <i class="bi bi-person me-2"></i>
-                                    Profil
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item"
-                                   href="{{ route('profil.profil-sekolah.index') }}">
-                                    <i class="bi bi-building me-2"></i>
-                                    Profil Sekolah
-                                </a>
-                            </li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item text-danger"
-                                   href="#">
-                                    <i class="bi bi-box-arrow-right me-2"></i>
-                                    Logout
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </li>
-
-                </ul>
+                </div>
 
             </div>
 
         </div>
+    </div>
 
-    </nav>
 
-</header>
-    <div id="app">
-        <div id="sidebar" class="active">
-            <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-center ">
-                        <div class="logo">
-                            <a href="{{ route('admin.index') }}">
-                                <img src="assets/images/logo/logoschool.jpg" alt="Logo" srcset="" style="width: 130px; height:150px; object-fit: contain; display: block;
-                margin: 0 auto;" >  <h5>SMAN 1 SINGAPARNA</h5></a>
+    {{-- FITUR --}}
+    <div class="row">
+
+        {{-- PROFIL SEKOLAH --}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+
+            <div class="card h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <h6 class="text-muted font-semibold">
+                                Profil Sekolah
+                            </h6>
+
+                            <h5 class="font-extrabold mb-0">
+                                Profil
+                            </h5>
                         </div>
-                        <div class="toggler">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+
+                        <div class="stats-icon purple">
+                            <i class="bi bi-building"></i>
                         </div>
+
                     </div>
-                </div>
-                <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item active ">
-                            <a href="{{ route('admin.index') }}" class="sidebar-link">
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item has-sub">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-stack"></i>
-                        <span>Profil Sekolah</span>
+                    <a href="{{ route('profil.profil-sekolah.index') }}"
+                       class="btn btn-primary btn-sm mt-3 w-100">
+                        <i class="bi bi-eye"></i>
+                        Kelola Profil
                     </a>
 
-                    <ul class="submenu">
-
-                        <li class="submenu-item">
-                            <a href="{{ route('profil.profil-sekolah.index') }}">
-                                Profil sekolah
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
-                                <span>Data Sekolah</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                   <a href="{{ route('admin.guru.create') }}"> Data Guru</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="{{ route('admin.siswa.create') }}">Data Siswa</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="{{ route('admin.ekstrakurikuler.create') }}">Ekstrakurikuler</a>
-                                </li>                                                         
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>Informasi</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="{{ route('admin.berita.create') }}">Berita</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="{{ route('admin.pengumuman.create') }}">Pengumuman</a>
-                                </li>   
-                                <li class="submenu-item ">
-                                    <a href="{{ route('admin.prestasi.create') }}">Prestasi</a>
-                                </li>                                                       
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-hexagon-fill"></i>
-                                <a href="{{ route('admin.galeri.create') }}">Galeri</a>
-                            </a>
-                        </li>                        
-                    </ul>
                 </div>
-                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+
             </div>
+
         </div>
-        <div id="main">
-            <header class="mb-3">
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
-            </header>
 
-            <div class="page-heading">
-                <h3>Selamat Datang di Website Sekolah</h3>
+
+        {{-- DATA GURU --}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+
+            <div class="card h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <h6 class="text-muted font-semibold">
+                                Data Sekolah
+                            </h6>
+
+                            <h5 class="font-extrabold mb-0">
+                                Guru
+                            </h5>
+                        </div>
+
+                        <div class="stats-icon blue">
+                            <i class="bi bi-person-badge"></i>
+                        </div>
+
+                    </div>
+
+                    <a href="{{ route('admin.guru.index') }}"
+                       class="btn btn-primary btn-sm mt-3 w-100">
+                        <i class="bi bi-people"></i>
+                        Kelola Guru
+                    </a>
+
+                </div>
+
             </div>
-            
-    <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 
-    <script src="{{asset('assets/vendors/apexcharts/apexcharts.js')}}"></script>
-    <script src="{{asset('assets/js/pages/dashboard.js')}}"></script>
+        </div>
 
-    <script src="{{ asset('assets/js/main.js')}}"></script>
-</body>
 
-</html>
+        {{-- DATA SISWA --}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+
+            <div class="card h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <h6 class="text-muted font-semibold">
+                                Data Sekolah
+                            </h6>
+
+                            <h5 class="font-extrabold mb-0">
+                                Siswa
+                            </h5>
+                        </div>
+
+                        <div class="stats-icon green">
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                    </div>
+
+                    <a href="{{ route('admin.siswa.index') }}"
+                       class="btn btn-primary btn-sm mt-3 w-100">
+                        <i class="bi bi-person-lines-fill"></i>
+                        Kelola Siswa
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {{-- EKSTRAKURIKULER --}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+
+            <div class="card h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <h6 class="text-muted font-semibold">
+                                Data Sekolah
+                            </h6>
+
+                            <h5 class="font-extrabold mb-0">
+                                Ekstrakurikuler
+                            </h5>
+                        </div>
+
+                        <div class="stats-icon red">
+                            <i class="bi bi-trophy"></i>
+                        </div>
+
+                    </div>
+
+                    <a href="{{ route('admin.ekstrakurikuler.index') }}"
+                       class="btn btn-primary btn-sm mt-3 w-100">
+                        <i class="bi bi-list"></i>
+                        Kelola Eskul
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {{-- PRESTASI --}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+
+            <div class="card h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <h6 class="text-muted font-semibold">
+                                Data Sekolah
+                            </h6>
+
+                            <h5 class="font-extrabold mb-0">
+                                Prestasi
+                            </h5>
+                        </div>
+
+                        <div class="stats-icon orange">
+                            <i class="bi bi-award"></i>
+                        </div>
+
+                    </div>
+
+                    <a href="{{ route('admin.prestasi.index') }}"
+                       class="btn btn-primary btn-sm mt-3 w-100">
+                        <i class="bi bi-list"></i>
+                        Kelola Prestasi
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {{-- BERITA --}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+
+            <div class="card h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <h6 class="text-muted font-semibold">
+                                Informasi
+                            </h6>
+
+                            <h5 class="font-extrabold mb-0">
+                                Berita
+                            </h5>
+                        </div>
+
+                        <div class="stats-icon blue">
+                            <i class="bi bi-newspaper"></i>
+                        </div>
+
+                    </div>
+
+                    <a href="{{ route('admin.berita.index') }}"
+                       class="btn btn-primary btn-sm mt-3 w-100">
+                        <i class="bi bi-list"></i>
+                        Kelola Berita
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {{-- PENGUMUMAN --}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+
+            <div class="card h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <h6 class="text-muted font-semibold">
+                                Informasi
+                            </h6>
+
+                            <h5 class="font-extrabold mb-0">
+                                Pengumuman
+                            </h5>
+                        </div>
+
+                        <div class="stats-icon green">
+                            <i class="bi bi-megaphone"></i>
+                        </div>
+
+                    </div>
+
+                    <a href="{{ route('admin.pengumuman.index') }}"
+                       class="btn btn-primary btn-sm mt-3 w-100">
+                        <i class="bi bi-list"></i>
+                        Kelola Pengumuman
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {{-- GALERI --}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+
+            <div class="card h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <h6 class="text-muted font-semibold">
+                                Informasi
+                            </h6>
+
+                            <h5 class="font-extrabold mb-0">
+                                Galeri
+                            </h5>
+                        </div>
+
+                        <div class="stats-icon purple">
+                            <i class="bi bi-images"></i>
+                        </div>
+
+                    </div>
+
+                    <a href="{{ route('admin.galeri.index') }}"
+                       class="btn btn-primary btn-sm mt-3 w-100">
+                        <i class="bi bi-images"></i>
+                        Kelola Galeri
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {{-- INFORMASI CEPAT --}}
+    <div class="row">
+
+        <div class="col-12">
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h4>Menu Cepat</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-3 mb-2">
+
+                            <a href="{{ route('admin.guru.create') }}"
+                               class="btn btn-outline-primary w-100">
+
+                                <i class="bi bi-person-plus"></i>
+                                Tambah Guru
+
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-3 mb-2">
+
+                            <a href="{{ route('admin.siswa.create') }}"
+                               class="btn btn-outline-primary w-100">
+
+                                <i class="bi bi-person-plus"></i>
+                                Tambah Siswa
+
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-3 mb-2">
+
+                            <a href="{{ route('admin.berita.create') }}"
+                               class="btn btn-outline-primary w-100">
+
+                                <i class="bi bi-plus-circle"></i>
+                                Tambah Berita
+
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-3 mb-2">
+
+                            <a href="{{ route('admin.galeri.create') }}"
+                               class="btn btn-outline-primary w-100">
+
+                                <i class="bi bi-cloud-upload"></i>
+                                Tambah Galeri
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@endsection

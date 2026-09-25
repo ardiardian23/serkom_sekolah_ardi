@@ -6,11 +6,14 @@
 
             <div class="d-flex justify-content-between">
 
-                <div class="logo">
+                <div class="logo" style="text-align: center;">
                     <a href="{{ route('admin.index') }}">
                         <img
-                            src="{{ asset('assets/images/logo/logo.png') }}"
-                            alt="Logo">
+                            src="{{ asset('assets/images/logo/logoschool.jpg') }}"
+                            alt="Logo"
+                            style="width: 150px; height: 150px; object-fit: contain; display: block; margin: 0 auto;">
+
+                        <h5 class="mt-2 text-center">SMAN 1 SINGAPARNA</h5>
                     </a>
                 </div>
 
@@ -89,31 +92,22 @@
                                 Prestasi
                             </a>
                         </li>
-
                     </ul>
-
                 </li>
 
 
                 {{-- INFORMASI --}}
                 <li class="sidebar-item has-sub">
-
                     <a href="#" class="sidebar-link">
-
                         <i class="bi bi-grid-1x2-fill"></i>
-
                         <span>Informasi</span>
-
                     </a>
-
                     <ul class="submenu">
-
                         <li class="submenu-item {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.berita.create') }}">
                                 Berita
                             </a>
                         </li>
-
                         <a href="{{ route('admin.pengumuman.index') }}" class="sidebar-link">
                             <i class="bi bi-megaphone"></i>
                             <span>Pengumuman</span>
@@ -121,10 +115,20 @@
                         <a href="{{ route('admin.galeri.index') }}" class="sidebar-link">
                             <i class="bi bi-megaphone"></i>
                             <span>Galeri</span>
-                        </a>
-                        
+                        </a> 
                     </ul>
+                </li>
 
+                <li class="sidebar-item">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+
+                        <button type="submit"
+                                class="sidebar-link border-0 bg-transparent w-100 text-start">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
                 </li>
 
             </ul>

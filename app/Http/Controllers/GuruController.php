@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guru;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GuruController extends Controller
 {
@@ -12,6 +13,13 @@ class GuruController extends Controller
         $gurus = Guru::orderBy('id_guru', 'desc')->get();
 
         return view('admin.guru.index', compact('gurus'));
+    }
+
+    public function edit($id)
+    {
+        $guru = Guru::findOrFail($id);
+
+        return view('admin.guru.edit', compact('guru'));
     }
 
     public function create()
@@ -52,25 +60,38 @@ class GuruController extends Controller
 
     public function update(Request $request, $id)
     {
+        $guru = Guru::findOrFail($id);
+
         $request->validate([
             'nama_guru' => 'required|string|max:40',
             'nip' => 'required|string|max:15',
+            'jenis_kelamin' => 'required|string|max:20',
             'mapel' => 'required|string|max:40',
-            'foto' => 'nullable|string|max:100',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $guru = Guru::findOrFail($id);
+        $guru->nama_guru = $request->nama_guru;
+        $guru->nip = $request->nip;
+        $guru->jenis_kelamin = $request->jenis_kelamin;
+        $guru->mapel = $request->mapel;
 
-        $guru->update([
-            'nama_guru' => $request->nama_guru,
-            'nip' => $request->nip,
-            'mapel' => $request->mapel,
-            'foto' => $request->foto,
-        ]);
+        // Jika memilih foto baru
+        if ($request->hasFile('foto')) {
+
+            // Hapus foto lama
+            if ($guru->foto) {
+                Storage::disk('public')->delete($guru->foto);
+            }
+
+            // Simpan foto baru
+            $guru->foto = $request->file('foto')->store('guru', 'public');
+        }
+
+        $guru->save();
 
         return redirect()
-            ->route('admin.guru.create')
-            ->with('success', 'Data guru berhasil diperbarui.');
+            ->route('admin.guru.index')
+            ->with('success', 'Data guru dan foto berhasil diperbarui.');
     }
 
     public function destroy($id)
