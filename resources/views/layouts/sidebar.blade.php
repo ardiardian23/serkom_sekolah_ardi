@@ -70,14 +70,14 @@
                     <ul class="submenu">
                         {{-- DATA GURU --}}
                         <li class="submenu-item {{ request()->routeIs('admin.guru.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.guru.create') }}">
+                            <a href="{{ route('admin.guru.index') }}">
                                 Data Guru
                             </a>
                         </li>
                         {{-- DATA SISWA --}}
                         <li class="submenu-item
                             {{ request()->routeIs('admin.siswa.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.siswa.create') }}">
+                            <a href="{{ route('admin.siswa.index') }}">
                                 Data Siswa
                             </a>
                         </li>

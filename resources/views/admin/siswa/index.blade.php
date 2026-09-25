@@ -84,13 +84,13 @@
                         </small>
                     </div>
 
-                    <a href="{{ route('admin.siswa.create') }}"
-                       class="btn btn-primary">
-
-                        <i class="bi bi-plus-circle"></i>
-                        Tambah Siswa
-
-                    </a>
+                    @if(auth()->user()->role === 'Admin')
+                        <a href="{{ route('admin.siswa.create') }}"
+                        class="btn btn-primary">
+                            <i class="bi bi-plus-circle"></i>
+                            Tambah Siswa
+                        </a>
+                    @endif
 
                 </div>
 
@@ -162,35 +162,36 @@
 
                                     <td>
 
-                                        <div class="d-flex gap-1">
+                                        {{-- LIHAT --}}
+                                        <a href="{{ route('admin.siswa.show', $siswa->id_siswa) }}"
+                                        class="btn btn-info btn-sm">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
 
-                                            {{-- EDIT --}}
-                                            <a href="{{ route('admin.siswa.edit', $siswa->getKey()) }}"
-                                               class="btn btn-warning btn-sm">
 
-                                                <i class="bi bi-pencil-square"></i>
+                                        {{-- KHUSUS ADMIN --}}
+                                        @if(auth()->user()->role === 'Admin')
 
+                                            <a href="{{ route('admin.siswa.edit', $siswa->id_siswa) }}"
+                                            class="btn btn-warning btn-sm">
+                                                <i class="bi bi-pencil"></i>
                                             </a>
 
-
-                                            {{-- HAPUS --}}
-                                            <form action="{{ route('admin.siswa.destroy', $siswa->getKey()) }}"
-                                                  method="POST"
-                                                  onsubmit="return confirm('Yakin ingin menghapus data siswa ini?');">
+                                            <form action="{{ route('admin.siswa.destroy', $siswa->id_siswa) }}"
+                                                method="POST"
+                                                class="d-inline">
 
                                                 @csrf
                                                 @method('DELETE')
 
                                                 <button type="submit"
                                                         class="btn btn-danger btn-sm">
-
                                                     <i class="bi bi-trash"></i>
-
                                                 </button>
 
                                             </form>
 
-                                        </div>
+                                        @endif
 
                                     </td>
 

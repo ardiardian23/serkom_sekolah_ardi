@@ -25,11 +25,15 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="card-title">Data Guru</h4>
 
-                <a href="{{ route('admin.guru.create') }}"
-                   class="btn btn-primary">
-                    <i class="bi bi-plus-circle"></i>
-                    Tambah Guru
-                </a>
+                @if(auth()->user()->role === 'Admin')
+                    <a href="{{ route('admin.guru.create') }}"
+                    class="btn btn-primary">
+
+                        <i class="bi bi-plus-circle"></i>
+                        Tambah Guru
+
+                    </a>
+                @endif
             </div>
 
             <div class="card-body">
@@ -87,27 +91,43 @@
                                     </td>
 
                                     <td>
-                                        <a href="{{ route('admin.guru.edit', $guru->id_guru) }}"
-                                        class="btn btn-warning btn-sm">
-                                            <i class="bi bi-pencil-square"></i>
-                                            Edit
+
+                                        <a href="{{ route('admin.guru.show', $guru->id_guru) }}"
+                                        class="btn btn-info btn-sm">
+
+                                            <i class="bi bi-eye"></i>
+
                                         </a>
 
-                                        <form action="{{ route('admin.guru.destroy', $guru->id_guru) }}"
-                                            method="POST"
-                                            class="d-inline">
 
-                                            @csrf
-                                            @method('DELETE')
+                                        @if(auth()->user()->role === 'Admin')
 
-                                            <button type="submit"
-                                                    class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin ingin menghapus data guru ini?')">
-                                                <i class="bi bi-trash"></i>
-                                                Hapus
-                                            </button>
+                                            <a href="{{ route('admin.guru.edit', $guru->id_guru) }}"
+                                            class="btn btn-warning btn-sm">
 
-                                        </form>
+                                                <i class="bi bi-pencil"></i>
+
+                                            </a>
+
+
+                                            <form action="{{ route('admin.guru.destroy', $guru->id_guru) }}"
+                                                method="POST"
+                                                class="d-inline">
+
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button type="submit"
+                                                        class="btn btn-danger btn-sm">
+
+                                                    <i class="bi bi-trash"></i>
+
+                                                </button>
+
+                                            </form>
+
+                                        @endif
+
                                     </td>
                                 </tr>
 

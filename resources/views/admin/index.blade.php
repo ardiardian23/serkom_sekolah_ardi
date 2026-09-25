@@ -388,13 +388,21 @@
 
                         <div class="col-md-3 mb-2">
 
-                            <a href="{{ route('admin.guru.create') }}"
-                               class="btn btn-outline-primary w-100">
+                            @if(auth()->user()->role === 'Admin')
 
-                                <i class="bi bi-person-plus"></i>
-                                Tambah Guru
+                                <div class="col-md-3 mb-2">
 
-                            </a>
+                                    <a href="{{ route('admin.guru.create') }}"
+                                    class="btn btn-outline-primary w-100">
+
+                                        <i class="bi bi-person-plus"></i>
+                                        Tambah Guru
+
+                                    </a>
+
+                                </div>
+
+                            @endif
 
                         </div>
 
