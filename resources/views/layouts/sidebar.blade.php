@@ -54,13 +54,23 @@
                         <span>Profil Sekolah</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item {{ request()->routeIs('profil.profil-sekolah.*') ? 'active' : '' }}">
-                            <a href="{{ route('profil.profil-sekolah.index') }}">
-                                Profil sekolah
+                        <li class="sidebar-item {{ request()->routeIs('admin.profil-sekolah.*') ? 'active' : '' }}">
+                            <a href="{{ route('profil.profil-sekolah.index') }}" class="sidebar-link">
+                                <i class="bi bi-layers"></i>
+                                <span>Profil Sekolah</span>
                             </a>
                         </li>
                     </ul>
                 </li>
+
+                @php
+                    $dataSekolahAktif = request()->routeIs(
+                        'admin.guru.*',
+                        'admin.siswa.*',
+                        'admin.prestasi.*',
+                        'admin.ekstrakurikuler.*'
+                    );
+                @endphp
                 {{-- DATA SEKOLAH --}}
                 <li class="sidebar-item has-sub">
                     <a href="#" class="sidebar-link">
@@ -69,27 +79,30 @@
                     </a>
                     <ul class="submenu">
                         {{-- DATA GURU --}}
-                        <li class="submenu-item {{ request()->routeIs('admin.guru.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.guru.index') }}">
-                                Data Guru
+                        <li class="sidebar-item {{ request()->routeIs('admin.guru.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.guru.index') }}" class="sidebar-link">
+                                <i class="bi bi-person-badge"></i>
+                                <span>Data Guru</span>
                             </a>
                         </li>
                         {{-- DATA SISWA --}}
-                        <li class="submenu-item
-                            {{ request()->routeIs('admin.siswa.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.siswa.index') }}">
-                                Data Siswa
+                        <li class="sidebar-item {{ request()->routeIs('admin.siswa.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.siswa.index') }}" class="sidebar-link">
+                                <i class="bi bi-people-fill"></i>
+                                <span>Data Siswa</span>
                             </a>
                         </li>
                         {{-- EKSTRAKURIKULER --}}
-                        <li class="submenu-item {{ request()->routeIs('admin.ekstrakurikuler.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.ekstrakurikuler.create') }}">
-                                Ekstrakurikuler
+                        <li class="sidebar-item {{ request()->routeIs('admin.ekstrakurikuler.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.ekstrakurikuler.index') }}" class="sidebar-link">
+                                <i class="bi bi-trophy-fill"></i>
+                                <span>Ekstrakurikuler</span>
                             </a>
                         </li>
-                        <li class="submenu-item {{ request()->routeIs('admin.prestasi.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.prestasi.create') }}">
-                                Prestasi
+                        <li class="sidebar-item {{ request()->routeIs('admin.prestasi.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.prestasi.index') }}" class="sidebar-link">
+                                <i class="bi bi-award-fill"></i>
+                                <span>Prestasi</span>
                             </a>
                         </li>
                     </ul>
@@ -103,19 +116,24 @@
                         <span>Informasi</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.berita.create') }}">
-                                Berita
+                        <li class="sidebar-item {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.berita.index') }}" class="sidebar-link">
+                                <i class="bi bi-newspaper"></i>
+                                <span>Berita</span>
                             </a>
                         </li>
-                        <a href="{{ route('admin.pengumuman.index') }}" class="sidebar-link">
-                            <i class="bi bi-megaphone"></i>
-                            <span>Pengumuman</span>
-                        </a>
-                        <a href="{{ route('admin.galeri.index') }}" class="sidebar-link">
-                            <i class="bi bi-megaphone"></i>
-                            <span>Galeri</span>
-                        </a> 
+                        <li class="sidebar-item {{ request()->routeIs('admin.pengumuman.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.pengumuman.index') }}" class="sidebar-link">
+                                <i class="bi bi-megaphone-fill"></i>
+                                <span>Pengumuman</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item {{ request()->routeIs('admin.galeri.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.galeri.index') }}" class="sidebar-link">
+                                <i class="bi bi-images"></i>
+                                <span>Galeri</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

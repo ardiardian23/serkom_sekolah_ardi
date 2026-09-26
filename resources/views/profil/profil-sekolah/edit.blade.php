@@ -244,17 +244,11 @@
                         @if(!empty($profil?->foto))
 
                             <div class="mb-3">
-
-                                <img src="{{ asset('storage/' . $profil->foto) }}"
-                                     alt="Foto Sekolah"
-                                     width="220"
-                                     height="150"
-                                     style="
-                                        object-fit: cover;
-                                        border-radius: 10px;
-                                        border: 1px solid #ddd;
-                                     ">
-
+                                <label class="form-label">Foto Sekolah</label>
+                                <input type="file"
+                                    name="foto"
+                                    class="form-control"
+                                    accept="image/*">
                             </div>
 
                         @endif
@@ -282,19 +276,12 @@
                         @if(!empty($profil?->logo))
 
                             <div class="mb-3">
-
-                                <img src="{{ asset('storage/' . $profil->logo) }}"
-                                     alt="Logo Sekolah"
-                                     width="150"
-                                     height="150"
-                                     style="
-                                        object-fit: contain;
-                                        border-radius: 10px;
-                                        border: 1px solid #ddd;
-                                        padding: 5px;
-                                     ">
-
-                            </div>
+                            <label class="form-label">Logo Sekolah</label>
+                            <input type="file"
+                                name="logo"
+                                class="form-control"
+                                accept="image/*">
+                        </div>
 
                         @endif
 

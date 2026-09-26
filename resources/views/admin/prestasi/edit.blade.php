@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+ @extends('layouts.admin')
 
 @section('title', 'Edit Prestasi')
 
@@ -15,6 +15,12 @@
 </div>
 
 <div class="page-content">
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     @if($errors->any())
 
@@ -47,13 +53,15 @@
             <div class="card-body">
 
                 <form action="{{ route('admin.prestasi.update', $prestasi->id) }}"
-                      method="POST">
+                      method="POST"
+                      enctype="multipart/form-data">
 
                     @csrf
                     @method('PUT')
 
                     <div class="row">
 
+                        {{-- Nama Prestasi --}}
                         <div class="col-md-6">
 
                             <div class="form-group mb-3">
@@ -67,13 +75,15 @@
                                        name="nama_prestasi"
                                        class="form-control"
                                        value="{{ old('nama_prestasi', $prestasi->nama_prestasi) }}"
-                                       placeholder="Nama prestasi">
+                                       placeholder="Nama prestasi"
+                                       required>
 
                             </div>
 
                         </div>
 
 
+                        {{-- Tahun Ajaran --}}
                         <div class="col-md-6">
 
                             <div class="form-group mb-3">
@@ -87,33 +97,55 @@
                                        name="tahun_ajaran"
                                        class="form-control"
                                        value="{{ old('tahun_ajaran', $prestasi->tahun_ajaran) }}"
-                                       placeholder="Contoh: 2025/2026">
+                                       placeholder="Contoh: 2025/2026"
+                                       required>
 
                             </div>
 
                         </div>
 
 
+                        {{-- Foto --}}
                         <div class="col-md-6">
 
                             <div class="form-group mb-3">
 
                                 <label for="foto">
-                                    Foto
+                                    Foto Prestasi
                                 </label>
 
-                                <input type="text"
+                                {{-- Foto lama --}}
+                                @if($prestasi->foto)
+
+                                    <div class="mb-2">
+
+                                        <img src="{{ asset('storage/' . $prestasi->foto) }}"
+                                             alt="Foto Prestasi"
+                                             width="120"
+                                             height="90"
+                                             style="object-fit: cover; border-radius: 8px;">
+
+                                    </div>
+
+                                @endif
+
+                                <input type="file"
                                        id="foto"
                                        name="foto"
                                        class="form-control"
-                                       value="{{ old('foto', $prestasi->foto) }}"
-                                       placeholder="Nama file foto">
+                                       accept="image/*">
+
+                                <small class="text-muted">
+                                    Kosongkan jika tidak ingin mengganti foto.
+                                    Format JPG, JPEG, PNG. Maksimal 2 MB.
+                                </small>
 
                             </div>
 
                         </div>
 
 
+                        {{-- Deskripsi --}}
                         <div class="col-12">
 
                             <div class="form-group mb-3">
@@ -126,7 +158,8 @@
                                           name="deskripsi"
                                           class="form-control"
                                           rows="5"
-                                          placeholder="Deskripsi prestasi">{{ old('deskripsi', $prestasi->deskripsi) }}</textarea>
+                                          placeholder="Deskripsi prestasi"
+                                          required>{{ old('deskripsi', $prestasi->deskripsi) }}</textarea>
 
                             </div>
 
@@ -135,6 +168,7 @@
                     </div>
 
 
+                    {{-- Tombol --}}
                     <button type="submit"
                             class="btn btn-primary">
 
@@ -147,6 +181,7 @@
                     <a href="{{ route('admin.prestasi.create') }}"
                        class="btn btn-secondary">
 
+                        <i class="bi bi-arrow-left"></i>
                         Kembali
 
                     </a>
@@ -160,5 +195,4 @@
     </section>
 
 </div>
-
 @endsection

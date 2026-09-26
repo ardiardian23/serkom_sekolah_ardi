@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title', 'Dashboard - Mazer Admin Dashboard')</title>
+    <title>SMAN 1 SINGAPARNA</title>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="icon" href="{{ asset('assets/images/logoschool.jpg')}}">
 
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
@@ -29,7 +29,7 @@
           href="{{ asset('assets/css/app.css') }}">
 
     <link rel="shortcut icon"
-          href="{{ asset('assets/images/favicon.svg') }}"
+          href="{{ asset('assets/images/logoschool.jpg')}}"
           type="image/x-icon">
 </head>
 

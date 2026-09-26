@@ -13,6 +13,12 @@
 
 <div class="page-content">
 
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     @if($errors->any())
         <div class="alert alert-danger">
             <ul class="mb-0">
@@ -36,13 +42,15 @@
             <div class="card-body">
 
                 <form action="{{ route('admin.ekstrakurikuler.update', $ekskul->id_ekskul) }}"
-                      method="POST">
+                      method="POST"
+                      enctype="multipart/form-data">
 
                     @csrf
                     @method('PUT')
 
                     <div class="row">
 
+                        {{-- Nama Ekstrakurikuler --}}
                         <div class="col-md-6">
 
                             <div class="form-group mb-3">
@@ -56,12 +64,14 @@
                                        name="nama_ekskul"
                                        class="form-control"
                                        value="{{ old('nama_ekskul', $ekskul->nama_ekskul) }}"
-                                       placeholder="Contoh: Pramuka">
+                                       placeholder="Contoh: Pramuka"
+                                       required>
 
                             </div>
 
                         </div>
 
+                        {{-- Pembina --}}
                         <div class="col-md-6">
 
                             <div class="form-group mb-3">
@@ -75,12 +85,14 @@
                                        name="pembina"
                                        class="form-control"
                                        value="{{ old('pembina', $ekskul->pembina) }}"
-                                       placeholder="Nama pembina">
+                                       placeholder="Nama pembina"
+                                       required>
 
                             </div>
 
                         </div>
 
+                        {{-- Jadwal --}}
                         <div class="col-md-6">
 
                             <div class="form-group mb-3">
@@ -94,31 +106,53 @@
                                        name="jadwal_latihan"
                                        class="form-control"
                                        value="{{ old('jadwal_latihan', $ekskul->jadwal_latihan) }}"
-                                       placeholder="Contoh: Sabtu, 08.00 - 10.00">
+                                       placeholder="Contoh: Sabtu, 08.00 - 10.00"
+                                       required>
 
                             </div>
 
                         </div>
 
+                        {{-- Gambar --}}
                         <div class="col-md-6">
 
                             <div class="form-group mb-3">
 
                                 <label for="gambar">
-                                    Gambar
+                                    Gambar Ekstrakurikuler
                                 </label>
 
-                                <input type="text"
+                                {{-- Gambar lama --}}
+                                @if($ekskul->gambar)
+
+                                    <div class="mb-2">
+
+                                        <img src="{{ asset('storage/' . $ekskul->gambar) }}"
+                                             alt="Gambar {{ $ekskul->nama_ekskul }}"
+                                             width="120"
+                                             height="90"
+                                             style="object-fit: cover; border-radius: 8px;">
+
+                                    </div>
+
+                                @endif
+
+                                <input type="file"
                                        id="gambar"
                                        name="gambar"
                                        class="form-control"
-                                       value="{{ old('gambar', $ekskul->gambar) }}"
-                                       placeholder="Nama file gambar">
+                                       accept="image/*">
+
+                                <small class="text-muted">
+                                    Kosongkan jika tidak ingin mengganti gambar.
+                                    Format JPG, JPEG, PNG. Maksimal 2 MB.
+                                </small>
 
                             </div>
 
                         </div>
 
+                        {{-- Deskripsi --}}
                         <div class="col-12">
 
                             <div class="form-group mb-3">
@@ -131,7 +165,8 @@
                                           name="deskripsi"
                                           class="form-control"
                                           rows="5"
-                                          placeholder="Deskripsi ekstrakurikuler">{{ old('deskripsi', $ekskul->deskripsi) }}</textarea>
+                                          placeholder="Deskripsi ekstrakurikuler"
+                                          required>{{ old('deskripsi', $ekskul->deskripsi) }}</textarea>
 
                             </div>
 
@@ -141,13 +176,18 @@
 
                     <button type="submit"
                             class="btn btn-primary">
+
                         <i class="bi bi-save"></i>
                         Update Data
+
                     </button>
 
                     <a href="{{ route('admin.ekstrakurikuler.create') }}"
                        class="btn btn-secondary">
+
+                        <i class="bi bi-arrow-left"></i>
                         Kembali
+
                     </a>
 
                 </form>
@@ -160,4 +200,4 @@
 
 </div>
 
-@endsection
+@endsection     
