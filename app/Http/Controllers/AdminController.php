@@ -10,6 +10,7 @@ use App\Models\Prestasi;
 use App\Models\Berita;
 use App\Models\Pengumuman;
 use App\Models\Galeri;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -27,6 +28,9 @@ class AdminController extends Controller
         $totalPengumuman = Pengumuman::count();
         $totalGaleri = Galeri::count();
 
+        // Data user
+        $users = User::orderByDesc('id_user')->get();
+
         // Data terbaru untuk ditampilkan gambarnya
         $eskulTerbaru = Ekstrakurikuler::orderByDesc('id_ekskul')->first();
 
@@ -41,6 +45,7 @@ class AdminController extends Controller
             'totalBerita',
             'totalPengumuman',
             'totalGaleri',
+            'users',
             'eskulTerbaru',
             'prestasiTerbaru'
         ));

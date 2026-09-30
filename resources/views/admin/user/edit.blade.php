@@ -17,6 +17,7 @@
             </div>
 
             <div class="col-12 col-md-6 order-md-2 order-first">
+
                 <nav aria-label="breadcrumb"
                      class="breadcrumb-header float-start float-lg-end">
 
@@ -41,21 +42,11 @@
                     </ol>
 
                 </nav>
+
             </div>
 
         </div>
     </div>
-
-    {{-- Error validasi --}}
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
     <section class="section">
 
@@ -69,45 +60,54 @@
 
             <div class="card-body">
 
+                @if($errors->any())
+
+                    <div class="alert alert-danger">
+
+                        <ul class="mb-0">
+
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+
+                        </ul>
+
+                    </div>
+
+                @endif
+
                 <form action="{{ route('admin.user.update', $user->id_user) }}"
                       method="POST">
 
                     @csrf
                     @method('PUT')
 
-                    {{-- Username --}}
-                    <div class="mb-3">
+                    <div class="form-group mb-3">
 
-                        <label for="username" class="form-label">
+                        <label for="username">
                             Username
                         </label>
 
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            class="form-control"
-                            value="{{ old('username', $user->username) }}"
-                            maxlength="30"
-                            required
-                        >
+                        <input type="text"
+                               name="username"
+                               id="username"
+                               class="form-control"
+                               value="{{ old('username', $user->username) }}"
+                               required>
 
                     </div>
 
-                    {{-- Password --}}
-                    <div class="mb-3">
+                    <div class="form-group mb-3">
 
-                        <label for="password" class="form-label">
-                            Password
+                        <label for="password">
+                            Password Baru
                         </label>
 
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class="form-control"
-                            placeholder="Kosongkan jika tidak ingin mengubah password"
-                        >
+                        <input type="password"
+                               name="password"
+                               id="password"
+                               class="form-control"
+                               placeholder="Kosongkan jika tidak ingin mengganti password">
 
                         <small class="text-muted">
                             Kosongkan jika password tidak ingin diubah.
@@ -115,22 +115,20 @@
 
                     </div>
 
-                    {{-- Role --}}
-                    <div class="mb-3">
+                    <div class="form-group mb-3">
 
-                        <label for="role" class="form-label">
+                        <label for="role">
                             Role
                         </label>
 
-                        <select
-                            name="role"
-                            id="role"
-                            class="form-select"
-                            required
-                        >
+                        <select name="role"
+                                id="role"
+                                class="form-select"
+                                required>
 
-                            <option value="">
-                                -- Pilih Role --
+                            <option value="Operator"
+                                {{ old('role', $user->role) == 'Operator' ? 'selected' : '' }}>
+                                Operator
                             </option>
 
                             <option value="Admin"
@@ -138,28 +136,27 @@
                                 Admin
                             </option>
 
-                            <option value="Operator"
-                                {{ old('role', $user->role) == 'Operator' ? 'selected' : '' }}>
-                                Operator
-                            </option>
-
                         </select>
 
                     </div>
 
-                    {{-- Tombol --}}
                     <div class="d-flex gap-2">
-
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-save"></i>
-                            Simpan Perubahan
-                        </button>
 
                         <a href="{{ route('admin.user.index') }}"
                            class="btn btn-secondary">
+
                             <i class="bi bi-arrow-left"></i>
                             Kembali
+
                         </a>
+
+                        <button type="submit"
+                                class="btn btn-primary">
+
+                            <i class="bi bi-save"></i>
+                            Simpan Perubahan
+
+                        </button>
 
                     </div>
 

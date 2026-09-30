@@ -10,8 +10,8 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\EkstrakurikulerController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\BeritaController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\GaleriController;
 
 
@@ -45,6 +45,48 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 
     Route::get('/admin', [AdminController::class, 'index'])
         ->name('admin.index');
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| USER
+|--------------------------------------------------------------------------
+| Admin      = lihat + tambah + edit + hapus
+| Operator   = hanya lihat
+|--------------------------------------------------------------------------
+*/
+
+
+// ADMIN - CRUD USER
+Route::middleware(['auth', 'role:Admin'])->group(function () {
+
+    Route::get('/admin/user/create', [UserController::class, 'create'])
+        ->name('admin.user.create');
+
+    Route::post('/admin/user', [UserController::class, 'store'])
+        ->name('admin.user.store');
+
+    Route::get('/admin/user/{user}/edit', [UserController::class, 'edit'])
+        ->name('admin.user.edit');
+
+    Route::put('/admin/user/{user}', [UserController::class, 'update'])
+        ->name('admin.user.update');
+
+    Route::delete('/admin/user/{user}', [UserController::class, 'destroy'])
+        ->name('admin.user.destroy');
+
+});
+
+
+// ADMIN + OPERATOR - LIHAT USER
+Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
+
+    Route::get('/admin/user', [UserController::class, 'index'])
+        ->name('admin.user.index');
+
+    Route::get('/admin/user/{user}', [UserController::class, 'show'])
+        ->name('admin.user.show');
 
 });
 
@@ -135,35 +177,7 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 });
 
 
-/*
-|--------------------------------------------------------------------------
-| USER / PENGGUNA
-|--------------------------------------------------------------------------
-| Admin      = lihat + tambah + edit + hapus
-| Operator   = hanya lihat
-|--------------------------------------------------------------------------
-*/
 
-
-// ADMIN - CRUD USER
-Route::middleware(['auth', 'role:Admin'])->group(function () {
-
-    Route::resource('admin/user', UserController::class)
-        ->names('admin.user');
-
-});
-
-
-// ADMIN + OPERATOR - LIHAT USER
-Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
-
-    Route::get('/admin/user', [UserController::class, 'index'])
-        ->name('admin.user.index');
-
-    Route::get('/admin/user/{user}', [UserController::class, 'show'])
-        ->name('admin.user.show');
-
-});
 
 
 /*
@@ -256,3 +270,4 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
         ->names('admin.galeri');
 
 });
+

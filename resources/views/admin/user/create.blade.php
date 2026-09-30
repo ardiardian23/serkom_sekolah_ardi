@@ -5,73 +5,158 @@
 @section('content')
 
 <div class="page-heading">
-    <h3>Tambah User</h3>
-</div>
 
-<div class="page-content">
+    <div class="page-title">
+        <div class="row">
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Tambah User</h3>
+                <p class="text-subtitle text-muted">
+                    Tambahkan pengguna baru
+                </p>
+            </div>
 
-    <div class="card">
-        <div class="card-header">
-            <h4>Form User</h4>
-        </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb"
+                     class="breadcrumb-header float-start float-lg-end">
 
-        <div class="card-body">
+                    <ol class="breadcrumb">
 
-            <form action="{{ route('admin.user.store') }}" method="POST">
-                @csrf
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.index') }}">
+                                Dashboard
+                            </a>
+                        </li>
 
-                <div class="mb-3">
-                    <label class="form-label">Username</label>
-                    <input
-                        type="text"
-                        name="username"
-                        class="form-control"
-                        value="{{ old('username') }}"
-                        required
-                    >
-                </div>
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.user.index') }}">
+                                Data User
+                            </a>
+                        </li>
 
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        class="form-control"
-                        required
-                    >
-                </div>
+                        <li class="breadcrumb-item active">
+                            Tambah
+                        </li>
 
-                <div class="mb-3">
-                    <label class="form-label">Role</label>
-                    <select name="role" class="form-select" required>
-                        <option value="">-- Pilih Role --</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Operator">Operator</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-primary">
-                    Simpan
-                </button>
-
-                <a href="{{ route('admin.index') }}" class="btn btn-secondary">
-                    Kembali
-                </a>
-
-            </form>
+                    </ol>
+                </nav>
+            </div>
 
         </div>
     </div>
+
+    <section class="section">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h4 class="card-title">
+                    Form Tambah User
+                </h4>
+            </div>
+
+            <div class="card-body">
+
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+
+                        </ul>
+                    </div>
+                @endif
+
+                <form action="{{ route('admin.user.store') }}"
+                      method="POST">
+
+                    @csrf
+
+                    <div class="form-group mb-3">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+                        <input type="text"
+                               name="username"
+                               id="username"
+                               class="form-control"
+                               value="{{ old('username') }}"
+                               placeholder="Masukkan username"
+                               required>
+
+                    </div>
+
+                    <div class="form-group mb-3">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input type="password"
+                               name="password"
+                               id="password"
+                               class="form-control"
+                               placeholder="Minimal 6 karakter"
+                               required>
+
+                    </div>
+
+                    <div class="form-group mb-3">
+
+                        <label for="role">
+                            Role
+                        </label>
+
+                        <select name="role"
+                                id="role"
+                                class="form-select"
+                                required>
+
+                            <option value="">
+                                -- Pilih Role --
+                            </option>
+
+                            <option value="Operator"
+                                {{ old('role') == 'Operator' ? 'selected' : '' }}>
+                                Operator
+                            </option>
+
+                            <option value="Admin"
+                                {{ old('role') == 'Admin' ? 'selected' : '' }}>
+                                Admin
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="d-flex gap-2">
+
+                        <a href="{{ route('admin.user.index') }}"
+                           class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i>
+                            Kembali
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-primary">
+                            <i class="bi bi-save"></i>
+                            Simpan
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
 
 </div>
 

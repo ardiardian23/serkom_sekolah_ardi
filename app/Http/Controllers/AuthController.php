@@ -7,20 +7,28 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    /**
+     * Menampilkan halaman login
+     */
     public function showLogin()
     {
         return view('admin.login.index');
     }
 
+    /**
+     * Proses login
+     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'username' => 'required',
-            'password' => 'required',
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($credentials)) {
-
+        if (Auth::attempt([
+            'username' => $credentials['username'],
+            'password' => $credentials['password'],
+        ])) {
             $request->session()->regenerate();
 
             return redirect()->route('admin.index');
@@ -30,14 +38,19 @@ class AuthController extends Controller
             ->withErrors([
                 'username' => 'Username atau password salah.',
             ])
-            ->withInput();
+            ->withInput($request->only('username'));
     }
 
+    /**
+     * Logout
+     */
     public function logout(Request $request)
-        {
-            Auth::logout();
-             $request->session()->invalidate();
-             $request->session()->regenerateToken();
-             return redirect()->route('login');
-        }
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
+    }
 }

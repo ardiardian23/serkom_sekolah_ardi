@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('id_user', 'desc')->get();
+        $users = User::orderByDesc('id_user')->get();
 
         return view('admin.user.index', compact('users'));
     }
@@ -23,8 +23,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|max:30|unique:user,username',
-            'password' => 'required|string|min:6|max:100',
+            'username' => 'required|string|max:255|unique:users,username',
+            'password' => 'required|string|min:6',
             'role' => 'required|in:Admin,Operator',
         ]);
 
@@ -39,20 +39,15 @@ class UserController extends Controller
             ->with('success', 'User berhasil ditambahkan.');
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
-
         return view('admin.user.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
-
         $request->validate([
-            'username' => 'required|string|max:30|unique:user,username,' . $id . ',id_user',
-            'password' => 'nullable|string|min:6|max:100',
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id_user . ',id_user',
             'role' => 'required|in:Admin,Operator',
         ]);
 
@@ -72,10 +67,8 @@ class UserController extends Controller
             ->with('success', 'User berhasil diperbarui.');
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
-
         $user->delete();
 
         return redirect()

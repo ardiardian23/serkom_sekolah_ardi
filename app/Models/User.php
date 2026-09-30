@@ -9,11 +9,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'user';
+    protected $table = 'users';
 
     protected $primaryKey = 'id_user';
 
-    public $timestamps = false;
+    public $incrementing = true;
+
+    protected $keyType = 'int';
 
     protected $fillable = [
         'username',
@@ -23,10 +25,6 @@ class User extends Authenticatable
 
     protected $hidden = [
         'password',
+        'remember_token',
     ];
-
-    public function getAuthIdentifierName()
-    {
-        return 'id_user';
-    }
 }
