@@ -13,6 +13,8 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\AgendaController;
+
 
 
 /*
@@ -78,7 +80,6 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
 });
 
-
 // ADMIN + OPERATOR - LIHAT USER
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 
@@ -87,6 +88,34 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 
     Route::get('/admin/user/{user}', [UserController::class, 'show'])
         ->name('admin.user.show');
+
+});
+
+
+Route::middleware(['auth', 'role:Admin'])->group(function(){
+    Route::get('/admin/agenda/create', [AgendaController::class, 'create'])
+    ->name('admin.agenda.create');
+
+    Route::post('/admin/agenda', [AgendaController::class, 'store'])
+        ->name('admin.agenda.store');
+
+    Route::get('/admin/agenda/{agenda}/edit', [AgendaController::class, 'edit'])
+        ->name('admin.agenda.edit');
+
+    Route::put('/admin/agenda/{agenda}', [AgendaController::class, 'update'])
+        ->name('admin.agenda.update');
+
+    Route::delete('/admin/agenda/{agenda}', [AgendaController::class, 'destroy'])
+        ->name('admin.agenda.destroy');
+});
+
+Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
+
+    Route::get('/admin/agenda', [AgendaController::class, 'index'])
+        ->name('admin.agenda.index');
+
+    Route::get('/admin/agenda/{agenda}', [AgendaController::class, 'show'])
+        ->name('admin.agenda.show');
 
 });
 

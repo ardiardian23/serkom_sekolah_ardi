@@ -147,6 +147,12 @@
                                 <span>Galeri</span>
                             </a>
                         </li>
+                        <li class="sidebar-item {{ request()->routeIs('admin.agenda.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.agenda.index') }}" class="sidebar-link">
+                                <i class="bi bi-images"></i>
+                                <span>Agenda</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

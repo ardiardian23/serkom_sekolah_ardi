@@ -10,87 +10,52 @@
          HEADER
     ====================================================== --}}
     <div class="page-title mb-4">
-
         <div class="row">
-
             <div class="col-12 col-md-6 order-md-1 order-last">
-
                 <h3>
                     Dashboard
                 </h3>
-
                 <p class="text-subtitle text-muted">
                     Selamat datang di Website Sekolah
                 </p>
-
             </div>
-
-
             <div class="col-12 col-md-6 order-md-2 order-first">
-
                 <nav aria-label="breadcrumb"
                      class="breadcrumb-header float-start float-lg-end">
-
                     <ol class="breadcrumb">
-
                         <li class="breadcrumb-item active">
                             Dashboard
                         </li>
-
                     </ol>
-
                 </nav>
-
             </div>
-
         </div>
-
     </div>
-
-
     {{-- =====================================================
          PROFIL SEKOLAH
     ====================================================== --}}
     <div class="card mb-4">
-
         <div class="card-body py-4 px-4">
-
             <div class="row align-items-center">
-
-
                 {{-- LOGO --}}
                 <div class="col-md-3 text-center">
-
                     @if($profil && $profil->logo)
-
                         <img src="{{ asset('storage/' . $profil->logo) }}"
                              alt="Logo Sekolah"
                              style="
                                 width: 130px;
                                 height: 130px;
-                                object-fit: contain;
-                             ">
-
+                                object-fit: contain;">
                     @else
-
                         <div class="d-flex align-items-center justify-content-center
-                                    bg-light rounded mx-auto"
-                             style="
+                                    bg-light rounded mx-auto"style="
                                 width:130px;
-                                height:130px;
-                             ">
-
-                            <i class="bi bi-building text-primary"
-                               style="font-size:60px;">
+                                height:130px;">
+                            <i class="bi bi-building text-primary"style="font-size:60px;">
                             </i>
-
                         </div>
-
                     @endif
-
                 </div>
-
-
                 {{-- DATA SEKOLAH --}}
                 <div class="col-md-6">
 

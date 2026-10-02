@@ -33,12 +33,6 @@ class ProfilController extends Controller
      */
     public function update(Request $request)
     {
-        /*
-        |--------------------------------------------------------------------------
-        | VALIDASI
-        |--------------------------------------------------------------------------
-        */
-
         $request->validate([
             'nama_sekolah' => 'required|string|max:255',
             'kepala_sekolah' => 'required|string|max:255',
