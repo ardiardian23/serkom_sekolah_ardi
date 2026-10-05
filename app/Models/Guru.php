@@ -17,6 +17,6 @@ class Guru extends Model
         'nip',
         'jenis_kelamin',
         'mapel',
-        'foto'
+        'foto',
     ];
 }

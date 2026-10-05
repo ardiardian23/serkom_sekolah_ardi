@@ -9,11 +9,11 @@
                 <div class="logo" style="text-align: center;">
                     <a href="{{ route('admin.index') }}">
                         <img
-                            src="{{ asset('assets/images/logo/logoschool.jpg') }}"
+                            src="{{ asset('assets/images/logo/logosekolah.png') }}"
                             alt="Logo"
                             style="width: 150px; height: 150px; object-fit: contain; display: block; margin: 0 auto;">
 
-                        <h5 class="mt-2 text-center">SMAN 1 SINGAPARNA</h5>
+                        <h5 class="mt-2 text-center">SMA Negeri 9 Sijunjung</h5>
                     </a>
                 </div>
 
@@ -46,7 +46,8 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-            
+
+                @if(Auth::check() && Auth::user()->role === 'admin')
                 <li class="sidebar-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
 
                     <a href="{{ route('admin.user.index') }}"
@@ -59,23 +60,13 @@
                     </a>
 
                 </li>
-
-                {{-- PROFIL SEKOLAH --}}
-                <li class="sidebar-item has-sub">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-stack"></i>
-                        <span>Profil Sekolah</span>
-                    </a>
-                    <ul class="submenu">
+                @endif
                         <li class="sidebar-item {{ request()->routeIs('admin.profil-sekolah.*') ? 'active' : '' }}">
                             <a href="{{ route('profil.profil-sekolah.index') }}" class="sidebar-link">
                                 <i class="bi bi-layers"></i>
                                 <span>Profil Sekolah</span>
                             </a>
                         </li>
-                    </ul>
-                </li>
-
                 @php
                     $dataSekolahAktif = request()->routeIs(
                         'admin.guru.*',
@@ -84,13 +75,7 @@
                         'admin.ekstrakurikuler.*'
                     );
                 @endphp
-                {{-- DATA SEKOLAH --}}
-                <li class="sidebar-item has-sub">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-collection-fill"></i>
-                        <span>Data Sekolah</span>
-                    </a>
-                    <ul class="submenu">
+
                         {{-- DATA GURU --}}
                         <li class="sidebar-item {{ request()->routeIs('admin.guru.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.guru.index') }}" class="sidebar-link">
@@ -118,17 +103,7 @@
                                 <span>Prestasi</span>
                             </a>
                         </li>
-                    </ul>
-                </li>
 
-
-                {{-- INFORMASI --}}
-                <li class="sidebar-item has-sub">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-grid-1x2-fill"></i>
-                        <span>Informasi</span>
-                    </a>
-                    <ul class="submenu">
                         <li class="sidebar-item {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.berita.index') }}" class="sidebar-link">
                                 <i class="bi bi-newspaper"></i>
@@ -147,14 +122,7 @@
                                 <span>Galeri</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.agenda.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.agenda.index') }}" class="sidebar-link">
-                                <i class="bi bi-images"></i>
-                                <span>Agenda</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
 
                 <li class="sidebar-item">
                     <form action="{{ route('logout') }}" method="POST">

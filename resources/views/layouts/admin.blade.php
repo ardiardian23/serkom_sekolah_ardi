@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SMAN 1 SINGAPARNA</title>
+    <title>SMA Negeri 9 Sijunjung</title>
 
     <link rel="icon" href="{{ asset('assets/images/logoschool.jpg')}}">
 

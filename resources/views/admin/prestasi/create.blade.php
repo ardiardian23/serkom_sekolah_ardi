@@ -4,134 +4,182 @@
 
 @section('content')
 
-<div class="page-heading">
+<div class="container-fluid">
 
-    <h3>Tambah Prestasi</h3>
+    {{-- Header --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <p class="text-subtitle text-muted">
-        Tambahkan data prestasi sekolah
-    </p>
+        <div>
+            <h3 class="fw-bold mb-1">
+                Tambah Prestasi
+            </h3>
 
-</div>
-
-<div class="page-content">
-
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+            <p class="text-muted mb-0">
+                Tambahkan data prestasi sekolah
+            </p>
         </div>
-    @endif
 
+        <a href="{{ route('admin.prestasi.index') }}"
+           class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Kembali
+        </a>
+
+    </div>
+
+    {{-- Validation Error --}}
     @if($errors->any())
+
         <div class="alert alert-danger">
-            <ul class="mb-0">
+
+            <strong>
+                Terdapat kesalahan:
+            </strong>
+
+            <ul class="mb-0 mt-2">
+
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
+
             </ul>
+
         </div>
+
     @endif
 
-    <section class="section">
+    {{-- Form --}}
+    <div class="card shadow-sm">
 
-        <div class="card">
+        <div class="card-header bg-white">
+            <h5 class="fw-bold mb-0">
+                Form Prestasi
+            </h5>
+        </div>
 
-            <div class="card-header">
-                <h4 class="card-title">Form Tambah Prestasi</h4>
-            </div>
+        <div class="card-body">
 
-            <div class="card-body">
+            <form action="{{ route('admin.prestasi.store') }}"
+                  method="POST"
+                  enctype="multipart/form-data">
 
-                <form action="{{ route('admin.prestasi.store') }}"
-                      method="POST"
-                      enctype="multipart/form-data">
+                @csrf
 
-                    @csrf
+                {{-- Nama Prestasi --}}
+                <div class="mb-3">
 
-                    {{-- Nama Prestasi --}}
-                    <div class="mb-3">
-                        <label class="form-label">
-                            Nama Prestasi
-                        </label>
+                    <label for="nama_prestasi"
+                           class="form-label fw-semibold">
+                        Nama Prestasi
+                    </label>
 
-                        <input type="text"
-                               name="nama_prestasi"
-                               class="form-control"
-                               value="{{ old('nama_prestasi') }}"
-                               placeholder="Contoh: Juara 1 Lomba Cerdas Cermat"
-                               required>
-                    </div>
+                    <input type="text"
+                           name="nama_prestasi"
+                           id="nama_prestasi"
+                           class="form-control @error('nama_prestasi') is-invalid @enderror"
+                           value="{{ old('nama_prestasi') }}"
+                           placeholder="Contoh: Juara 1 Lomba Web Design">
 
-                    {{-- Deskripsi --}}
-                    <div class="mb-3">
-                        <label class="form-label">
-                            Deskripsi
-                        </label>
+                    @error('nama_prestasi')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
 
-                        <textarea name="deskripsi"
-                                  class="form-control"
-                                  rows="4"
-                                  placeholder="Masukkan deskripsi prestasi"
-                                  required>{{ old('deskripsi') }}</textarea>
-                    </div>
+                </div>
 
-                    {{-- Foto --}}
-                    <div class="mb-3">
-                        <label class="form-label">
-                            Foto Prestasi
-                        </label>
+                {{-- Deskripsi --}}
+                <div class="mb-3">
 
-                        <input type="file"
-                               name="foto"
-                               class="form-control"
-                               accept="image/*">
+                    <label for="deskripsi"
+                           class="form-label fw-semibold">
+                        Deskripsi
+                    </label>
 
-                        <small class="text-muted">
-                            Format JPG, JPEG, PNG. Maksimal 2 MB.
-                        </small>
-                    </div>
+                    <textarea name="deskripsi"
+                              id="deskripsi"
+                              rows="6"
+                              class="form-control @error('deskripsi') is-invalid @enderror"
+                              placeholder="Masukkan deskripsi prestasi">{{ old('deskripsi') }}</textarea>
 
-                    {{-- Tahun Ajaran --}}
-                    <div class="mb-3">
-                        <label class="form-label">
-                            Tahun Ajaran
-                        </label>
+                    @error('deskripsi')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
 
-                        <input type="text"
-                               name="tahun_ajaran"
-                               class="form-control"
-                               value="{{ old('tahun_ajaran') }}"
-                               placeholder="Contoh: 2025/2026"
-                               required>
-                    </div>
+                </div>
 
-                    <div class="d-flex gap-2">
+                {{-- Foto --}}
+                <div class="mb-3">
 
-                        <button type="submit"
-                                class="btn btn-primary">
+                    <label for="foto"
+                           class="form-label fw-semibold">
+                        Foto Prestasi
+                    </label>
 
-                            <i class="bi bi-save"></i>
-                            Simpan
+                    <input type="file"
+                           name="foto"
+                           id="foto"
+                           class="form-control @error('foto') is-invalid @enderror"
+                           accept="image/jpeg,image/png,image/jpg,image/webp">
 
-                        </button>
+                    <small class="text-muted">
+                        Format JPG, JPEG, PNG, WEBP. Maksimal 2 MB.
+                    </small>
 
-                        <a href="{{ route('admin.prestasi.index') }}"
-                           class="btn btn-secondary">
+                    @error('foto')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
 
-                            <i class="bi bi-arrow-left"></i>
-                            Kembali
+                </div>
 
-                        </a>
+                {{-- Tahun Ajaran --}}
+                <div class="mb-4">
 
-                    </div>
+                    <label for="tahun_ajaran"
+                           class="form-label fw-semibold">
+                        Tahun Ajaran
+                    </label>
 
-                </form>
+                    <input type="text"
+                           name="tahun_ajaran"
+                           id="tahun_ajaran"
+                           class="form-control @error('tahun_ajaran') is-invalid @enderror"
+                           value="{{ old('tahun_ajaran') }}"
+                           placeholder="Contoh: 2025/2026">
 
-            </div>
+                    @error('tahun_ajaran')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                </div>
+
+                {{-- Button --}}
+                <div class="d-flex gap-2">
+
+                    <a href="{{ route('admin.prestasi.index') }}"
+                       class="btn btn-secondary">
+                        Batal
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        <i class="bi bi-save"></i>
+                        Simpan
+                    </button>
+
+                </div>
+
+            </form>
 
         </div>
 
-    </section>
+    </div>
 
 </div>
 

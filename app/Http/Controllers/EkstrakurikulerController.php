@@ -11,12 +11,21 @@ class EkstrakurikulerController extends Controller
     /**
      * Menampilkan semua data ekstrakurikuler
      */
-    public function index()
-    {
-        $ekskuls = Ekstrakurikuler::orderByDesc('id_ekskul')->get();
+    public function index(Request $request)
+        {
+            $search = $request->search;
 
-        return view('admin.ekstrakurikuler.index', compact('ekskuls'));
-    }
+            $ekskuls = Ekstrakurikuler::query()
+                ->when($search, function ($query) use ($search) {
+                    $query->where(function ($q) use ($search) {
+                         $q->where('nama_ekskul', 'like', '%' . $search . '%')
+                            ->orWhere('pembina', 'like', '%' . $search . '%');
+                   });
+                })
+                ->orderByDesc('id_ekskul')
+                ->get();
+         return view('admin.ekstrakurikuler.index', compact('ekskuls', 'search'));
+        }
 
     /**
      * Menampilkan form tambah + data ekstrakurikuler

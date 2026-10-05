@@ -10,12 +10,25 @@ class SiswaController extends Controller
     /**
      * Menampilkan data siswa
      */
-    public function index()
-    {
-        $siswas = Siswa::orderBy('id_siswa', 'desc')->get();
+    public function index(Request $request)
+{
+    $search = $request->search;
 
-        return view('admin.siswa.index', compact('siswas'));
-    }
+    $siswas = Siswa::query()
+        ->when($search, function ($query) use ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_siswa', 'like', '%' . $search . '%')
+                    ->orWhere('nisn', 'like', '%' . $search . '%')
+                    ->orWhere('jenis_kelamin', 'like', '%' . $search . '%')
+                    ->orWhere('tahun_masuk', 'like', '%' . $search . '%');
+            });
+        })
+        ->orderByDesc('id_siswa')
+        ->get();
+
+    return view('admin.siswa.index', compact('siswas', 'search'));
+}
+
 
     /**
      * Halaman input siswa

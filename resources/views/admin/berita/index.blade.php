@@ -1,181 +1,383 @@
 @extends('layouts.admin')
-
 @section('title', 'Data Berita')
-
 @section('content')
-
 <div class="page-heading">
-    <h3>Data Berita</h3>
-    <p class="text-subtitle text-muted">
-        Kelola berita sekolah
-    </p>
+<h3>Data Berita</h3>
+<p class="text-subtitle text-muted">
+    Kelola berita sekolah
+</p>
 </div>
-
 <div class="page-content">
+{{-- ================================================= --}}
+{{-- PESAN SUKSES --}}
+{{-- ================================================= --}}
+@if(session('success'))
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    <div class="alert alert-success alert-dismissible fade show">
 
-    <section class="section">
+        <i class="bi bi-check-circle me-2"></i>
 
-        <div class="card">
+        {{ session('success') }}
 
-            <div class="card-header d-flex justify-content-between align-items-center">
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+        </button>
 
-                <h4 class="card-title">
+    </div>
+
+@endif
+
+
+{{-- ================================================= --}}
+{{-- PESAN ERROR --}}
+{{-- ================================================= --}}
+
+@if(session('error'))
+
+    <div class="alert alert-danger alert-dismissible fade show">
+
+        <i class="bi bi-exclamation-circle me-2"></i>
+
+        {{ session('error') }}
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+        </button>
+
+    </div>
+
+@endif
+
+
+<section class="section">
+
+    <div class="card">
+
+        {{-- ================================================= --}}
+        {{-- HEADER --}}
+        {{-- ================================================= --}}
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <h4 class="card-title mb-1">
+                    <i class="bi bi-newspaper me-2"></i>
                     Data Berita
                 </h4>
 
-                <a href="{{ route('admin.berita.create') }}"
-                   class="btn btn-primary">
-
-                    <i class="bi bi-plus-circle"></i>
-                    Tambah Berita
-
-                </a>
+                <small class="text-muted">
+                    Daftar berita sekolah
+                </small>
 
             </div>
 
-            <div class="card-body">
+            <a href="{{ route('admin.berita.create') }}"
+               class="btn btn-primary">
 
-                <div class="table-responsive">
+                <i class="bi bi-plus-circle me-1"></i>
+                Tambah Berita
 
-                    <table class="table table-striped">
+            </a>
 
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Judul</th>
-                                <th>Isi</th>
-                                <th>Tanggal</th>
-                                <th>Gambar</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
+        </div>
 
-                        <tbody>
 
-                            @forelse($beritas as $berita)
+        {{-- ================================================= --}}
+        {{-- BODY --}}
+        {{-- ================================================= --}}
 
-                                <tr>
+        <div class="card-body">
 
-                                    <td>
-                                        {{ $loop->iteration }}
-                                    </td>
 
-                                    <td>
-                                        {{ $berita->judul }}
-                                    </td>
+            {{-- ================================================= --}}
+            {{-- PENCARIAN --}}
+            {{-- ================================================= --}}
 
-                                    <td>
-                                        {{ Str::limit($berita->isi, 80) }}
-                                    </td>
+            <form action="{{ route('admin.berita.index') }}"
+                  method="GET"
+                  class="mb-4">
 
-                                    <td>
-                                        {{ $berita->tanggal }}
-                                    </td>
+                <div class="row">
 
-                                    <td>
+                    <div class="col-md-6">
 
-                                        @if($berita->gambar)
+                        <div class="input-group">
 
-                                            <img src="{{ asset('storage/' . $berita->gambar) }}"
-                                                 width="60"
-                                                 height="60"
-                                                 style="object-fit: cover;"
-                                                 class="rounded">
+                            <input type="text"
+                                   name="search"
+                                   class="form-control"
+                                   value="{{ $search ?? '' }}"
+                                   placeholder="Cari judul berita...">
 
-                                        @else
+                            <button type="submit"
+                                    class="btn btn-primary">
 
-                                            <span class="text-muted">
-                                                Tidak ada gambar
-                                            </span>
+                                <i class="bi bi-search me-1"></i>
+                                Cari
 
-                                        @endif
+                            </button>
 
-                                    </td>
+                            @if(!empty($search))
 
-                                    <td>
+                                <a href="{{ route('admin.berita.index') }}"
+                                   class="btn btn-secondary">
 
-                                        @if($berita->status == 'Publish')
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                    Reset
 
-                                            <span class="badge bg-success">
-                                                Publish
-                                            </span>
+                                </a>
 
-                                        @else
+                            @endif
 
-                                            <span class="badge bg-secondary">
-                                                Draft
-                                            </span>
+                        </div>
 
-                                        @endif
-
-                                    </td>
-
-                                    <td>
-
-                                        <a href="{{ route('admin.berita.edit', $berita->id_berita) }}"
-                                           class="btn btn-warning btn-sm">
-
-                                            <i class="bi bi-pencil-square"></i>
-                                            Edit
-
-                                        </a>
-
-                                        <form action="{{ route('admin.berita.destroy', $berita->id_berita) }}"
-                                              method="POST"
-                                              class="d-inline">
-
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <button type="submit"
-                                                    class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin ingin menghapus berita ini?')">
-
-                                                <i class="bi bi-trash"></i>
-                                                Hapus
-
-                                            </button>
-
-                                        </form>
-
-                                    </td>
-
-                                </tr>
-
-                            @empty
-
-                                <tr>
-
-                                    <td colspan="7"
-                                        class="text-center">
-
-                                        Belum ada berita.
-
-                                    </td>
-
-                                </tr>
-
-                            @endforelse
-
-                        </tbody>
-
-                    </table>
+                    </div>
 
                 </div>
+
+            </form>
+
+
+            {{-- ================================================= --}}
+            {{-- TABLE --}}
+            {{-- ================================================= --}}
+
+            <div class="table-responsive">
+
+                <table class="table table-striped table-hover align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th width="60">
+                                No
+                            </th>
+
+                            <th>
+                                Judul
+                            </th>
+
+                            <th>
+                                Isi
+                            </th>
+
+                            <th>
+                                Tanggal
+                            </th>
+
+                            <th>
+                                Gambar
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th width="180">
+                                Aksi
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        @forelse($beritas as $berita)
+
+                            <tr>
+
+
+                                {{-- NO --}}
+                                <td>
+                                    {{ $loop->iteration }}
+                                </td>
+
+
+                                {{-- JUDUL --}}
+                                <td>
+
+                                    <strong>
+                                        {{ $berita->judul }}
+                                    </strong>
+
+                                </td>
+
+
+                                {{-- ISI --}}
+                                <td>
+
+                                    <span class="text-muted">
+
+                                        {{ \Illuminate\Support\Str::limit(strip_tags($berita->isi), 80) }}
+
+                                    </span>
+
+                                </td>
+
+
+                                {{-- TANGGAL --}}
+                                <td>
+
+                                    @if($berita->tanggal)
+
+                                        {{ \Carbon\Carbon::parse($berita->tanggal)->format('d-m-Y') }}
+
+                                    @else
+
+                                        <span class="text-muted">
+                                            -
+                                        </span>
+
+                                    @endif
+
+                                </td>
+
+
+                                {{-- GAMBAR --}}
+                                <td>
+
+                                    @if($berita->gambar)
+
+                                        <img src="{{ asset('storage/' . $berita->gambar) }}"
+                                             alt="{{ $berita->judul }}"
+                                             width="70"
+                                             height="60"
+                                             class="rounded"
+                                             style="object-fit: cover;">
+
+                                    @else
+
+                                        <div class="d-flex align-items-center justify-content-center bg-light rounded"
+                                             style="width: 70px; height: 60px;">
+
+                                            <i class="bi bi-image text-secondary fs-4"></i>
+
+                                        </div>
+
+                                    @endif
+
+                                </td>
+
+
+                                {{-- STATUS --}}
+                                <td>
+
+                                    @if($berita->status === 'Publish')
+
+                                        <span class="badge bg-success">
+
+                                            <i class="bi bi-check-circle me-1"></i>
+                                            Publish
+
+                                        </span>
+
+                                    @else
+
+                                        <span class="badge bg-secondary">
+
+                                            <i class="bi bi-file-earmark me-1"></i>
+                                            Draft
+
+                                        </span>
+
+                                    @endif
+
+                                </td>
+
+
+                                {{-- AKSI --}}
+                                <td>
+
+                                    {{-- EDIT --}}
+                                    <a href="{{ route('admin.berita.edit', $berita->id_berita) }}"
+                                       class="btn btn-warning btn-sm"
+                                       title="Edit berita">
+
+                                        <i class="bi bi-pencil-square"></i>
+
+                                    </a>
+
+
+                                    {{-- HAPUS --}}
+                                    <form action="{{ route('admin.berita.destroy', $berita->id_berita) }}"
+                                          method="POST"
+                                          class="d-inline">
+
+                                        @csrf
+
+                                        @method('DELETE')
+
+                                        <button type="submit"
+                                                class="btn btn-danger btn-sm"
+                                                title="Hapus berita"
+                                                onclick="return confirm('Yakin ingin menghapus berita ini?')">
+
+                                            <i class="bi bi-trash"></i>
+
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+
+                        @empty
+
+                            <tr>
+
+                                <td colspan="7"
+                                    class="text-center py-5">
+
+                                    @if(!empty($search))
+
+                                        <i class="bi bi-search fs-1 text-secondary"></i>
+
+                                        <p class="text-muted mt-3 mb-0">
+
+                                            Berita dengan kata
+                                            <strong>"{{ $search }}"</strong>
+                                            tidak ditemukan.
+
+                                        </p>
+
+                                    @else
+
+                                        <i class="bi bi-newspaper fs-1 text-secondary"></i>
+
+                                        <p class="text-muted mt-3 mb-0">
+                                            Belum ada berita.
+                                        </p>
+
+                                    @endif
+
+                                </td>
+
+                            </tr>
+
+                        @endforelse
+
+                    </tbody>
+
+                </table>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
+```
 
 </div>
 
 @endsection
+

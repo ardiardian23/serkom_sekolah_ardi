@@ -15,11 +15,12 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('gambar', 100);
             $table->enum('status', ['Publish', 'Draft']);
-            $table->unsignedInteger('id_user');
+
+            $table->unsignedBigInteger('id_user');
 
             $table->foreign('id_user')
                   ->references('id_user')
-                  ->on('user')
+                  ->on('users')
                   ->onDelete('cascade');
         });
     }

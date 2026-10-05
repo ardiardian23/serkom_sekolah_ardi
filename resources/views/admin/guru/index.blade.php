@@ -1,3 +1,4 @@
+```blade
 @extends('layouts.admin')
 
 @section('title', 'Data Guru')
@@ -22,23 +23,58 @@
     <section class="section">
 
         <div class="card">
+
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="card-title">Data Guru</h4>
 
                 @if(auth()->user()->role === 'Admin')
                     <a href="{{ route('admin.guru.create') }}"
-                    class="btn btn-primary">
-
+                       class="btn btn-primary">
                         <i class="bi bi-plus-circle"></i>
                         Tambah Guru
-
                     </a>
                 @endif
             </div>
 
             <div class="card-body">
 
+                {{-- Search --}}
+                <form action="{{ route('admin.guru.index') }}"
+                      method="GET"
+                      class="mb-3">
+
+                    <div class="input-group">
+
+                        <input
+                            type="text"
+                            name="search"
+                            class="form-control"
+                            placeholder="Cari nama guru atau NIP..."
+                            value="{{ $search ?? '' }}"
+                        >
+
+                        <button type="submit"
+                                class="btn btn-primary">
+                            <i class="bi bi-search"></i>
+                            Cari
+                        </button>
+
+                        @if(!empty($search))
+                            <a href="{{ route('admin.guru.index') }}"
+                               class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i>
+                                Reset
+                            </a>
+                        @endif
+
+                    </div>
+
+                </form>
+
+
+                {{-- Tabel --}}
                 <div class="table-responsive">
+
                     <table class="table table-striped" id="table1">
 
                         <thead>
@@ -58,7 +94,10 @@
                             @forelse($gurus as $guru)
 
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+
+                                    <td>
+                                        {{ $loop->iteration }}
+                                    </td>
 
                                     <td>
                                         {{ $guru->nip }}
@@ -77,51 +116,59 @@
                                     </td>
 
                                     <td>
+
                                         @if($guru->foto)
-                                            <img src="{{ asset('storage/' . $guru->foto) }}"
+
+                                            <img
+                                                src="{{ asset('storage/' . $guru->foto) }}"
+                                                alt="Foto {{ $guru->nama_guru }}"
                                                 width="50"
                                                 height="50"
                                                 style="object-fit: cover;"
-                                                class="rounded">
+                                                class="rounded"
+                                            >
+
                                         @else
+
                                             <span class="text-muted">
                                                 Tidak ada foto
                                             </span>
+
                                         @endif
+
                                     </td>
 
                                     <td>
-
-                                        <a href="{{ route('admin.guru.show', $guru->id_guru) }}"
-                                        class="btn btn-info btn-sm">
-
-                                            <i class="bi bi-eye"></i>
-
-                                        </a>
-
-
+                                        {{-- Admin Only --}}
                                         @if(auth()->user()->role === 'Admin')
 
-                                            <a href="{{ route('admin.guru.edit', $guru->id_guru) }}"
-                                            class="btn btn-warning btn-sm">
-
+                                            {{-- Edit --}}
+                                            <a
+                                                href="{{ route('admin.guru.edit', $guru->id_guru) }}"
+                                                class="btn btn-warning btn-sm"
+                                                title="Edit"
+                                            >
                                                 <i class="bi bi-pencil"></i>
-
                                             </a>
 
 
-                                            <form action="{{ route('admin.guru.destroy', $guru->id_guru) }}"
+                                            {{-- Delete --}}
+                                            <form
+                                                action="{{ route('admin.guru.destroy', $guru->id_guru) }}"
                                                 method="POST"
-                                                class="d-inline">
+                                                class="d-inline"
+                                            >
 
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <button type="submit"
-                                                        class="btn btn-danger btn-sm">
-
+                                                <button
+                                                    type="submit"
+                                                    class="btn btn-danger btn-sm"
+                                                    title="Hapus"
+                                                    onclick="return confirm('Apakah kamu yakin ingin menghapus data guru ini?')"
+                                                >
                                                     <i class="bi bi-trash"></i>
-
                                                 </button>
 
                                             </form>
@@ -129,14 +176,30 @@
                                         @endif
 
                                     </td>
+
                                 </tr>
 
                             @empty
 
                                 <tr>
-                                    <td colspan="7" class="text-center">
-                                        Belum ada data guru.
+
+                                    <td colspan="7"
+                                        class="text-center">
+
+                                        @if(!empty($search))
+
+                                            Data guru dengan pencarian
+                                            "<strong>{{ $search }}</strong>"
+                                            tidak ditemukan.
+
+                                        @else
+
+                                            Belum ada data guru.
+
+                                        @endif
+
                                     </td>
+
                                 </tr>
 
                             @endforelse
@@ -144,9 +207,11 @@
                         </tbody>
 
                     </table>
+
                 </div>
 
             </div>
+
         </div>
 
     </section>

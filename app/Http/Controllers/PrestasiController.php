@@ -11,11 +11,21 @@ class PrestasiController extends Controller
     /**
      * Menampilkan semua data prestasi
      */
-    public function index()
+    public function index(Request $request)
     {
-        $prestasis = Prestasi::orderBy('id', 'desc')->get();
+        $search = $request->search;
 
-        return view('admin.prestasi.index', compact('prestasis'));
+        $prestasis = Prestasi::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_prestasi', 'like', '%' . $search . '%')
+                    ->orWhere('tahun_ajaran', 'like', '%' . $search . '%');
+                });
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('admin.prestasi.index', compact('prestasis', 'search'));
     }
 
     /**
@@ -23,9 +33,7 @@ class PrestasiController extends Controller
      */
     public function create()
     {
-        $prestasis = Prestasi::orderBy('id', 'desc')->get();
-
-        return view('admin.prestasi.create', compact('prestasis'));
+        return view('admin.prestasi.create');
     }
 
     /**
@@ -40,29 +48,29 @@ class PrestasiController extends Controller
             'tahun_ajaran' => 'required|string|max:20',
         ], [
             'nama_prestasi.required' => 'Nama prestasi wajib diisi.',
+            'nama_prestasi.max' => 'Nama prestasi maksimal 100 karakter.',
             'deskripsi.required' => 'Deskripsi wajib diisi.',
-            'foto.image' => 'File foto harus berupa gambar.',
+            'foto.image' => 'File harus berupa gambar.',
             'foto.mimes' => 'Foto harus berformat JPG, JPEG, atau PNG.',
             'foto.max' => 'Ukuran foto maksimal 2 MB.',
             'tahun_ajaran.required' => 'Tahun ajaran wajib diisi.',
         ]);
 
-        $data = [
-            'nama_prestasi' => $request->nama_prestasi,
-            'deskripsi' => $request->deskripsi,
-            'tahun_ajaran' => $request->tahun_ajaran,
-        ];
+        $foto = null;
 
-        // Upload foto
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')
-                ->store('prestasi', 'public');
+            $foto = $request->file('foto')->store('prestasi', 'public');
         }
 
-        Prestasi::create($data);
+        Prestasi::create([
+            'nama_prestasi' => $request->nama_prestasi,
+            'deskripsi' => $request->deskripsi,
+            'foto' => $foto,
+            'tahun_ajaran' => $request->tahun_ajaran,
+        ]);
 
         return redirect()
-            ->route('admin.prestasi.create')
+            ->route('admin.prestasi.index')
             ->with('success', 'Data prestasi berhasil ditambahkan.');
     }
 
@@ -77,7 +85,7 @@ class PrestasiController extends Controller
     }
 
     /**
-     * Menampilkan form edit
+     * Menampilkan form edit prestasi
      */
     public function edit($id)
     {
@@ -91,6 +99,8 @@ class PrestasiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $prestasi = Prestasi::findOrFail($id);
+
         $request->validate([
             'nama_prestasi' => 'required|string|max:100',
             'deskripsi' => 'required|string',
@@ -98,20 +108,17 @@ class PrestasiController extends Controller
             'tahun_ajaran' => 'required|string|max:20',
         ], [
             'nama_prestasi.required' => 'Nama prestasi wajib diisi.',
+            'nama_prestasi.max' => 'Nama prestasi maksimal 100 karakter.',
             'deskripsi.required' => 'Deskripsi wajib diisi.',
-            'foto.image' => 'File foto harus berupa gambar.',
+            'foto.image' => 'File harus berupa gambar.',
             'foto.mimes' => 'Foto harus berformat JPG, JPEG, atau PNG.',
             'foto.max' => 'Ukuran foto maksimal 2 MB.',
             'tahun_ajaran.required' => 'Tahun ajaran wajib diisi.',
         ]);
 
-        $prestasi = Prestasi::findOrFail($id);
-
-        $data = [
-            'nama_prestasi' => $request->nama_prestasi,
-            'deskripsi' => $request->deskripsi,
-            'tahun_ajaran' => $request->tahun_ajaran,
-        ];
+        $prestasi->nama_prestasi = $request->nama_prestasi;
+        $prestasi->deskripsi = $request->deskripsi;
+        $prestasi->tahun_ajaran = $request->tahun_ajaran;
 
         // Jika upload foto baru
         if ($request->hasFile('foto')) {
@@ -122,14 +129,14 @@ class PrestasiController extends Controller
             }
 
             // Simpan foto baru
-            $data['foto'] = $request->file('foto')
+            $prestasi->foto = $request->file('foto')
                 ->store('prestasi', 'public');
         }
 
-        $prestasi->update($data);
+        $prestasi->save();
 
         return redirect()
-            ->route('admin.prestasi.create')
+            ->route('admin.prestasi.index')
             ->with('success', 'Data prestasi berhasil diperbarui.');
     }
 
@@ -140,15 +147,17 @@ class PrestasiController extends Controller
     {
         $prestasi = Prestasi::findOrFail($id);
 
-        // Hapus file foto
+        // Hapus file foto dari storage
         if ($prestasi->foto) {
             Storage::disk('public')->delete($prestasi->foto);
         }
 
+        // Hapus data dari database
         $prestasi->delete();
 
         return redirect()
-            ->route('admin.prestasi.create')
+            ->route('admin.prestasi.index')
             ->with('success', 'Data prestasi berhasil dihapus.');
     }
 }
+

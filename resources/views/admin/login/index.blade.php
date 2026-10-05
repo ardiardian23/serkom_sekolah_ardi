@@ -20,7 +20,7 @@
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="index.html"><img src="assets/images/logo/logoschool.jpg" alt="Logo" srcset=""
+                        <a href="index.html"><img src="assets/images/logo/logosekolah.png" alt="Logo" srcset=""
                          style="width: 150px; height:170px; object-fit: contain; display: block;margin: 0 auto;"></a>
                     </div>
                     <h1 class="auth-title">Log in.</h1>
@@ -37,6 +37,7 @@
                             required
                         >
 
+                        <br>
                         <input
                             type="password"
                             name="password"
@@ -45,6 +46,7 @@
                             required
                         >
 
+                        <br>
                         <button type="submit" class="btn btn-primary">
                             Login
                         </button>

@@ -309,42 +309,22 @@
                                     <td>
                                         {{ Str::limit($galeri->keterangan, 50) }}
                                     </td>
-
-
                                     <td>
-
                                         @if($galeri->kategori == 'Foto')
-
                                             <span class="badge bg-primary">
                                                 Foto
                                             </span>
-
                                         @else
-
                                             <span class="badge bg-danger">
                                                 Video
                                             </span>
 
                                         @endif
-
                                     </td>
-
-
                                     <td>
                                         {{ $galeri->tanggal }}
                                     </td>
-
-
                                     <td>
-
-                                        <a href="{{ route('admin.galeri.show', $galeri->id_galeri) }}"
-                                           class="btn btn-info btn-sm">
-
-                                            <i class="bi bi-eye"></i>
-
-                                        </a>
-
-
                                         <a href="{{ route('admin.galeri.edit', $galeri->id_galeri) }}"
                                            class="btn btn-warning btn-sm">
 
@@ -389,7 +369,6 @@
                                 </tr>
 
                             @endforelse
-
                         </tbody>
 
                     </table>

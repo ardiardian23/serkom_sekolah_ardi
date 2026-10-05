@@ -99,7 +99,37 @@
 
             <div class="card-body">
 
-                <div class="table-responsive">
+    {{-- PENCARIAN --}}
+    <form action="{{ route('admin.siswa.index') }}" method="GET" class="mb-4">
+        <div class="row g-2">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text"
+                           name="search"
+                           class="form-control"
+                           placeholder="Cari nama, NIS, atau kelas..."
+                           value="{{ $search ?? '' }}">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                    Cari
+                </button>
+                @if(!empty($search))
+                    <a href="{{ route('admin.siswa.index') }}"
+                       class="btn btn-secondary">
+                        <i class="bi bi-x-circle"></i>
+                        Reset
+                    </a>
+                @endif
+            </div>
+        </div>
+    </form>
+    <div class="table-responsive">
 
                     <table class="table table-striped table-hover">
 
@@ -162,12 +192,6 @@
 
                                     <td>
 
-                                        {{-- LIHAT --}}
-                                        <a href="{{ route('admin.siswa.show', $siswa->id_siswa) }}"
-                                        class="btn btn-info btn-sm">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-
 
                                         {{-- KHUSUS ADMIN --}}
                                         @if(auth()->user()->role === 'Admin')
@@ -216,27 +240,15 @@
 
                                             <i class="bi bi-plus-circle"></i>
                                             Tambah Siswa
-
                                         </a>
-
                                     </td>
-
                                 </tr>
-
                             @endforelse
-
                         </tbody>
-
                     </table>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
-
 </div>
-
 @endsection

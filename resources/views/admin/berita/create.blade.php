@@ -54,7 +54,8 @@
             <div class="card-body">
 
                 <form action="{{ route('admin.berita.store') }}"
-                      method="POST">
+                    method="POST"
+                    enctype="multipart/form-data">
 
                     @csrf
 
@@ -108,12 +109,11 @@
                                     Gambar
                                 </label>
 
-                                <input type="text"
-                                       id="gambar"
-                                       name="gambar"
-                                       class="form-control"
-                                       value="{{ old('gambar') }}"
-                                       placeholder="Nama file gambar">
+                                <input type="file"
+                                id="gambar"
+                                name="gambar"
+                                class="form-control"
+                                accept="image/*">
 
                             </div>
 

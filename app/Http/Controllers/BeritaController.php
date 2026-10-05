@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Berita;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class BeritaController extends Controller
@@ -25,30 +26,33 @@ class BeritaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required|string|max:50',
-            'isi' => 'required|string',
+            'judul' => 'required|string|max:255',
             'tanggal' => 'required|date',
-            'gambar' => 'required|string|max:100',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'status' => 'required|in:Publish,Draft',
-        ], [
-            'judul.required' => 'Judul berita wajib diisi.',
-            'isi.required' => 'Isi berita wajib diisi.',
-            'tanggal.required' => 'Tanggal wajib diisi.',
-            'gambar.required' => 'Gambar wajib diisi.',
-            'status.required' => 'Status berita wajib dipilih.',
+            'isi' => 'required|string',
         ]);
 
-        Berita::create([
+        $data = [
+            'id_user' => Auth::id(),
             'judul' => $request->judul,
-            'isi' => $request->isi,
             'tanggal' => $request->tanggal,
-            'gambar' => $request->gambar,
             'status' => $request->status,
-            'id_user' => 2,
-        ]);
+            'isi' => $request->isi,
+        ];
+
+        if ($request->hasFile('gambar')) {
+
+            $data['gambar'] = $request
+                ->file('gambar')
+                ->store('berita', 'public');
+
+        }
+
+        Berita::create($data);
 
         return redirect()
-            ->route('admin.berita.create')
+            ->route('admin.berita.index')
             ->with('success', 'Berita berhasil ditambahkan.');
     }
 

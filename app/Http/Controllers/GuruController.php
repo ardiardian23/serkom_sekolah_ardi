@@ -8,11 +8,20 @@ use Illuminate\Support\Facades\Storage;
 
 class GuruController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $gurus = Guru::orderBy('id_guru', 'desc')->get();
+        $search = $request->search;
+        $gurus = Guru::query()
+        ->when($search, function ($query) use ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_guru', 'like', '%' . $search . '%')
+                ->orWhere('nip', 'like', '%' . $search . '%');
+                });
+            })
+            ->orderByDesc('id_guru') ->get();
 
-        return view('admin.guru.index', compact('gurus'));
+
+        return view('admin.guru.index', compact('gurus', 'search'));
     }
 
     public function edit($id)
@@ -32,18 +41,14 @@ class GuruController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_guru' => 'required|string|max:40',
-            'nip' => 'required|string|max:15',
-            'jenis_kelamin' => 'required|string|max:20',
-            'mapel' => 'required|string|max:40',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'nama_guru' => 'required|string|max:100',
+            'nip' => 'required|string|max:20',
+            'jenis_kelamin' => 'required|string',
+            'mapel' => 'required|string|max:100',
+            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $foto = null;
-
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')->store('guru', 'public');
-        }
+        $foto = $request->file('foto')->store('guru', 'public');
 
         Guru::create([
             'nama_guru' => $request->nama_guru,
@@ -54,7 +59,7 @@ class GuruController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.guru.create')
+            ->route('admin.guru.index')
             ->with('success', 'Data guru berhasil ditambahkan.');
     }
 

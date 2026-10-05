@@ -287,18 +287,6 @@
                                     </td>
 
                                     <td>
-
-                                        {{-- Detail --}}
-                                        <a
-                                            href="{{ route('admin.pengumuman.show', $pengumuman->id_pengumuman) }}"
-                                            class="btn btn-info btn-sm"
-                                        >
-
-                                            <i class="bi bi-eye"></i>
-
-                                        </a>
-
-
                                         {{-- Edit --}}
                                         <a
                                             href="{{ route('admin.pengumuman.edit', $pengumuman->id_pengumuman) }}"
@@ -308,8 +296,6 @@
                                             <i class="bi bi-pencil"></i>
 
                                         </a>
-
-
                                         {{-- Hapus --}}
                                         <form
                                             action="{{ route('admin.pengumuman.destroy', $pengumuman->id_pengumuman) }}"

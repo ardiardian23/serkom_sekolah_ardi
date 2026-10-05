@@ -10,18 +10,14 @@ class Berita extends Model
 
     protected $primaryKey = 'id_berita';
 
-    public $incrementing = true;
-
-    protected $keyType = 'int';
-
     public $timestamps = false;
 
     protected $fillable = [
+        'id_user',
         'judul',
-        'isi',
         'tanggal',
         'gambar',
         'status',
-        'id_user',
+        'isi',
     ];
 }
