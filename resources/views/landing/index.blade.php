@@ -1,8 +1,8 @@
 @extends('layouts.landing')
 
-@section('title')
-{{ $profil->nama_sekolah ?? 'Website Sekolah' }}
-@endsection
+ <title>SMA Negeri 9 Sijunjung</title>
+
+    <link rel="icon" href="{{ asset('assets/images/logo/logosekolah.png')}}">
 
 @section('content')
 
@@ -14,7 +14,7 @@
 
 <section class="hero" id="home">
 
-```
+
 <div class="container">
 
     <div class="row align-items-center">
@@ -54,7 +54,7 @@
     </div>
 
 </div>
-```
+
 
 </section>
 
@@ -64,66 +64,91 @@
 
 <!-- ========================================================= -->
 
-<section class="stat-section py-5">
+<section class="school-stats">
+    <div class="container">
 
-```
-<div class="container">
+        <div class="stats-wrapper">
 
-    <div class="row text-center g-4">
+            <!-- Berita -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-newspaper"></i>
+                </div>
 
-        <div class="col-md-3">
-
-            <div class="stat-number">
-                {{ $totalSiswa }}
+                <div class="stat-content">
+                    <h2>{{ $totalBerita ?? 0 }}</h2>
+                    <p>Berita</p>
+                </div>
             </div>
 
-            <div class="stat-label">
-                Siswa
+
+            <!-- Pengumuman -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-megaphone-fill"></i>
+                </div>
+
+                <div class="stat-content">
+                    <h2>{{ $totalPengumuman ?? 0 }}</h2>
+                    <p>Pengumuman</p>
+                </div>
             </div>
 
-        </div>
 
-        <div class="col-md-3">
+            <!-- Guru & Staff -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
 
-            <div class="stat-number">
-                {{ $totalGuru }}
+                <div class="stat-content">
+                    <h2>{{ $totalGuru ?? 0 }}</h2>
+                    <p>Guru & Staff</p>
+                </div>
             </div>
 
-            <div class="stat-label">
-                Guru
+
+            <!-- Ekstrakurikuler -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-mortarboard-fill"></i>
+                </div>
+
+                <div class="stat-content">
+                    <h2>{{ $totalEkstrakurikuler ?? 0 }}</h2>
+                    <p>Ekstrakurikuler</p>
+                </div>
             </div>
 
-        </div>
 
-        <div class="col-md-3">
+            <!-- Prestasi -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-trophy-fill"></i>
+                </div>
 
-            <div class="stat-number">
-                {{ $ekskuls->count() }}
+                <div class="stat-content">
+                    <h2>{{ $totalPrestasi ?? 0 }}</h2>
+                    <p>Prestasi</p>
+                </div>
             </div>
 
-            <div class="stat-label">
-                Ekstrakurikuler
-            </div>
 
-        </div>
+            <!-- Galeri -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-images"></i>
+                </div>
 
-        <div class="col-md-3">
-
-            <div class="stat-number">
-                {{ $prestasi->count() }}
-            </div>
-
-            <div class="stat-label">
-                Prestasi
+                <div class="stat-content">
+                    <h2>{{ $totalGaleri ?? 0 }}</h2>
+                    <p>Galeri</p>
+                </div>
             </div>
 
         </div>
 
     </div>
-
-</div>
-```
-
 </section>
 
 <!-- ========================================================= -->
@@ -134,7 +159,7 @@
 
 <section class="section-padding bg-white" id="profil">
 
-```
+
 <div class="container">
 
     <div class="text-center">
@@ -161,9 +186,10 @@
 
             @else
 
-                <img src="{{ asset('assets/images/logo/logoschool.jpg') }}"
-                     class="school-logo"
-                     alt="Logo Sekolah">
+                <img src="{{ asset('assets/images/faces/kepsek.png') }}"
+                    class="school-logo"
+                    alt="Logo Sekolah"
+                    style="width: 300px; height: 300px; object-fit: contain;">
 
             @endif
 
@@ -263,7 +289,7 @@
     </div>
 
 </div>
-```
+
 
 </section>
 
@@ -273,45 +299,63 @@
 
 <!-- ========================================================= -->
 
-<section class="section-padding bg-light">
 
-```
-<div class="container">
 
-    <div class="text-center">
+<!-- Visi & Misi -->
+<section class="visi-misi-section py-5">
 
-        <h2 class="section-title">
-            Visi & Misi
-        </h2>
+    <div class="container">
 
-        <p class="section-subtitle">
-            Landasan dan tujuan pendidikan sekolah
-        </p>
+        <!-- Judul Section -->
+        <div class="text-center mb-4">
 
-    </div>
+            <h2 class="section-title">
+                Visi & Misi
+            </h2>
 
-    <div class="row justify-content-center">
+            <p class="section-subtitle">
+                Landasan dan tujuan pendidikan sekolah
+            </p>
 
-        <div class="col-lg-9">
+        </div>
 
-            <div class="card info-card shadow-sm">
+        <!-- Card -->
+        <div class="row justify-content-center">
 
-                <div class="card-body p-5 text-center">
+            <div class="col-lg-9">
 
-                    <div class="info-icon bg-primary bg-opacity-10 text-primary mx-auto">
+                <div class="card info-card shadow-sm">
 
-                        <i class="bi bi-bullseye"></i>
+                    <div class="card-body p-5">
+
+                        <!-- Icon -->
+                        <div class="info-icon bg-primary bg-opacity-10 text-primary mx-auto mb-3">
+
+                            <i class="bi bi-bullseye"></i>
+
+                        </div>
+
+                        <!-- Judul -->
+                        <h4 class="fw-bold mb-4 text-center">
+                            Visi & Misi Sekolah
+                        </h4>
+
+                        <!-- Isi Visi & Misi -->
+                        <div class="text-muted visi-misi-content">
+
+                            @if($profil && $profil->visi_misi)
+
+                                {!! nl2br(e($profil->visi_misi)) !!}
+
+                            @else
+
+                                Visi dan misi sekolah belum tersedia.
+
+                            @endif
+
+                        </div>
 
                     </div>
-
-                    <h4 class="fw-bold mb-3">
-                        Visi & Misi Sekolah
-                    </h4>
-
-                    <p class="text-muted"
-                       style="white-space: pre-line; line-height: 1.9;">
-                        {{ $profil->visi_misi ?? 'Visi dan misi sekolah belum tersedia.' }}
-                    </p>
 
                 </div>
 
@@ -321,10 +365,9 @@
 
     </div>
 
-</div>
-```
-
 </section>
+
+
 
 <!-- ========================================================= -->
 
@@ -334,7 +377,7 @@
 
 <section class="section-padding bg-white" id="berita">
 
-```
+
 <div class="container">
 
     <div class="d-flex justify-content-between align-items-center mb-5">
@@ -351,8 +394,8 @@
 
         </div>
 
-        <a href="{{ route('admin.berita.index') }}"
-           class="btn btn-outline-primary">
+        <a href="{{ route('berita.public') }}"
+        class="btn btn-outline-primary">
             Lihat Semua
             <i class="bi bi-arrow-right ms-1"></i>
         </a>
@@ -422,7 +465,7 @@
     </div>
 
 </div>
-```
+
 
 </section>
 
@@ -432,87 +475,83 @@
 
 <!-- ========================================================= -->
 
-<section class="section-padding bg-light">
+<section class="section-padding bg-light" id="pengumuman">
 
-```
-<div class="container">
+    <div class="container">
 
-    <div class="text-center">
+        <div class="d-flex justify-content-between align-items-center mb-5">
 
-        <h2 class="section-title">
-            Pengumuman
-        </h2>
+            <div>
+                <h2 class="section-title mb-1">
+                    Pengumuman
+                </h2>
 
-        <p class="section-subtitle">
-            Informasi penting untuk siswa dan orang tua
-        </p>
+                <p class="text-muted mb-0">
+                    Informasi penting untuk siswa dan orang tua
+                </p>
+            </div>
 
-    </div>
+            <a href="{{ route('pengumuman.public') }}"
+               class="btn btn-outline-primary">
 
-    <div class="row g-4">
+                Lihat Semua
+                <i class="bi bi-arrow-right ms-1"></i>
 
-        @forelse($pengumuman as $item)
+            </a>
 
-            <div class="col-lg-4">
+        </div>
 
-                <div class="card info-card shadow-sm">
+        {{-- DATA PENGUMUMAN --}}
+        <div class="row g-4">
 
-                    <div class="card-body p-4">
+            @forelse($pengumuman as $item)
 
-                        <div class="d-flex align-items-center mb-3">
+                <div class="col-md-4">
 
-                            <div class="info-icon bg-primary bg-opacity-10 text-primary mb-0 me-3">
+                    <div class="card h-100 shadow-sm border-0">
 
-                                <i class="bi bi-megaphone"></i>
+                        <div class="card-body">
 
+                            <div class="mb-3">
+                                <i class="bi bi-megaphone fs-2 text-primary"></i>
                             </div>
 
-                            <div>
+                            <small class="text-muted">
+                                {{ $item->tanggal }}
+                            </small>
 
-                                <small class="text-muted">
+                            <h5 class="fw-bold mt-2">
+                                {{ $item->judul }}
+                            </h5>
 
-                                    {{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}
-
-                                </small>
-
-                                <h5 class="fw-bold mb-0">
-                                    {{ $item->judul }}
-                                </h5>
-
-                            </div>
+                            <p class="text-muted">
+                                {{ Str::limit($item->isi, 120) }}
+                            </p>
 
                         </div>
-
-                        <p class="text-muted mb-0">
-
-                            {{ \Illuminate\Support\Str::limit(strip_tags($item->isi), 150) }}
-
-                        </p>
 
                     </div>
 
                 </div>
 
-            </div>
+            @empty
 
-        @empty
+                <div class="col-12 text-center">
+                    <p class="text-muted">
+                        Belum ada pengumuman.
+                    </p>
+                </div>
 
-            <div class="col-12 text-center">
+            @endforelse
 
-                <p class="text-muted">
-                    Belum ada pengumuman.
-                </p>
-
-            </div>
-
-        @endforelse
+        </div>
 
     </div>
 
-</div>
-```
-
 </section>
+
+
+
 
 <!-- ========================================================= -->
 
@@ -522,21 +561,27 @@
 
 <section class="section-padding bg-white" id="guru">
 
-```
+
 <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h2 class="section-title mb-1">
+                Guru dan Staff
+            </h2>
 
-    <div class="text-center">
+            <p class="text-muted mb-0">
+                Tenaga pendidik profesional sekolah
+            </p>
 
-        <h2 class="section-title">
-            Guru Kami
-        </h2>
+        </div>
+        <a href="{{ route('guru.public') }}"
+        class="btn btn-outline-primary">
 
-        <p class="section-subtitle">
-            Tenaga pendidik profesional sekolah
-        </p>
+            Lihat Semua
+            <i class="bi bi-arrow-right ms-1"></i>
 
+        </a>
     </div>
-
     <div class="row g-4">
 
         @forelse($guru as $item)
@@ -596,127 +641,6 @@
     </div>
 
 </div>
-```
-
-</section>
-
-<!-- ========================================================= -->
-
-<!-- SISWA -->
-
-<!-- ========================================================= -->
-
-<section class="section-padding bg-light" id="siswa">
-
-```
-<div class="container">
-
-    <div class="text-center">
-
-        <h2 class="section-title">
-            Siswa Kami
-        </h2>
-
-        <p class="section-subtitle">
-            Peserta didik sekolah kami
-        </p>
-
-    </div>
-
-    <div class="row g-4">
-
-        @forelse($siswas as $item)
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="card info-card shadow-sm">
-
-                    <div class="card-body p-4">
-
-                        <div class="d-flex align-items-center">
-
-                            <div class="info-icon bg-primary bg-opacity-10 text-primary mb-0 me-3">
-
-                                <i class="bi bi-person-fill"></i>
-
-                            </div>
-
-                            <div>
-
-                                <h5 class="fw-bold mb-1">
-                                    {{ $item->nama_siswa }}
-                                </h5>
-
-                                <small class="text-muted">
-                                    NISN: {{ $item->nisn }}
-                                </small>
-
-                            </div>
-
-                        </div>
-
-                        <hr>
-
-                        <div class="row">
-
-                            <div class="col-6">
-
-                                <small class="text-muted">
-                                    Jenis Kelamin
-                                </small>
-
-                                <div class="fw-bold">
-                                    {{ $item->jenis_kelamin }}
-                                </div>
-
-                            </div>
-
-                            <div class="col-6">
-
-                                <small class="text-muted">
-                                    Tahun Masuk
-                                </small>
-
-                                <div class="fw-bold">
-                                    {{ $item->tahun_masuk }}
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        @empty
-
-            <div class="col-12 text-center">
-
-                <div class="card shadow-sm">
-
-                    <div class="card-body p-5">
-
-                        <i class="bi bi-people fs-1 text-secondary"></i>
-
-                        <p class="text-muted mt-3 mb-0">
-                            Belum ada data siswa.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        @endforelse
-
-    </div>
-
-</div>
-
 </section>
 
 <!-- ========================================================= -->
@@ -728,16 +652,22 @@
 <section class="section-padding bg-light">
 
 <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h2 class="section-title mb-1">
+                Ekstrakurikuler
+            </h2>
+            <p class="text-muted mb-0">
+                Kegiatan pengembangan minat dan bakat siswa
+            </p>
+        </div>
+        <a href="{{ route('ekstrakurikuler.public') }}"
+        class="btn btn-outline-primary">
 
-    <div class="text-center">
+            Lihat Semua
+            <i class="bi bi-arrow-right ms-1"></i>
 
-        <h2 class="section-title">
-            Ekstrakurikuler
-        </h2>
-
-        <p class="section-subtitle">
-            Kegiatan pengembangan minat dan bakat siswa
-        </p>
+        </a>
 
     </div>
 
@@ -804,7 +734,6 @@
     </div>
 
 </div>
-```
 
 </section>
 
@@ -816,19 +745,24 @@
 
 <section class="section-padding bg-white" id="prestasi">
 
-```
 <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h2 class="section-title mb-1">
+                Prestasi Sekolah
+            </h2>
 
-    <div class="text-center">
+            <p class="text-muted mb-0">
+                Prestasi dan pencapaian siswa
+            </p>
+        </div>
+        <a href="{{ route('prestasi.public') }}"
+        class="btn btn-outline-primary">
 
-        <h2 class="section-title">
-            Prestasi Sekolah
-        </h2>
+            Lihat Semua
+            <i class="bi bi-arrow-right ms-1"></i>
 
-        <p class="section-subtitle">
-            Prestasi dan pencapaian siswa
-        </p>
-
+        </a>
     </div>
 
     <div class="row g-4">
@@ -890,7 +824,7 @@
     </div>
 
 </div>
-```
+
 
 </section>
 
@@ -902,19 +836,24 @@
 
 <section class="section-padding bg-light" id="galeri">
 
-```
+
 <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h2 class="section-title mb-1">
+                Galeri Sekolah
+            </h2>
 
-    <div class="text-center">
+            <p class="text-muted mb-0">
+                Dokumentasi kegiatan sekolah
+            </p>
 
-        <h2 class="section-title">
-            Galeri Sekolah
-        </h2>
-
-        <p class="section-subtitle">
-            Dokumentasi kegiatan sekolah
-        </p>
-
+        </div>
+        <a href="{{ route('galeri.public') }}"
+        class="btn btn-outline-primary">
+            Lihat Semua
+            <i class="bi bi-arrow-right ms-1"></i>
+        </a>
     </div>
 
     <div class="row g-3">
@@ -960,7 +899,7 @@
     </div>
 
 </div>
-```
+
 
 </section>
 
@@ -972,7 +911,7 @@
 
 <section class="section-padding bg-white">
 
-```
+
 <div class="container">
 
     <div class="text-center">

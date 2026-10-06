@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Prestasi;
+use App\Models\ProfilSekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PrestasiController extends Controller
 {
+   public function publicIndex()
+    {
+        $profil = ProfilSekolah::first();
+
+        $prestasi = Prestasi::take(3)->get();
+
+        return view('public.prestasi', compact(
+            'profil',
+            'prestasi'
+        ));
+    }
     /**
      * Menampilkan semua data prestasi
      */

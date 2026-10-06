@@ -16,8 +16,36 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\LandingController;
 
 
+// HALAMAN UTAMA
 Route::get('/', [LandingController::class, 'index'])
-    ->name('home');
+    ->name('landing');
+
+
+// HALAMAN PUBLIC
+
+Route::get('/berita', function () {
+    return view('public.berita');
+})->name('public.berita');
+
+Route::get('/pengumuman', function () {
+    return view('public.pengumuman');
+})->name('public.pengumuman');
+
+Route::get('/guru', function () {
+    return view('public.guru');
+})->name('public.guru');
+
+Route::get('/prestasi', function () {
+    return view('public.prestasi');
+})->name('public.prestasi');
+
+Route::get('/galeri', function () {
+    return view('public.galeri');
+})->name('public.galeri');
+
+Route::get('/ekstrakurikuler', function () {
+    return view('public.ekstrakurikuler');
+})->name('public.ekstrakurikuler');
 /*
 |--------------------------------------------------------------------------
 | LOGIN
@@ -274,3 +302,24 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 
 });
 
+// ==============================
+// HALAMAN PUBLIK
+// ==============================
+
+Route::get('/berita', [BeritaController::class, 'publicIndex'])
+    ->name('berita.public');
+
+Route::get('/pengumuman', [PengumumanController::class, 'publicIndex'])
+    ->name('pengumuman.public');
+
+Route::get('/guru-staff', [GuruController::class, 'publicIndex'])
+    ->name('guru.public');
+
+Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'publicIndex'])
+    ->name('ekstrakurikuler.public');
+
+Route::get('/prestasi', [PrestasiController::class, 'publicIndex'])
+    ->name('prestasi.public');
+
+Route::get('/galeri', [GaleriController::class, 'publicIndex'])
+    ->name('galeri.public');

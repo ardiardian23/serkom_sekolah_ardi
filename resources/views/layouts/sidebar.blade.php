@@ -61,10 +61,10 @@
 
                 </li>
                 @endif
-                        <li class="sidebar-item {{ request()->routeIs('admin.profil-sekolah.*') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->routeIs('profil.profil-sekolah.*') ? 'active' : '' }}">
                             <a href="{{ route('profil.profil-sekolah.index') }}" class="sidebar-link">
-                                <i class="bi bi-layers"></i>
-                                <span>Profil Sekolah</span>
+                                <i class="bi bi-person-badge"></i>
+                                <span>Profil sekolah</span>
                             </a>
                         </li>
                 @php

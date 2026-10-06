@@ -3,11 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\ProfilSekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class GuruController extends Controller
 {
+
+    public function publicIndex()
+    {
+        $profil = ProfilSekolah::first();
+
+        $guru = Guru::get();
+
+        return view('public.guru', compact(
+            'profil',
+            'guru'
+        ));
+    }
+
     public function index(Request $request)
     {
         $search = $request->search;

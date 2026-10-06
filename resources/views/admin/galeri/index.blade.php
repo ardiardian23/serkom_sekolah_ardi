@@ -239,14 +239,72 @@
 
             <div class="card-header">
 
-                <h4 class="card-title">
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h4 class="card-title mb-0">
                     Data Galeri
                 </h4>
 
             </div>
 
+        </div>
+
             <div class="card-body">
 
+                {{-- PENCARIAN --}}
+
+            <form action="{{ route('admin.galeri.index') }}"
+                method="GET"
+                class="mb-4">
+
+                <div class="row g-2">
+
+                    <div class="col-md-9">
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="bi bi-search"></i>
+                            </span>
+
+                            <input type="text"
+                                name="search"
+                                class="form-control"
+                                placeholder="Cari judul, keterangan, atau kategori..."
+                                value="{{ request('search') }}">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-1">
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+
+                            <i class="bi bi-search"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="col-md-2">
+
+                        <a href="{{ route('admin.galeri.index') }}"
+                        class="btn btn-secondary w-100">
+
+                            <i class="bi bi-arrow-clockwise"></i>
+                            Reset
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </form>
                 <div class="table-responsive">
 
                     <table class="table table-striped">

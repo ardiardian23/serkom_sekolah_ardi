@@ -3,16 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\Galeri;
+use App\Models\ProfilSekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class GaleriController extends Controller
 {
-    public function index()
-    {
-        $galeris = Galeri::orderBy('id_galeri', 'desc')->get();
 
-        return view('admin.galeri.index', compact('galeris'));
+    public function publicIndex()
+    {
+        $profil = ProfilSekolah::first();
+
+        $galeris = Galeri::get();
+
+        return view('public.galeri', compact(
+            'profil',
+            'galeris'
+        ));
+    }
+
+    public function index(Request $request)
+    {
+        $search = $request->search;
+
+        $galeris = Galeri::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('judul', 'like', '%' . $search . '%')
+                    ->orWhere('keterangan', 'like', '%' . $search . '%')
+                    ->orWhere('kategori', 'like', '%' . $search . '%');
+            })
+            ->orderBy('id_galeri', 'desc')
+            ->get();
+
+        return view('admin.galeri.index', compact(
+            'galeris',
+            'search'
+        ));
     }
 
     public function create()

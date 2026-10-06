@@ -3,21 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengumuman;
+use App\Models\ProfilSekolah;
 use Illuminate\Http\Request;
 
 class PengumumanController extends Controller
 {
-    public function index()
-{
-    $pengumumans = Pengumuman::orderBy('id_pengumuman', 'desc')->get();
 
-    return view('admin.pengumuman.index', compact('pengumumans'));
-}
+    public function publicIndex()
+    {
+        $profil = ProfilSekolah::first();
 
-public function create()
-{
-    return redirect()->route('admin.pengumuman.index');
-}
+        $pengumuman = Pengumuman::orderBy('tanggal', 'desc')->get();
+
+        return view('public.pengumuman', compact(
+            'profil',
+            'pengumuman'
+        ));
+    }
+
+    public function index(Request $request)
+    {
+        $search = $request->search;
+
+        $pengumumans = Pengumuman::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('judul', 'like', '%' . $search . '%')
+                    ->orWhere('isi', 'like', '%' . $search . '%')
+                    ->orWhere('status', 'like', '%' . $search . '%');
+            })
+            ->orderBy('tanggal', 'desc')
+            ->get();
+
+        return view('admin.pengumuman.index', compact(
+            'pengumumans'
+        ));
+    }
+
+    public function create()
+    {
+        return redirect()->route('admin.pengumuman.index');
+    }
 
     public function store(Request $request)
     {

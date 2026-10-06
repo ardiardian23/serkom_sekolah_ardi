@@ -6,6 +6,10 @@
 
 <div class="page-heading">
 
+    {{-- ========================================== --}}
+    {{-- PAGE TITLE --}}
+    {{-- ========================================== --}}
+
     <div class="page-title">
 
         <div class="row">
@@ -20,6 +24,7 @@
 
             </div>
 
+
             <div class="col-12 col-md-6 order-md-2 order-first">
 
                 <nav aria-label="breadcrumb"
@@ -28,9 +33,11 @@
                     <ol class="breadcrumb">
 
                         <li class="breadcrumb-item">
+
                             <a href="{{ route('admin.index') }}">
                                 Dashboard
                             </a>
+
                         </li>
 
                         <li class="breadcrumb-item active">
@@ -48,17 +55,30 @@
     </div>
 
 
-    {{-- Pesan berhasil --}}
+    {{-- ========================================== --}}
+    {{-- SUCCESS --}}
+    {{-- ========================================== --}}
+
     @if(session('success'))
 
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show">
+
             {{ session('success') }}
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+
         </div>
 
     @endif
 
 
-    {{-- Error validasi --}}
+    {{-- ========================================== --}}
+    {{-- ERROR --}}
+    {{-- ========================================== --}}
+
     @if($errors->any())
 
         <div class="alert alert-danger">
@@ -67,7 +87,9 @@
 
                 @foreach($errors->all() as $error)
 
-                    <li>{{ $error }}</li>
+                    <li>
+                        {{ $error }}
+                    </li>
 
                 @endforeach
 
@@ -78,10 +100,12 @@
     @endif
 
 
+    {{-- ========================================== --}}
+    {{-- FORM TAMBAH PENGUMUMAN --}}
+    {{-- ========================================== --}}
+
     <section class="section">
 
-
-        {{-- FORM TAMBAH PENGUMUMAN --}}
         <div class="card">
 
             <div class="card-header">
@@ -101,41 +125,41 @@
                     @csrf
 
 
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            Judul Pengumuman
-                        </label>
-
-                        <input
-                            type="text"
-                            name="judul"
-                            class="form-control"
-                            value="{{ old('judul') }}"
-                            maxlength="50"
-                            placeholder="Masukkan judul pengumuman"
-                            required
-                        >
-
-                    </div>
-
+                    {{-- JUDUL --}}
 
                     <div class="mb-3">
 
                         <label class="form-label">
-                            Isi Pengumuman
+                            Judul
                         </label>
 
-                        <textarea
-                            name="isi"
-                            class="form-control"
-                            rows="5"
-                            placeholder="Masukkan isi pengumuman"
-                            required
-                        >{{ old('isi') }}</textarea>
+                        <input type="text"
+                               name="judul"
+                               class="form-control"
+                               value="{{ old('judul') }}"
+                               maxlength="50"
+                               required>
 
                     </div>
 
+
+                    {{-- ISI --}}
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Isi
+                        </label>
+
+                        <textarea name="isi"
+                                  class="form-control"
+                                  rows="4"
+                                  required>{{ old('isi') }}</textarea>
+
+                    </div>
+
+
+                    {{-- TANGGAL & STATUS --}}
 
                     <div class="row">
 
@@ -147,13 +171,11 @@
                                     Tanggal
                                 </label>
 
-                                <input
-                                    type="date"
-                                    name="tanggal"
-                                    class="form-control"
-                                    value="{{ old('tanggal', date('Y-m-d')) }}"
-                                    required
-                                >
+                                <input type="date"
+                                       name="tanggal"
+                                       class="form-control"
+                                       value="{{ old('tanggal', date('Y-m-d')) }}"
+                                       required>
 
                             </div>
 
@@ -168,11 +190,9 @@
                                     Status
                                 </label>
 
-                                <select
-                                    name="status"
-                                    class="form-select"
-                                    required
-                                >
+                                <select name="status"
+                                        class="form-select"
+                                        required>
 
                                     <option value="">
                                         -- Pilih Status --
@@ -197,11 +217,14 @@
                     </div>
 
 
+                    {{-- TOMBOL TAMBAH --}}
+
                     <button type="submit"
                             class="btn btn-primary">
 
-                        <i class="bi bi-save"></i>
-                        Simpan Pengumuman
+                        <i class="bi bi-plus-circle"></i>
+
+                        Tambah Pengumuman
 
                     </button>
 
@@ -211,34 +234,123 @@
 
         </div>
 
+    </section>
 
-        {{-- DAFTAR PENGUMUMAN --}}
+
+    {{-- ========================================== --}}
+    {{-- DATA PENGUMUMAN --}}
+    {{-- ========================================== --}}
+
+    <section class="section">
+
         <div class="card">
 
             <div class="card-header">
 
-                <h4 class="card-title">
-                    Daftar Pengumuman
-                </h4>
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <h4 class="card-title mb-0">
+                        Data Pengumuman
+                    </h4>
+
+                </div>
 
             </div>
 
 
             <div class="card-body">
 
+
+                {{-- ========================================== --}}
+                {{-- PENCARIAN --}}
+                {{-- ========================================== --}}
+
+                <form action="{{ route('admin.pengumuman.index') }}"
+                      method="GET"
+                      class="mb-4">
+
+                    <div class="row g-2">
+
+
+                        {{-- INPUT PENCARIAN --}}
+
+                        <div class="col-md-9">
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+
+                                    <i class="bi bi-search"></i>
+
+                                </span>
+
+                                <input type="text"
+                                       name="search"
+                                       class="form-control"
+                                       placeholder="Cari judul, isi, atau status..."
+                                       value="{{ request('search') }}">
+
+                            </div>
+
+                        </div>
+
+
+                        {{-- TOMBOL CARI --}}
+
+                        <div class="col-md-1">
+
+                            <button type="submit"
+                                    class="btn btn-primary w-100">
+
+                                <i class="bi bi-search"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        {{-- TOMBOL RESET --}}
+
+                        <div class="col-md-2">
+
+                            <a href="{{ route('admin.pengumuman.index') }}"
+                               class="btn btn-secondary w-100">
+
+                                <i class="bi bi-arrow-clockwise"></i>
+
+                                Reset
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+
+                {{-- ========================================== --}}
+                {{-- TABEL --}}
+                {{-- ========================================== --}}
+
                 <div class="table-responsive">
 
-                    <table class="table table-hover">
+                    <table class="table table-striped">
 
                         <thead>
 
                             <tr>
 
                                 <th>No</th>
+
                                 <th>Judul</th>
+
                                 <th>Isi</th>
+
                                 <th>Tanggal</th>
+
                                 <th>Status</th>
+
                                 <th>Aksi</th>
 
                             </tr>
@@ -252,25 +364,40 @@
 
                                 <tr>
 
+
+                                    {{-- NO --}}
+
                                     <td>
                                         {{ $loop->iteration }}
                                     </td>
+
+
+                                    {{-- JUDUL --}}
 
                                     <td>
                                         {{ $pengumuman->judul }}
                                     </td>
 
+
+                                    {{-- ISI --}}
+
                                     <td>
-                                        {{ \Illuminate\Support\Str::limit($pengumuman->isi, 50) }}
+                                        {{ Str::limit($pengumuman->isi, 50) }}
                                     </td>
+
+
+                                    {{-- TANGGAL --}}
 
                                     <td>
                                         {{ $pengumuman->tanggal }}
                                     </td>
 
+
+                                    {{-- STATUS --}}
+
                                     <td>
 
-                                        @if($pengumuman->status === 'Publish')
+                                        @if($pengumuman->status == 'Publish')
 
                                             <span class="badge bg-success">
                                                 Publish
@@ -286,32 +413,42 @@
 
                                     </td>
 
+
+                                    {{-- AKSI --}}
+
                                     <td>
-                                        {{-- Edit --}}
-                                        <a
-                                            href="{{ route('admin.pengumuman.edit', $pengumuman->id_pengumuman) }}"
-                                            class="btn btn-warning btn-sm"
-                                        >
+
+
+                                        {{-- EDIT --}}
+
+                                        <a href="{{ route(
+                                            'admin.pengumuman.edit',
+                                            $pengumuman->id_pengumuman
+                                        ) }}"
+                                           class="btn btn-warning btn-sm">
 
                                             <i class="bi bi-pencil"></i>
 
                                         </a>
-                                        {{-- Hapus --}}
-                                        <form
-                                            action="{{ route('admin.pengumuman.destroy', $pengumuman->id_pengumuman) }}"
-                                            method="POST"
-                                            class="d-inline"
-                                        >
+
+
+                                        {{-- HAPUS --}}
+
+                                        <form action="{{ route(
+                                                    'admin.pengumuman.destroy',
+                                                    $pengumuman->id_pengumuman
+                                                ) }}"
+                                              method="POST"
+                                              class="d-inline">
 
                                             @csrf
 
                                             @method('DELETE')
 
-                                            <button
-                                                type="submit"
-                                                class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Yakin ingin menghapus pengumuman ini?')"
-                                            >
+
+                                            <button type="submit"
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Yakin ingin menghapus pengumuman ini?')">
 
                                                 <i class="bi bi-trash"></i>
 
@@ -323,14 +460,13 @@
 
                                 </tr>
 
+
                             @empty
 
                                 <tr>
 
-                                    <td
-                                        colspan="6"
-                                        class="text-center text-muted"
-                                    >
+                                    <td colspan="6"
+                                        class="text-center">
 
                                         Belum ada data pengumuman.
 

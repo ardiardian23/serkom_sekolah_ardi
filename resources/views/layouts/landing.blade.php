@@ -16,6 +16,112 @@
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
+
+
+        .school-stats {
+    background: #f5f8fc;
+    padding: 50px 0;
+}
+
+.stats-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.stat-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf2ff;
+    color: #0d6efd;
+
+    border-radius: 15px;
+
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.stat-content h2 {
+    margin: 0;
+    font-size: 38px;
+    font-weight: 700;
+    color: #172b4d;
+}
+
+.stat-content p {
+    margin: 3px 0 0;
+    font-size: 16px;
+    color: #6c757d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .stats-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 25px;
+    }
+
+}
+        html {
+    scroll-behavior: smooth;
+    }
+
+    section {
+        scroll-margin-top: 80px;
+    }
+        .navbar .nav-link {
+    position: relative;
+    color: #555;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    }
+
+    .navbar .nav-link:hover {
+        color: #0d6efd;
+    }
+
+    .navbar .nav-link.active {
+        color: #0d6efd;
+        font-weight: 600;
+    }
+
+    .navbar .nav-link.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background-color: #0d6efd;
+        border-radius: 2px;
+    }
         html {
             scroll-behavior: smooth;
         }

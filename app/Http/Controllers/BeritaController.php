@@ -3,12 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\ProfilSekolah;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class BeritaController extends Controller
 {
+
+    public function publicIndex()
+    {
+        $profil = ProfilSekolah::first();
+
+        $berita = Berita::orderBy('tanggal', 'desc')->get();
+
+        return view('public.berita', compact(
+            'profil',
+            'berita'
+        ));
+    }
+
     public function index()
     {
         $beritas = Berita::orderBy('id_berita', 'desc')->get();

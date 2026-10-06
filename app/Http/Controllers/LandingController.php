@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\ProfilSekolah;
 use App\Models\Guru;
-use App\Models\Siswa;
 use App\Models\Ekstrakurikuler;
 use App\Models\Prestasi;
 use App\Models\Berita;
 use App\Models\Pengumuman;
 use App\Models\Galeri;
-
 
 class LandingController extends Controller
 {
@@ -18,48 +16,43 @@ class LandingController extends Controller
     {
         $profil = ProfilSekolah::first();
 
-        $siswas = Siswa::orderByDesc('id_siswa')->get();
-
-        $guru = Guru::orderBy('id_guru', 'desc')
-            ->take(6)
-            ->get();
-
-        $berita = Berita::where('status', 'Publish')
-            ->orderBy('tanggal', 'desc')
+        $berita = Berita::orderBy('tanggal', 'desc')
             ->take(3)
             ->get();
 
-        $pengumuman = Pengumuman::where('status', 'Publish')
-            ->orderBy('tanggal', 'desc')
+        $pengumuman = Pengumuman::orderBy('tanggal', 'desc')
             ->take(3)
             ->get();
 
-        $prestasi = Prestasi::orderBy('id', 'desc')
-            ->take(3)
-            ->get();
+        $guru = Guru::take(3)->get();
 
-        $ekskuls = Ekstrakurikuler::orderBy('id_ekskul', 'desc')
-            ->take(6)
-            ->get();
+        $ekskuls = Ekstrakurikuler::take(3)->get();
 
-        $galeris = Galeri::orderBy('id_galeri', 'desc')
-            ->take(8)
-            ->get();
+        $prestasi = Prestasi::take(3)->get();
+
+        $galeris = Galeri::take(4)->get();
 
         $totalGuru = Guru::count();
-        $totalSiswa = Siswa::count();
+        $totalEkstrakurikuler = Ekstrakurikuler::count();
+        $totalPrestasi = Prestasi::count();
+        $totalBerita = Berita::count();
+        $totalPengumuman = Pengumuman::count();
+        $totalGaleri = Galeri::count();
 
         return view('landing.index', compact(
             'profil',
-            'guru',
             'berita',
             'pengumuman',
-            'prestasi',
+            'guru',
             'ekskuls',
+            'prestasi',
             'galeris',
             'totalGuru',
-            'totalSiswa',
-            'siswas'
+            'totalEkstrakurikuler',
+            'totalPrestasi',
+            'totalBerita',
+            'totalPengumuman',
+            'totalGaleri'
         ));
     }
 }

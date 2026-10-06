@@ -7,7 +7,7 @@
 
     <title>SMA Negeri 9 Sijunjung</title>
 
-    <link rel="icon" href="{{ asset('assets/images/logoschool.jpg')}}">
+    <link rel="icon" href="{{ asset('assets/images/logo/logosekolah.png')}}">
 
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"

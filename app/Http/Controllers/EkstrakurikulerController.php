@@ -3,11 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ekstrakurikuler;
+use App\Models\ProfilSekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class EkstrakurikulerController extends Controller
 {
+
+    public function publicIndex()
+    {
+        $profil = ProfilSekolah::first();
+
+        $ekskuls = Ekstrakurikuler::get();
+
+        return view('public.ekstrakurikuler', compact(
+            'profil',
+            'ekskuls'
+        ));
+    }
     /**
      * Menampilkan semua data ekstrakurikuler
      */

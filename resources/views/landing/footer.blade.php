@@ -4,7 +4,7 @@
 
         <div class="row g-4">
 
-            <div class="col-lg-5">
+            <div class="col-lg-6">
 
                 <h5 class="fw-bold mb-3">
                     {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
@@ -15,27 +15,7 @@
                 </p>
 
             </div>
-
-            <div class="col-lg-3">
-
-                <h6 class="fw-bold mb-3">
-                    Navigasi
-                </h6>
-
-                <div class="d-flex flex-column gap-2">
-
-                    <a href="#home">Beranda</a>
-                    <a href="#profil">Profil</a>
-                    <a href="#berita">Berita</a>
-                    <a href="#guru">Guru</a>
-                    <a href="#prestasi">Prestasi</a>
-                    <a href="#galeri">Galeri</a>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-4">
+            <div class="col-lg-6">
 
                 <h6 class="fw-bold mb-3">
                     Kontak
