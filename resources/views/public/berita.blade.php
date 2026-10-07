@@ -30,46 +30,64 @@ Berita - {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
 
                 <div class="col-lg-4 col-md-6">
 
-                    <div class="card news-card shadow-sm h-100">
+                    <div class="card berita-card shadow-sm">
 
-                        @if($item->gambar)
+                        {{-- GAMBAR --}}
+                        <div class="berita-image-wrapper">
 
-                            <img src="{{ asset('storage/' . $item->gambar) }}"
-                                 class="news-image"
-                                 alt="{{ $item->judul }}">
+                            <img
+                                src="{{ $item->gambar
+                                    ? asset('storage/' . $item->gambar)
+                                    : asset('assets/images/logo/logosekolah.png') }}"
+                                alt="{{ $item->judul }}"
+                                class="berita-image"
+                            >
 
-                        @else
+                        </div>
 
-                            <div class="news-image bg-white d-flex align-items-center justify-content-center">
 
-                                <i class="bi bi-newspaper fs-1 text-secondary"></i>
+                        {{-- ISI --}}
+                        <div class="card-body">
 
-                            </div>
-
-                        @endif
-
-                        <div class="card-body p-4">
-
-                            <small class="text-primary">
+                            {{-- TANGGAL --}}
+                            <div class="berita-date mb-2">
 
                                 <i class="bi bi-calendar3 me-1"></i>
 
-                                {{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}
+                                {{ \Carbon\Carbon::parse($item->tanggal)
+                                    ->translatedFormat('d F Y') }}
 
-                            </small>
+                            </div>
 
-                            <h5 class="fw-bold mt-2">
+
+                            {{-- JUDUL --}}
+                            <h5 class="fw-bold mb-2">
+
                                 {{ $item->judul }}
+
                             </h5>
 
-                            <p class="text-muted">
+
+                            {{-- RINGKASAN --}}
+                            <p class="text-muted mb-3">
 
                                 {{ \Illuminate\Support\Str::limit(
                                     strip_tags($item->isi),
-                                    180
+                                    120
                                 ) }}
 
                             </p>
+
+
+                            {{-- DETAIL --}}
+                            <a href="{{ route('berita.show', ['id' => $item->id_berita]) }}"
+                            class="berita-detail-link">
+
+                                Lihat Detail
+
+                                <i class="bi bi-arrow-right"></i>
+
+                            </a>
 
                         </div>
 
@@ -81,19 +99,9 @@ Berita - {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
 
                 <div class="col-12 text-center">
 
-                    <div class="card info-card shadow-sm">
-
-                        <div class="card-body p-5">
-
-                            <i class="bi bi-newspaper fs-1 text-muted"></i>
-
-                            <p class="text-muted mt-3 mb-0">
-                                Belum ada berita sekolah.
-                            </p>
-
-                        </div>
-
-                    </div>
+                    <p class="text-muted">
+                        Belum ada berita.
+                    </p>
 
                 </div>
 

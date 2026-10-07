@@ -77,6 +77,18 @@ class GuruController extends Controller
             ->with('success', 'Data guru berhasil ditambahkan.');
     }
 
+    public function show($id)
+    {
+        $guru = Guru::where('id_guru', $id)->firstOrFail();
+
+        $profil = ProfilSekolah::first();
+
+        return view('landing.guru.show', compact(
+            'guru',
+            'profil'
+        ));
+    }
+
     public function update(Request $request, $id)
     {
         $guru = Guru::findOrFail($id);

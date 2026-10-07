@@ -98,9 +98,14 @@ class EkstrakurikulerController extends Controller
      */
     public function show($id)
     {
-        $ekskul = Ekstrakurikuler::findOrFail($id);
+        $ekskul = Ekstrakurikuler::where('id_ekskul', $id)->firstOrFail();
 
-        return view('admin.ekstrakurikuler.show', compact('ekskul'));
+        $profil = ProfilSekolah::first();
+
+        return view('landing.ekstrakurikuler.show', compact(
+            'ekskul',
+            'profil'
+        ));
     }
 
     /**

@@ -31,6 +31,374 @@
     <link rel="shortcut icon"
           href="{{ asset('assets/images/logoschool.jpg')}}"
           type="image/x-icon">
+
+
+          <style>
+            .poster-card {
+
+        position: relative;
+
+        min-height: 430px;
+
+        padding: 28px;
+
+        border-radius: 18px;
+
+        overflow: hidden;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: space-between;
+
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.10);
+
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+
+        color: white;
+
+    }
+
+
+    /* =========================================
+       HOVER
+    ========================================= */
+
+    .poster-card:hover {
+
+        transform: translateY(-7px);
+
+        box-shadow:
+            0 15px 35px rgba(0, 0, 0, 0.18);
+
+    }
+
+
+    /* =========================================
+       BACKGROUND BERITA
+    ========================================= */
+
+    .poster-berita {
+
+        background:
+            linear-gradient(
+                145deg,
+                #1877d2,
+                #064b9b
+            );
+
+    }
+
+
+    /* =========================================
+       BACKGROUND PENGUMUMAN
+    ========================================= */
+
+    .poster-pengumuman {
+
+        background:
+            linear-gradient(
+                145deg,
+                #ffc928,
+                #ef9800
+            );
+
+    }
+
+
+    /* =========================================
+       BACKGROUND GALERI
+    ========================================= */
+
+    .poster-galeri {
+
+        background:
+            linear-gradient(
+                145deg,
+                #8054d8,
+                #4d27a2
+            );
+
+    }
+
+
+    /* =========================================
+       BACKGROUND PRESTASI
+    ========================================= */
+
+    .poster-prestasi {
+
+        background:
+            linear-gradient(
+                145deg,
+                #ef4141,
+                #b81919
+            );
+
+    }
+
+
+    /* =========================================
+       DEKORASI LINGKARAN
+    ========================================= */
+
+    .poster-circle {
+
+        position: absolute;
+
+        border-radius: 50%;
+
+        background:
+            rgba(255,255,255,0.10);
+
+        pointer-events: none;
+
+    }
+
+
+    .circle-1 {
+
+        width: 240px;
+
+        height: 240px;
+
+        right: -100px;
+
+        bottom: 45px;
+
+    }
+
+
+    .circle-2 {
+
+        width: 140px;
+
+        height: 140px;
+
+        right: 70px;
+
+        top: -70px;
+
+        background:
+            rgba(255,255,255,0.08);
+
+    }
+
+
+    /* =========================================
+       CONTENT
+    ========================================= */
+
+    .poster-content {
+
+        position: relative;
+
+        z-index: 2;
+
+    }
+
+
+    /* =========================================
+       ICON
+    ========================================= */
+
+    .poster-icon {
+
+        width: 62px;
+
+        height: 62px;
+
+        border-radius: 50%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: white;
+
+        color: #3159bd;
+
+        font-size: 27px;
+
+        margin-bottom: 25px;
+
+        box-shadow:
+            0 5px 15px rgba(0,0,0,0.12);
+
+    }
+
+
+    /* =========================================
+       JUDUL POSTER
+    ========================================= */
+
+    .poster-card h3 {
+
+        color: white;
+
+        font-size: 29px;
+
+        line-height: 1.08;
+
+        font-weight: 700;
+
+        margin-bottom: 12px;
+
+    }
+
+
+    /* =========================================
+       GARIS KUNING
+    ========================================= */
+
+    .poster-line {
+
+        width: 55px;
+
+        height: 4px;
+
+        border-radius: 10px;
+
+        background: #ffdc35;
+
+        margin-bottom: 18px;
+
+    }
+
+
+    /* =========================================
+       DESKRIPSI
+    ========================================= */
+
+    .poster-card p {
+
+        color: rgba(255,255,255,0.95);
+
+        font-size: 14px;
+
+        line-height: 1.6;
+
+        max-width: 230px;
+
+        margin-bottom: 18px;
+
+    }
+
+
+    /* =========================================
+       JUMLAH DATA
+    ========================================= */
+
+    .poster-number {
+
+        position: relative;
+
+        z-index: 2;
+
+        color: white;
+
+        font-size: 32px;
+
+        font-weight: 700;
+
+    }
+
+
+    .poster-number span {
+
+        font-size: 14px;
+
+        font-weight: 400;
+
+        opacity: 0.9;
+
+    }
+
+
+    /* =========================================
+       BUTTON
+    ========================================= */
+
+    .poster-button {
+
+        position: relative;
+
+        z-index: 5;
+
+        width: 100%;
+
+        padding: 13px 15px;
+
+        border-radius: 7px;
+
+        background: white;
+
+        color: #3159bd;
+
+        text-align: center;
+
+        text-decoration: none;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        transition: all 0.25s ease;
+
+    }
+
+
+    .poster-button:hover {
+
+        background: #3159bd;
+
+        color: white;
+
+        transform: translateY(-2px);
+
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+
+    @media (max-width: 1200px) {
+
+        .poster-card {
+
+            min-height: 410px;
+
+        }
+
+
+        .poster-card h3 {
+
+            font-size: 26px;
+
+        }
+
+    }
+
+
+    @media (max-width: 768px) {
+
+        .poster-card {
+
+            min-height: 400px;
+
+        }
+
+    }
+     </style>
+
+    @stack('styles')
 </head>
 
 <body>

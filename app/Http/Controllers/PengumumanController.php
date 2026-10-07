@@ -13,11 +13,13 @@ class PengumumanController extends Controller
     {
         $profil = ProfilSekolah::first();
 
-        $pengumuman = Pengumuman::orderBy('tanggal', 'desc')->get();
+        $pengumumans = Pengumuman::where('status', 'Publish')
+            ->orderBy('tanggal', 'desc')
+            ->get();
 
         return view('public.pengumuman', compact(
             'profil',
-            'pengumuman'
+            'pengumumans'
         ));
     }
 
@@ -74,9 +76,14 @@ class PengumumanController extends Controller
 
     public function show($id)
     {
-        $pengumuman = Pengumuman::findOrFail($id);
+        $pengumuman = Pengumuman::where('id_pengumuman', $id)->firstOrFail();
 
-        return view('admin.pengumuman.show', compact('pengumuman'));
+        $profil = ProfilSekolah::first();
+
+        return view('landing.pengumuman.show', compact(
+            'pengumuman',
+            'profil'
+        ));
     }
 
     public function edit($id)

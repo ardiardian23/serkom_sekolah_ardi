@@ -72,9 +72,14 @@ class BeritaController extends Controller
 
     public function show($id)
     {
-        $berita = Berita::findOrFail($id);
+        $berita = Berita::where('id_berita', $id)->firstOrFail();
 
-        return view('admin.berita.show', compact('berita'));
+        $profil = \App\Models\ProfilSekolah::first();
+
+        return view('landing.berita.show', compact(
+            'berita',
+            'profil'
+        ));
     }
 
     public function edit($id)

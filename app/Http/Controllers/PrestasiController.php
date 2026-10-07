@@ -93,7 +93,12 @@ class PrestasiController extends Controller
     {
         $prestasi = Prestasi::findOrFail($id);
 
-        return view('admin.prestasi.show', compact('prestasi'));
+        $profil = ProfilSekolah::first();
+
+        return view('landing.prestasi.show', compact(
+            'prestasi',
+            'profil'
+        ));
     }
 
     /**

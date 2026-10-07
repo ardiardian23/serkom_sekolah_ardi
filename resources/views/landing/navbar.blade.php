@@ -111,6 +111,18 @@
 
                 </li>
 
+                {{-- GURU DAN STAFF --}}
+                <li class="nav-item">
+
+                    <a class="nav-link {{ request()->routeIs('ekstrakurikuler.public') ? 'active' : '' }}"
+                       href="{{ route('ekstrakurikuler.public') }}">
+
+                        Ekstrakurikuler
+
+                    </a>
+
+                </li>
+
 
                 {{-- PRESTASI --}}
                 <li class="nav-item">

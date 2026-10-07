@@ -51,7 +51,7 @@ class GaleriController extends Controller
         $request->validate([
             'judul' => 'required|string|max:50',
             'keterangan' => 'required|string',
-            'file' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'file' => 'required|image|mimes:jpg,jpeg,png|max:10240',
             'kategori' => 'required|in:Foto,Video',
             'tanggal' => 'required|date',
         ], [
@@ -61,7 +61,7 @@ class GaleriController extends Controller
             'file.required' => 'File wajib dipilih.',
             'file.image' => 'File harus berupa gambar.',
             'file.mimes' => 'Format harus JPG, JPEG, atau PNG.',
-            'file.max' => 'Ukuran file maksimal 2 MB.',
+            'file.max' => 'Ukuran file maksimal 100 MB.',
             'kategori.required' => 'Kategori wajib dipilih.',
             'tanggal.required' => 'Tanggal wajib diisi.',
         ]);
@@ -99,7 +99,7 @@ class GaleriController extends Controller
         $request->validate([
             'judul' => 'required|string|max:50',
             'keterangan' => 'required|string',
-            'file' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'file' => 'required|image|mimes:jpg,jpeg,png|max:10240',
             'kategori' => 'required|in:Foto,Video',
             'tanggal' => 'required|date',
         ], [
@@ -108,7 +108,7 @@ class GaleriController extends Controller
             'keterangan.required' => 'Keterangan wajib diisi.',
             'file.image' => 'File harus berupa gambar.',
             'file.mimes' => 'Format harus JPG, JPEG, atau PNG.',
-            'file.max' => 'Ukuran file maksimal 2 MB.',
+            'file.max' => 'Ukuran file maksimal 100 MB.',
             'kategori.required' => 'Kategori wajib dipilih.',
             'tanggal.required' => 'Tanggal wajib diisi.',
         ]);

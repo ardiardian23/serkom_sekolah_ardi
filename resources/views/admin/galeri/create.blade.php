@@ -202,7 +202,7 @@
                                required>
 
                         <small class="text-muted">
-                            Format JPG, JPEG, PNG. Maksimal 2 MB.
+                            Format JPG, JPEG, PNG. Maksimal 100MB
                         </small>
 
                         @error('file')

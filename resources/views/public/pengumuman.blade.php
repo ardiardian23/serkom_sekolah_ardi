@@ -26,7 +26,7 @@ Pengumuman - {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
         <!-- DATA -->
         <div class="row g-4">
 
-            @forelse($pengumuman as $item)
+            @forelse($pengumumans as $item)
 
                 <div class="col-lg-4 col-md-6">
 
@@ -34,6 +34,7 @@ Pengumuman - {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
 
                         <div class="card-body p-4">
 
+                            <!-- HEADER CARD -->
                             <div class="d-flex align-items-center mb-4">
 
                                 <div class="info-icon bg-primary bg-opacity-10 text-primary mb-0 me-3">
@@ -45,27 +46,38 @@ Pengumuman - {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
                                 <div>
 
                                     <small class="text-muted">
-
                                         {{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}
-
                                     </small>
 
                                     <h5 class="fw-bold mb-0">
-
                                         {{ $item->judul }}
-
                                     </h5>
 
                                 </div>
 
                             </div>
 
-                            <p class="text-muted mb-0"
+                            <!-- ISI SINGKAT -->
+                            <p class="text-muted mb-4"
                                style="line-height: 1.8;">
 
-                                {{ $item->isi }}
+                                {{ \Illuminate\Support\Str::limit(strip_tags($item->isi), 150) }}
 
                             </p>
+
+                            <!-- LIHAT DETAIL -->
+                            <div class="mt-auto">
+
+                                <a href="{{ route('pengumuman.show', ['id' => $item->id_pengumuman]) }}"
+                                   class="text-primary text-decoration-none fw-semibold">
+
+                                    Lihat Detail
+
+                                    <i class="bi bi-arrow-right ms-1"></i>
+
+                                </a>
+
+                            </div>
 
                         </div>
 
@@ -106,6 +118,7 @@ Pengumuman - {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
                class="btn btn-outline-primary">
 
                 <i class="bi bi-arrow-left me-1"></i>
+
                 Kembali ke Beranda
 
             </a>

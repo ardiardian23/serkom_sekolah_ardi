@@ -30,43 +30,45 @@ Guru & Staff - {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
 
                 <div class="col-lg-4 col-md-6">
 
-                    <div class="card info-card shadow-sm text-center h-100">
+                    <div class="card h-100 border-0 shadow-sm teacher-card">
 
-                        <div class="card-body p-4">
+                        {{-- FOTO --}}
+                        <div class="teacher-image-wrapper">
 
-                            @if($item->foto)
+                            <img
+                                src="{{ $item->foto
+                                    ? asset('storage/' . $item->foto)
+                                    : asset('assets/images/faces/kepsek.png') }}"
+                                alt="{{ $item->nama_guru }}"
+                                class="teacher-image"
+                            >
 
-                                <img src="{{ asset('storage/' . $item->foto) }}"
-                                     class="teacher-image"
-                                     alt="{{ $item->nama_guru }}">
+                        </div>
 
-                            @else
+                        {{-- DATA GURU --}}
+                        <div class="card-body text-center">
 
-                                <div class="teacher-image mx-auto bg-light d-flex align-items-center justify-content-center">
-
-                                    <i class="bi bi-person fs-1 text-secondary"></i>
-
-                                </div>
-
-                            @endif
-
-                            <h5 class="fw-bold mt-4 mb-1">
-
+                            <h5 class="fw-bold mb-1">
                                 {{ $item->nama_guru }}
-
                             </h5>
 
                             <p class="text-primary mb-2">
-
                                 {{ $item->mapel }}
-
                             </p>
 
-                            <small class="text-muted">
-
-                                NIP: {{ $item->nip ?? '-' }}
-
+                            <small class="text-muted d-block mb-3">
+                                NIP: {{ $item->nip ?: '-' }}
                             </small>
+
+                            {{-- LIHAT DETAIL --}}
+                            <a href="{{ route('guru.show', ['id' => $item->id_guru]) }}"
+                            class="text-primary text-decoration-none fw-semibold">
+
+                                Lihat Detail
+
+                                <i class="bi bi-arrow-right ms-1"></i>
+
+                            </a>
 
                         </div>
 
@@ -78,21 +80,9 @@ Guru & Staff - {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
 
                 <div class="col-12 text-center">
 
-                    <div class="card info-card shadow-sm">
-
-                        <div class="card-body p-5">
-
-                            <i class="bi bi-people fs-1 text-muted"></i>
-
-                            <p class="text-muted mt-3 mb-0">
-
-                                Belum ada data guru dan staff.
-
-                            </p>
-
-                        </div>
-
-                    </div>
+                    <p class="text-muted">
+                        Belum ada data guru.
+                    </p>
 
                 </div>
 

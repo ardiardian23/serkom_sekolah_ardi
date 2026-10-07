@@ -16,7 +16,7 @@ class LandingController extends Controller
     {
         $profil = ProfilSekolah::first();
 
-        $berita = Berita::orderBy('tanggal', 'desc')
+        $beritas = Berita::orderBy('tanggal', 'desc')
             ->take(3)
             ->get();
 
@@ -41,7 +41,7 @@ class LandingController extends Controller
 
         return view('landing.index', compact(
             'profil',
-            'berita',
+            'beritas',
             'pengumuman',
             'guru',
             'ekskuls',

@@ -289,95 +289,57 @@
                                     @endif
 
                                 </td>
-
-
                                 {{-- AKSI --}}
                                 <td>
-
                                     {{-- EDIT --}}
                                     <a href="{{ route('admin.berita.edit', $berita->id_berita) }}"
                                        class="btn btn-warning btn-sm"
                                        title="Edit berita">
 
                                         <i class="bi bi-pencil-square"></i>
-
                                     </a>
-
-
                                     {{-- HAPUS --}}
                                     <form action="{{ route('admin.berita.destroy', $berita->id_berita) }}"
                                           method="POST"
                                           class="d-inline">
 
                                         @csrf
-
                                         @method('DELETE')
-
                                         <button type="submit"
                                                 class="btn btn-danger btn-sm"
                                                 title="Hapus berita"
                                                 onclick="return confirm('Yakin ingin menghapus berita ini?')">
-
                                             <i class="bi bi-trash"></i>
-
                                         </button>
-
                                     </form>
-
                                 </td>
-
                             </tr>
-
-
                         @empty
-
                             <tr>
-
                                 <td colspan="7"
                                     class="text-center py-5">
-
                                     @if(!empty($search))
-
                                         <i class="bi bi-search fs-1 text-secondary"></i>
-
                                         <p class="text-muted mt-3 mb-0">
-
                                             Berita dengan kata
                                             <strong>"{{ $search }}"</strong>
                                             tidak ditemukan.
-
                                         </p>
-
                                     @else
-
                                         <i class="bi bi-newspaper fs-1 text-secondary"></i>
-
                                         <p class="text-muted mt-3 mb-0">
                                             Belum ada berita.
                                         </p>
-
                                     @endif
-
                                 </td>
-
                             </tr>
-
                         @endforelse
-
                     </tbody>
-
                 </table>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
-
-
 </div>
-
 @endsection
 

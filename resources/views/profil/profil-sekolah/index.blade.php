@@ -128,7 +128,7 @@
                         <div class="col-md-6 text-center">
 
                             <h6 class="mb-3">
-                                Logo Sekolah
+                                Kepala Sekolah
                             </h6>
 
                             @if($profil->logo)

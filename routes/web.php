@@ -20,6 +20,21 @@ use App\Http\Controllers\LandingController;
 Route::get('/', [LandingController::class, 'index'])
     ->name('landing');
 
+    Route::get('/berita/{id}', [BeritaController::class, 'show'])
+    ->name('berita.show');
+
+    Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])
+    ->name('pengumuman.show');
+
+    Route::get('/guru/{id}', [GuruController::class, 'show'])
+    ->name('guru.show');
+
+    Route::get('/ekstrakurikuler/{id}', [EkstrakurikulerController::class, 'show'])
+    ->name('ekstrakurikuler.show');
+
+    Route::get('/prestasi/{id}', [PrestasiController::class, 'show'])
+    ->name('prestasi.show');
+
 
 // HALAMAN PUBLIC
 

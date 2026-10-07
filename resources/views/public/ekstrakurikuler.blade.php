@@ -30,47 +30,53 @@ Ekstrakurikuler - {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
 
                 <div class="col-lg-4 col-md-6">
 
-                    <div class="card info-card shadow-sm overflow-hidden h-100">
+                    <div class="card ekskul-card shadow-sm">
 
-                        @if($item->gambar)
+                        {{-- FOTO --}}
+                        <div class="ekskul-image-wrapper">
 
-                            <img src="{{ asset('storage/' . $item->gambar) }}"
-                                 class="news-image"
-                                 alt="{{ $item->nama_ekskul }}">
+                            <img
+                                src="{{ $item->gambar
+                                    ? asset('storage/' . $item->gambar)
+                                    : asset('assets/images/logo/logosekolah.png') }}"
+                                alt="{{ $item->nama_ekskul }}"
+                                class="ekskul-image"
+                            >
 
-                        @else
+                        </div>
 
-                            <div class="news-image bg-white d-flex align-items-center justify-content-center">
+                        {{-- ISI --}}
+                        <div class="card-body">
 
-                                <i class="bi bi-people fs-1 text-primary"></i>
-
-                            </div>
-
-                        @endif
-
-                        <div class="card-body p-4">
-
-                            <h5 class="fw-bold">
-
+                            <h5 class="fw-bold mb-2">
                                 {{ $item->nama_ekskul }}
-
                             </h5>
 
-                            <p class="text-muted mb-2">
-
-                                <i class="bi bi-person me-1"></i>
-
-                                {{ $item->pembina ?? '-' }}
-
+                            <p class="ekskul-pembina mb-2">
+                                <i class="bi bi-person-badge me-1"></i>
+                                {{ $item->pembina ?: '-' }}
                             </p>
 
-                            <p class="text-muted mb-0">
-
-                                <i class="bi bi-calendar-event me-1"></i>
-
-                                {{ $item->jadwal_latihan ?? '-' }}
-
+                            <p class="ekskul-jadwal mb-3">
+                                <i class="bi bi-calendar3 me-1"></i>
+                                {{ $item->jadwal_latihan ?: '-' }}
                             </p>
+
+                            <p class="text-muted">
+                                {{ \Illuminate\Support\Str::limit(
+                                    strip_tags($item->deskripsi),
+                                    100
+                                ) }}
+                            </p>
+
+                            {{-- DETAIL --}}
+                            <a href="{{ route('ekstrakurikuler.show', ['id' => $item->id_ekskul]) }}"
+                            class="ekskul-detail-link">
+
+                                Lihat Detail
+                                <i class="bi bi-arrow-right"></i>
+
+                            </a>
 
                         </div>
 
@@ -82,21 +88,9 @@ Ekstrakurikuler - {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
 
                 <div class="col-12 text-center">
 
-                    <div class="card info-card shadow-sm">
-
-                        <div class="card-body p-5">
-
-                            <i class="bi bi-people fs-1 text-muted"></i>
-
-                            <p class="text-muted mt-3 mb-0">
-
-                                Belum ada data ekstrakurikuler.
-
-                            </p>
-
-                        </div>
-
-                    </div>
+                    <p class="text-muted">
+                        Belum ada data ekstrakurikuler.
+                    </p>
 
                 </div>
 
