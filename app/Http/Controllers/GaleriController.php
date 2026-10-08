@@ -43,7 +43,9 @@ class GaleriController extends Controller
 
     public function create()
     {
-        return redirect()->route('admin.galeri.index');
+        $galeris = Galeri::orderBy('tanggal', 'desc')->get();
+
+        return view('admin.galeri.create', compact('galeris'));
     }
 
     public function store(Request $request)

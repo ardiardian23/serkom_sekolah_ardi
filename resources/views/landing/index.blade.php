@@ -792,18 +792,20 @@
 
                     <div class="card h-100 border-0 shadow-sm news-card">
 
-                        {{-- FOTO --}}
-                        <div class="text-center pt-4">
 
-                            <img
-                                src="{{ $item->foto
-                                    ? asset('storage/' . $item->foto)
-                                    : asset('assets/images/faces/kepsek.png') }}"
-                                alt="{{ $item->nama_guru }}"
+                {{-- FOTO GURU BERBENTUK KOTAK --}}
+                <div class="teacher-image-wrapper">
 
-                            >
+                    <img
+                        src="{{ $item->foto
+                            ? asset('storage/' . $item->foto)
+                            : asset('assets/images/faces/kepsek.png') }}"
+                        alt="{{ $item->nama_guru }}"
+                        class="teacher-image"
+                    >
 
-                        </div>
+                </div>
+
 
                         <div class="card-body text-center p-4">
 

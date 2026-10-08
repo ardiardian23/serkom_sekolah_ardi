@@ -23,9 +23,16 @@ class BeritaController extends Controller
         ));
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $beritas = Berita::orderBy('id_berita', 'desc')->get();
+        $search = $request->search;
+
+        $beritas = Berita::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('judul', 'like', '%' . $search . '%');
+            })
+            ->orderBy('tanggal', 'desc')
+            ->get();
 
         return view('admin.berita.index', compact('beritas'));
     }
@@ -89,34 +96,42 @@ class BeritaController extends Controller
         return view('admin.berita.edit', compact('berita'));
     }
 
+
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'judul' => 'required|string|max:50',
-            'isi' => 'required|string',
-            'tanggal' => 'required|date',
-            'gambar' => 'required|string|max:100',
-            'status' => 'required|in:Publish,Draft',
-        ], [
-            'judul.required' => 'Judul berita wajib diisi.',
-            'isi.required' => 'Isi berita wajib diisi.',
-            'tanggal.required' => 'Tanggal wajib diisi.',
-            'gambar.required' => 'Gambar wajib diisi.',
-            'status.required' => 'Status berita wajib dipilih.',
-        ]);
-
         $berita = Berita::findOrFail($id);
 
-        $berita->update([
-            'judul' => $request->judul,
-            'isi' => $request->isi,
-            'tanggal' => $request->tanggal,
-            'gambar' => $request->gambar,
-            'status' => $request->status,
+        $validated = $request->validate([
+            'judul'   => 'required|string|max:255',
+            'isi'     => 'required|string',
+            'tanggal' => 'required|date',
+            'gambar'  => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'status'  => 'required|in:Publish,Draft',
         ]);
 
+        if ($request->hasFile('gambar')) {
+            // Simpan gambar baru
+            $gambarBaru = $request->file('gambar')
+                ->store('berita', 'public');
+
+            // Hapus gambar lama jika berada di disk public
+            if ($berita->gambar &&
+                \Illuminate\Support\Facades\Storage::disk('public')
+                    ->exists($berita->gambar)) {
+                \Illuminate\Support\Facades\Storage::disk('public')
+                    ->delete($berita->gambar);
+            }
+
+            $validated['gambar'] = $gambarBaru;
+        } else {
+            // Pertahankan gambar lama jika tidak upload gambar baru
+            unset($validated['gambar']);
+        }
+
+        $berita->update($validated);
+
         return redirect()
-            ->route('admin.berita.create')
+            ->route('admin.berita.index')
             ->with('success', 'Berita berhasil diperbarui.');
     }
 
@@ -127,7 +142,7 @@ class BeritaController extends Controller
         $berita->delete();
 
         return redirect()
-            ->route('admin.berita.create')
+            ->route('admin.berita.index')
             ->with('success', 'Berita berhasil dihapus.');
     }
 }

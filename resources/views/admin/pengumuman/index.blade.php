@@ -99,144 +99,6 @@
 
     @endif
 
-
-    {{-- ========================================== --}}
-    {{-- FORM TAMBAH PENGUMUMAN --}}
-    {{-- ========================================== --}}
-
-    <section class="section">
-
-        <div class="card">
-
-            <div class="card-header">
-
-                <h4 class="card-title">
-                    Tambah Pengumuman
-                </h4>
-
-            </div>
-
-
-            <div class="card-body">
-
-                <form action="{{ route('admin.pengumuman.store') }}"
-                      method="POST">
-
-                    @csrf
-
-
-                    {{-- JUDUL --}}
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            Judul
-                        </label>
-
-                        <input type="text"
-                               name="judul"
-                               class="form-control"
-                               value="{{ old('judul') }}"
-                               maxlength="50"
-                               required>
-
-                    </div>
-
-
-                    {{-- ISI --}}
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            Isi
-                        </label>
-
-                        <textarea name="isi"
-                                  class="form-control"
-                                  rows="4"
-                                  required>{{ old('isi') }}</textarea>
-
-                    </div>
-
-
-                    {{-- TANGGAL & STATUS --}}
-
-                    <div class="row">
-
-                        <div class="col-md-6">
-
-                            <div class="mb-3">
-
-                                <label class="form-label">
-                                    Tanggal
-                                </label>
-
-                                <input type="date"
-                                       name="tanggal"
-                                       class="form-control"
-                                       value="{{ old('tanggal', date('Y-m-d')) }}"
-                                       required>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="col-md-6">
-
-                            <div class="mb-3">
-
-                                <label class="form-label">
-                                    Status
-                                </label>
-
-                                <select name="status"
-                                        class="form-select"
-                                        required>
-
-                                    <option value="">
-                                        -- Pilih Status --
-                                    </option>
-
-                                    <option value="Publish"
-                                        {{ old('status') == 'Publish' ? 'selected' : '' }}>
-                                        Publish
-                                    </option>
-
-                                    <option value="Draft"
-                                        {{ old('status') == 'Draft' ? 'selected' : '' }}>
-                                        Draft
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    {{-- TOMBOL TAMBAH --}}
-
-                    <button type="submit"
-                            class="btn btn-primary">
-
-                        <i class="bi bi-plus-circle"></i>
-
-                        Tambah Pengumuman
-
-                    </button>
-
-                </form>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
     {{-- ========================================== --}}
     {{-- DATA PENGUMUMAN --}}
     {{-- ========================================== --}}
@@ -253,9 +115,17 @@
                         Data Pengumuman
                     </h4>
 
+                @if(auth()->user()->role === 'Admin')
+                    <a href="{{ route('admin.pengumuman.create') }}"
+                       class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i>
+                        Tambah Pengumuman
+                    </a>
+                @endif
                 </div>
-
             </div>
+
+
 
 
             <div class="card-body">
@@ -303,7 +173,7 @@
                                     class="btn btn-primary w-100">
 
                                 <i class="bi bi-search"></i>
-
+                                Cari
                             </button>
 
                         </div>
@@ -429,6 +299,7 @@
 
                                             <i class="bi bi-pencil"></i>
 
+                                            Edit
                                         </a>
 
 
@@ -452,6 +323,7 @@
 
                                                 <i class="bi bi-trash"></i>
 
+                                                Hapus
                                             </button>
 
                                         </form>

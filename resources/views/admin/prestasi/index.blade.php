@@ -48,37 +48,65 @@
         </div>
     @endif
 
-    {{-- Search --}}
-    <div class="card shadow-sm mb-4">
-        <div class="card-body">
+    <!-- SEARCH -->
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
 
-            <form action="{{ route('admin.prestasi.index') }}"
-                  method="GET">
+        <form action="{{ route('admin.prestasi.index') }}" method="GET">
 
-                <div class="row g-2">
+            <div class="row g-2">
 
-                    <div class="col-md-10">
-                        <input type="text"
-                               name="search"
-                               class="form-control"
-                               value="{{ $search ?? '' }}"
-                               placeholder="Cari nama prestasi atau tahun ajaran...">
-                    </div>
+                <!-- INPUT SEARCH -->
+                <div class="col-md-9">
 
-                    <div class="col-md-2">
-                        <button type="submit"
-                                class="btn btn-primary w-100">
-                            <i class="bi bi-search"></i>
-                            Cari
-                        </button>
-                    </div>
+                    <input
+                        type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Cari nama prestasi, deskripsi, atau tahun ajaran..."
+                        value="{{ request('search') }}"
+                    >
 
                 </div>
 
-            </form>
+                <!-- BUTTON CARI -->
+                <div class="col-md-2">
 
-        </div>
+                    <button type="submit"
+                            class="btn btn-primary w-100">
+
+                        <i class="bi bi-search me-1"></i>
+                        Cari
+
+                    </button>
+
+                </div>
+
+                <!-- BUTTON RESET -->
+                @if(request('search'))
+
+                    <div class="col-md-1">
+
+                        <a href="{{ route('admin.prestasi.index') }}"
+                           class="btn btn-secondary w-100"
+                           title="Reset pencarian">
+
+                           <i class="bi bi-arrow-clockwise"></i>
+
+                                Reset   
+
+                        </a>
+
+                    </div>
+
+                @endif
+
+            </div>
+
+        </form>
+
     </div>
+</div>
 
     {{-- Tabel --}}
     <div class="card shadow-sm">

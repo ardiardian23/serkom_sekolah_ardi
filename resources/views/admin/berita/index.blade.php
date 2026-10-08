@@ -120,15 +120,21 @@
 
                             </button>
 
-                            @if(!empty($search))
+                            @if(request('search'))
 
-                                <a href="{{ route('admin.berita.index') }}"
-                                   class="btn btn-secondary">
+                                <div class="col-md-1">
+
+                                    <a href="{{ route('admin.berita.index') }}"
+                                    class="btn btn-secondary w-100"
+                                    title="Reset pencarian">
 
                                     <i class="bi bi-arrow-clockwise"></i>
-                                    Reset
 
-                                </a>
+                                            Reset
+
+                                    </a>
+
+                                </div>
 
                             @endif
 
@@ -241,27 +247,17 @@
 
                                 {{-- GAMBAR --}}
                                 <td>
-
-                                    @if($berita->gambar)
-
-                                        <img src="{{ asset('storage/' . $berita->gambar) }}"
-                                             alt="{{ $berita->judul }}"
-                                             width="70"
-                                             height="60"
-                                             class="rounded"
-                                             style="object-fit: cover;">
-
+                                    @if ($berita->gambar)
+                                        <img
+                                            src="{{ asset('storage/' . $berita->gambar) }}"
+                                            alt="{{ $berita->judul }}"
+                                            width="60"
+                                            height="60"
+                                            style="object-fit: cover;"
+                                        >
                                     @else
-
-                                        <div class="d-flex align-items-center justify-content-center bg-light rounded"
-                                             style="width: 70px; height: 60px;">
-
-                                            <i class="bi bi-image text-secondary fs-4"></i>
-
-                                        </div>
-
+                                        <span>Tidak ada gambar</span>
                                     @endif
-
                                 </td>
 
 
@@ -297,6 +293,7 @@
                                        title="Edit berita">
 
                                         <i class="bi bi-pencil-square"></i>
+                                        Edit
                                     </a>
                                     {{-- HAPUS --}}
                                     <form action="{{ route('admin.berita.destroy', $berita->id_berita) }}"
@@ -310,6 +307,7 @@
                                                 title="Hapus berita"
                                                 onclick="return confirm('Yakin ingin menghapus berita ini?')">
                                             <i class="bi bi-trash"></i>
+                                            Hapus
                                         </button>
                                     </form>
                                 </td>

@@ -149,6 +149,7 @@
                                                 title="Edit"
                                             >
                                                 <i class="bi bi-pencil"></i>
+                                                Edit
                                             </a>
 
 
@@ -169,6 +170,7 @@
                                                     onclick="return confirm('Apakah kamu yakin ingin menghapus data guru ini?')"
                                                 >
                                                     <i class="bi bi-trash"></i>
+                                                    Hapus
                                                 </button>
 
                                             </form>

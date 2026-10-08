@@ -449,16 +449,6 @@
         object-fit: cover;
     }
 
-    .teacher-image {
-        width: 145px;
-        height: 145px;
-
-        object-fit: cover;
-
-        border-radius: 50%;
-
-        border: 5px solid #eef5ff;
-    }
 
     /* =========================================================
        GALERI
@@ -1770,41 +1760,28 @@
            GURU
         ========================================================= */
 
-        .teacher-image {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-            object-position: center;
-
-            display: block;
-        }
-
         .teacher-image-wrapper {
-            width: 120px;
-            height: 120px;
+            width: 180px;
+            height: 180px;
             margin: 0 auto 20px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
             overflow: hidden;
-
-            background: #fff;
+            border-radius: 0 !important;
             border: 4px solid #fff;
 
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
-        .teacher-card {
+        .teacher-image {
+            width: 100%;
             height: 100%;
-            text-align: center;
-            padding-top: 25px;
-
-            transition: all 0.3s ease;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            border-radius: 0 !important;
         }
+
+
 
 
         /* =========================================================
@@ -2053,12 +2030,13 @@
 
     .detail-image {
         width: 100%;
-        height: 100%;
-        object-fit: contain;
-        object-position: center;
-        display: block;
-        background: #ffffff;
+        max-width: 280px;
+        height: 280px;
+        object-fit: cover;
+        border-radius: 0;
     }
+
+
 
     .detail-description {
         flex: 1;

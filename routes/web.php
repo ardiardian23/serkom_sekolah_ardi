@@ -298,8 +298,8 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 
-    Route::resource('admin/pengumuman', PengumumanController::class)
-        ->names('admin.pengumuman');
+   Route::resource('admin/pengumuman', PengumumanController::class)
+    ->names('admin.pengumuman');
 
 });
 
@@ -338,3 +338,6 @@ Route::get('/prestasi', [PrestasiController::class, 'publicIndex'])
 
 Route::get('/galeri', [GaleriController::class, 'publicIndex'])
     ->name('galeri.public');
+
+Route::get('/admin/galeri/create', [GaleriController::class, 'create'])
+    ->name('admin.galeri.create');

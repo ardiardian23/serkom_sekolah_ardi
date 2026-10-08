@@ -5,14 +5,15 @@
 
 @section('content')
 
-<div class="page-heading">
+<div class="card-header d-flex justify-content-between align-items-center">
+    <div>
+        <h5 class="mb-1">Data Ekstrakurikuler</h5>
+        <small class="text-muted">Kelola data ekstrakurikuler sekolah</small>
+    </div>
 
-    <h3>Data Ekstrakurikuler</h3>
-
-    <p class="text-subtitle text-muted">
-        Kelola data ekstrakurikuler sekolah
-    </p>
-
+    <a href="{{ route('admin.ekstrakurikuler.create') }}" class="btn btn-primary">
+        <i class="fas fa-plus-circle"></i> Tambah Ekstrakurikuler
+    </a>
 </div>
 
 <div class="page-content">
@@ -41,175 +42,6 @@
 
 
     <section class="section">
-
-
-        {{-- FORM TAMBAH --}}
-        @if(auth()->user()->role === 'Admin')
-
-            <div class="card">
-
-                <div class="card-header">
-
-                    <h4 class="card-title">
-                        Tambah Ekstrakurikuler
-                    </h4>
-
-                </div>
-
-                <div class="card-body">
-
-                    <form action="{{ route('admin.ekstrakurikuler.store') }}"
-                          method="POST"
-                          enctype="multipart/form-data">
-
-                        @csrf
-
-                        <div class="row">
-
-
-                            {{-- NAMA --}}
-                            <div class="col-md-6">
-
-                                <div class="form-group mb-3">
-
-                                    <label>
-                                        Nama Ekstrakurikuler
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        name="nama_ekskul"
-                                        class="form-control"
-                                        placeholder="Contoh: Pramuka"
-                                        value="{{ old('nama_ekskul') }}"
-                                    >
-
-                                </div>
-
-                            </div>
-
-
-                            {{-- PEMBINA --}}
-                            <div class="col-md-6">
-
-                                <div class="form-group mb-3">
-
-                                    <label>
-                                        Pembina
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        name="pembina"
-                                        class="form-control"
-                                        placeholder="Nama pembina"
-                                        value="{{ old('pembina') }}"
-                                    >
-
-                                </div>
-
-                            </div>
-
-
-                            {{-- JADWAL --}}
-                            <div class="col-md-6">
-
-                                <div class="form-group mb-3">
-
-                                    <label>
-                                        Jadwal Latihan
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        name="jadwal_latihan"
-                                        class="form-control"
-                                        placeholder="Contoh: Sabtu, 08.00 - 10.00"
-                                        value="{{ old('jadwal_latihan') }}"
-                                    >
-
-                                </div>
-
-                            </div>
-
-
-                            {{-- GAMBAR --}}
-                            <div class="col-md-6">
-
-                                <div class="form-group mb-3">
-
-                                    <label>
-                                        Gambar
-                                    </label>
-
-                                    <input
-                                        type="file"
-                                        name="gambar"
-                                        class="form-control"
-                                        accept="image/*"
-                                    >
-
-                                    <small class="text-muted">
-                                        JPG, JPEG, PNG. Maksimal 2 MB.
-                                    </small>
-
-                                </div>
-
-                            </div>
-
-
-                            {{-- DESKRIPSI --}}
-                            <div class="col-12">
-
-                                <div class="form-group mb-3">
-
-                                    <label>
-                                        Deskripsi
-                                    </label>
-
-                                    <textarea
-                                        name="deskripsi"
-                                        class="form-control"
-                                        rows="4"
-                                        placeholder="Deskripsi ekstrakurikuler"
-                                    >{{ old('deskripsi') }}</textarea>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <button
-                            type="submit"
-                            class="btn btn-primary"
-                        >
-
-                            <i class="bi bi-save"></i>
-                            Simpan Data
-
-                        </button>
-
-
-                        <button
-                            type="reset"
-                            class="btn btn-secondary"
-                        >
-
-                            Reset
-
-                        </button>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-        @endif
-
-
         {{-- TABEL DATA --}}
         <div class="card">
 
@@ -346,9 +178,6 @@
                                         @endif
 
                                     </td>
-
-
-                                    {{-- AKSI --}}
                                     <td>
                                         @if(auth()->user()->role === 'Admin')
 
@@ -361,10 +190,10 @@
 
                                                 <i class="bi bi-pencil-square"></i>
 
+                                                Edit
                                             </a>
 
 
-                                            {{-- HAPUS --}}
                                             <form
                                                 action="{{ route('admin.ekstrakurikuler.destroy', $ekskul->id_ekskul) }}"
                                                 method="POST"
@@ -383,6 +212,7 @@
 
                                                     <i class="bi bi-trash"></i>
 
+                                                    Hapus
                                                 </button>
 
                                             </form>

@@ -132,7 +132,7 @@ class GuruController extends Controller
         $guru->delete();
 
         return redirect()
-            ->route('admin.guru.create')
+            ->route('admin.guru.index')
             ->with('success', 'Data guru berhasil dihapus.');
     }
 }

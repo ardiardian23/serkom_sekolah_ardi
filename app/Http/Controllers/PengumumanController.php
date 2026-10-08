@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class PengumumanController extends Controller
 {
-
     public function publicIndex()
     {
         $profil = ProfilSekolah::first();
@@ -29,21 +28,26 @@ class PengumumanController extends Controller
 
         $pengumumans = Pengumuman::query()
             ->when($search, function ($query) use ($search) {
-                $query->where('judul', 'like', '%' . $search . '%')
-                    ->orWhere('isi', 'like', '%' . $search . '%')
-                    ->orWhere('status', 'like', '%' . $search . '%');
+                $query->where(function ($q) use ($search) {
+                    $q->where('judul', 'like', '%' . $search . '%')
+                      ->orWhere('isi', 'like', '%' . $search . '%')
+                      ->orWhere('status', 'like', '%' . $search . '%');
+                });
             })
             ->orderBy('tanggal', 'desc')
             ->get();
 
         return view('admin.pengumuman.index', compact(
-            'pengumumans'
+            'pengumumans',
+            'search'
         ));
     }
 
     public function create()
     {
-        return redirect()->route('admin.pengumuman.index');
+        $pengumumans = Pengumuman::orderBy('tanggal', 'desc')->get();
+
+        return view('admin.pengumuman.create', compact('pengumumans'));
     }
 
     public function store(Request $request)
@@ -70,13 +74,16 @@ class PengumumanController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.pengumuman.create')
+            ->route('admin.pengumuman.index')
             ->with('success', 'Pengumuman berhasil ditambahkan.');
     }
 
     public function show($id)
     {
-        $pengumuman = Pengumuman::where('id_pengumuman', $id)->firstOrFail();
+        $pengumuman = Pengumuman::where(
+            'id_pengumuman',
+            $id
+        )->firstOrFail();
 
         $profil = ProfilSekolah::first();
 
@@ -90,7 +97,10 @@ class PengumumanController extends Controller
     {
         $pengumuman = Pengumuman::findOrFail($id);
 
-        return view('admin.pengumuman.edit', compact('pengumuman'));
+        return view(
+            'admin.pengumuman.edit',
+            compact('pengumuman')
+        );
     }
 
     public function update(Request $request, $id)
@@ -118,7 +128,7 @@ class PengumumanController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.pengumuman.create')
+            ->route('admin.pengumuman.index')
             ->with('success', 'Pengumuman berhasil diperbarui.');
     }
 
@@ -129,7 +139,7 @@ class PengumumanController extends Controller
         $pengumuman->delete();
 
         return redirect()
-            ->route('admin.pengumuman.create')
+            ->route('admin.pengumuman.index')
             ->with('success', 'Pengumuman berhasil dihapus.');
     }
 }

@@ -65,7 +65,7 @@ class SiswaController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.siswa.create')
+            ->route('admin.siswa.index')
             ->with('success', 'Data siswa berhasil ditambahkan.');
     }
 
@@ -101,7 +101,7 @@ class SiswaController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.siswa.create')
+            ->route('admin.siswa.index')
             ->with('success', 'Data siswa berhasil diperbarui.');
     }
 
@@ -115,7 +115,7 @@ class SiswaController extends Controller
         $siswa->delete();
 
         return redirect()
-            ->route('admin.siswa.create')
+            ->route('admin.siswa.index')
             ->with('success', 'Data siswa berhasil dihapus.');
     }
 }

@@ -89,7 +89,7 @@ class EkstrakurikulerController extends Controller
         Ekstrakurikuler::create($data);
 
         return redirect()
-            ->route('admin.ekstrakurikuler.create')
+            ->route('admin.ekstrakurikuler.index')
             ->with('success', 'Data ekstrakurikuler berhasil ditambahkan.');
     }
 
@@ -164,7 +164,7 @@ class EkstrakurikulerController extends Controller
         $ekskul->update($data);
 
         return redirect()
-            ->route('admin.ekstrakurikuler.create')
+            ->route('admin.ekstrakurikuler.index')
             ->with('success', 'Data ekstrakurikuler berhasil diperbarui.');
     }
 
@@ -184,7 +184,7 @@ class EkstrakurikulerController extends Controller
         $ekskul->delete();
 
         return redirect()
-            ->route('admin.ekstrakurikuler.create')
+            ->route('admin.ekstrakurikuler.index')
             ->with('success', 'Data ekstrakurikuler berhasil dihapus.');
     }
 }

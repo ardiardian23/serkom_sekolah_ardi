@@ -14,7 +14,6 @@ return new class extends Migration
             $table->text('isi');
             $table->date('tanggal');
             $table->enum('status', ['Publish', 'Draft']);
-
             $table->unsignedBigInteger('id_user');
 
             $table->foreign('id_user')

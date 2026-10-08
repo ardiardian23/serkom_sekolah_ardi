@@ -47,7 +47,8 @@
             <div class="card-body">
 
                 <form action="{{ route('admin.berita.update', $berita->id_berita) }}"
-                      method="POST">
+                    method="POST"
+                    enctype="multipart/form-data">
 
                     @csrf
                     @method('PUT')
@@ -93,54 +94,43 @@
 
                         </div>
 
+
                         {{-- GAMBAR --}}
                         <div class="col-md-6">
-
                             <div class="form-group mb-3">
 
-                                <label for="gambar">
-                                    Gambar
-                                </label>
+                                <label for="gambar">Gambar Berita</label>
 
-                                <input type="text"
-                                       id="gambar"
-                                       name="gambar"
-                                       class="form-control"
-                                       value="{{ old('gambar', $berita->gambar) }}"
-                                       placeholder="Nama file gambar">
+                                {{-- Tampilkan gambar saat ini --}}
+                                @if($berita->gambar)
+                                    <div class="mb-3">
+                                        <img src="{{ asset('storage/' . $berita->gambar) }}"
+                                            alt="Gambar Berita"
+                                            style="max-width: 250px; max-height: 200px; object-fit: cover;"
+                                            class="img-thumbnail d-block">
+                                        <small class="text-muted">Gambar saat ini</small>
+                                    </div>
+                                @endif
 
-                            </div>
+                                {{-- Pilih gambar baru --}}
+                                <input type="file"
+                                    id="gambar"
+                                    name="gambar"
+                                    class="form-control"
+                                    accept="image/*">
 
-                        </div>
+                                <small class="text-muted">
+                                    Kosongkan jika tidak ingin mengganti gambar.
+                                </small>
 
-                        {{-- STATUS --}}
-                        <div class="col-md-6">
-
-                            <div class="form-group mb-3">
-
-                                <label for="status">
-                                    Status
-                                </label>
-
-                                <select name="status"
-                                        id="status"
-                                        class="form-select">
-
-                                    <option value="Publish"
-                                        {{ old('status', $berita->status) == 'Publish' ? 'selected' : '' }}>
-                                        Publish
-                                    </option>
-
-                                    <option value="Draft"
-                                        {{ old('status', $berita->status) == 'Draft' ? 'selected' : '' }}>
-                                        Draft
-                                    </option>
-
-                                </select>
+                                @error('gambar')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
 
                             </div>
-
                         </div>
+
+
 
                         {{-- ISI --}}
                         <div class="col-12">
@@ -160,6 +150,42 @@
                             </div>
 
                         </div>
+
+
+                        {{-- STATUS --}}
+                        <div class="col-md-6">
+
+                            <div class="form-group mb-3">
+
+                                <label for="status">
+                                    Status Berita
+                                </label>
+
+                                <select name="status"
+                                        id="status"
+                                        class="form-select">
+
+                                    <option value="Publish"
+                                        {{ old('status', $berita->status) == 'Publish' ? 'selected' : '' }}>
+                                        Publish
+                                    </option>
+
+                                    <option value="Draft"
+                                        {{ old('status', $berita->status) == 'Draft' ? 'selected' : '' }}>
+                                        Draft
+                                    </option>
+
+                                </select>
+
+                                @error('status')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+
+                        </div>
+
+
 
                     </div>
 

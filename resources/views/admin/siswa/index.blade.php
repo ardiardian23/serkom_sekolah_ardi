@@ -11,12 +11,14 @@
 
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Data Siswa</h3>
+
                 <p class="text-subtitle text-muted">
                     Kelola data siswa sekolah
                 </p>
             </div>
 
             <div class="col-12 col-md-6 order-md-2 order-first">
+
                 <nav aria-label="breadcrumb"
                      class="breadcrumb-header float-start float-lg-end">
 
@@ -35,6 +37,7 @@
                     </ol>
 
                 </nav>
+
             </div>
 
         </div>
@@ -43,26 +46,32 @@
 
     {{-- PESAN BERHASIL --}}
     @if(session('success'))
+
         <div class="alert alert-success">
             <i class="bi bi-check-circle"></i>
             {{ session('success') }}
         </div>
+
     @endif
 
 
     {{-- PESAN ERROR --}}
     @if($errors->any())
+
         <div class="alert alert-danger">
 
             <ul class="mb-0">
 
                 @foreach($errors->all() as $error)
+
                     <li>{{ $error }}</li>
+
                 @endforeach
 
             </ul>
 
         </div>
+
     @endif
 
 
@@ -75,6 +84,7 @@
                 <div class="d-flex justify-content-between align-items-center">
 
                     <div>
+
                         <h4 class="card-title mb-0">
                             Data Siswa
                         </h4>
@@ -82,14 +92,21 @@
                         <small class="text-muted">
                             Daftar seluruh siswa
                         </small>
+
                     </div>
 
+
+                    {{-- TOMBOL TAMBAH KHUSUS ADMIN --}}
                     @if(auth()->user()->role === 'Admin')
+
                         <a href="{{ route('admin.siswa.create') }}"
-                        class="btn btn-primary">
+                           class="btn btn-primary">
+
                             <i class="bi bi-plus-circle"></i>
                             Tambah Siswa
+
                         </a>
+
                     @endif
 
                 </div>
@@ -99,60 +116,94 @@
 
             <div class="card-body">
 
-    {{-- PENCARIAN --}}
-    <form action="{{ route('admin.siswa.index') }}" method="GET" class="mb-4">
-        <div class="row g-2">
-            <div class="col-md-8">
-                <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="bi bi-search"></i>
-                    </span>
-                    <input type="text"
-                           name="search"
-                           class="form-control"
-                           placeholder="Cari nama, NIS, atau kelas..."
-                           value="{{ $search ?? '' }}">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-search"></i>
-                    Cari
-                </button>
-                @if(!empty($search))
-                    <a href="{{ route('admin.siswa.index') }}"
-                       class="btn btn-secondary">
-                        <i class="bi bi-x-circle"></i>
-                        Reset
-                    </a>
-                @endif
-            </div>
-        </div>
-    </form>
-    <div class="table-responsive">
+
+                {{-- PENCARIAN --}}
+                <form action="{{ route('admin.siswa.index') }}"
+                      method="GET"
+                      class="mb-4">
+
+                    <div class="row g-2">
+
+                        <div class="col-md-8">
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-search"></i>
+                                </span>
+
+                                <input type="text"
+                                       name="search"
+                                       class="form-control"
+                                       placeholder="Cari nama, NIS, atau kelas..."
+                                       value="{{ $search ?? '' }}">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4">
+
+                            <button type="submit"
+                                    class="btn btn-primary">
+
+                                <i class="bi bi-search"></i>
+                                Cari
+
+                            </button>
+
+
+                            @if(!empty($search))
+
+                                <a href="{{ route('admin.siswa.index') }}"
+                                   class="btn btn-secondary">
+
+                                    <i class="bi bi-x-circle"></i>
+                                    Reset
+
+                                </a>
+
+                            @endif
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+
+                {{-- TABEL --}}
+                <div class="table-responsive">
 
                     <table class="table table-striped table-hover">
 
                         <thead>
 
                             <tr>
+
                                 <th>No</th>
+
 
                                 @if($siswas->count() > 0)
 
                                     @foreach($siswas->first()->getAttributes() as $field => $value)
 
                                         @if($field !== 'id_siswa')
+
                                             <th>
                                                 {{ ucwords(str_replace('_', ' ', $field)) }}
                                             </th>
+
                                         @endif
 
                                     @endforeach
 
                                 @endif
 
+
                                 <th>Aksi</th>
+
                             </tr>
 
                         </thead>
@@ -176,11 +227,15 @@
                                             <td>
 
                                                 @if($value === null || $value === '')
+
                                                     <span class="text-muted">
                                                         -
                                                     </span>
+
                                                 @else
+
                                                     {{ $value }}
+
                                                 @endif
 
                                             </td>
@@ -193,27 +248,40 @@
                                     <td>
 
 
-                                        {{-- KHUSUS ADMIN --}}
+                                        {{-- AKSI KHUSUS ADMIN --}}
                                         @if(auth()->user()->role === 'Admin')
 
+
+                                            {{-- EDIT --}}
                                             <a href="{{ route('admin.siswa.edit', $siswa->id_siswa) }}"
-                                            class="btn btn-warning btn-sm">
+                                               class="btn btn-warning btn-sm">
+
                                                 <i class="bi bi-pencil"></i>
+                                                Edit
+
                                             </a>
 
+
+                                            {{-- HAPUS --}}
                                             <form action="{{ route('admin.siswa.destroy', $siswa->id_siswa) }}"
-                                                method="POST"
-                                                class="d-inline">
+                                                  method="POST"
+                                                  class="d-inline"
+                                                  onsubmit="return confirm('Apakah Anda yakin ingin menghapus data siswa {{ $siswa->nama_siswa }}? Data yang sudah dihapus tidak dapat dikembalikan.');">
 
                                                 @csrf
+
                                                 @method('DELETE')
 
                                                 <button type="submit"
                                                         class="btn btn-danger btn-sm">
+
                                                     <i class="bi bi-trash"></i>
+                                                    Hapus
+
                                                 </button>
 
                                             </form>
+
 
                                         @endif
 
@@ -221,11 +289,13 @@
 
                                 </tr>
 
+
                             @empty
 
                                 <tr>
 
-                                    <td colspan="100%" class="text-center py-4">
+                                    <td colspan="100%"
+                                        class="text-center py-4">
 
                                         <i class="bi bi-inbox"
                                            style="font-size: 40px;">
@@ -235,20 +305,33 @@
                                             Belum ada data siswa.
                                         </p>
 
+
                                         <a href="{{ route('admin.siswa.create') }}"
                                            class="btn btn-primary btn-sm mt-3">
 
                                             <i class="bi bi-plus-circle"></i>
                                             Tambah Siswa
+
                                         </a>
+
                                     </td>
+
                                 </tr>
+
                             @endforelse
+
                         </tbody>
+
                     </table>
+
                 </div>
+
             </div>
+
         </div>
+
     </section>
+
 </div>
+
 @endsection

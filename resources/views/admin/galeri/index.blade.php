@@ -87,149 +87,6 @@
     @endif
 
 
-    {{-- FORM TAMBAH --}}
-
-    <section class="section">
-
-        <div class="card">
-
-            <div class="card-header">
-
-                <h4 class="card-title">
-                    Tambah Galeri
-                </h4>
-
-            </div>
-
-            <div class="card-body">
-
-                <form action="{{ route('admin.galeri.store') }}"
-                      method="POST"
-                      enctype="multipart/form-data">
-
-                    @csrf
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            Judul
-                        </label>
-
-                        <input type="text"
-                               name="judul"
-                               class="form-control"
-                               value="{{ old('judul') }}"
-                               maxlength="50"
-                               required>
-
-                    </div>
-
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            Keterangan
-                        </label>
-
-                        <textarea name="keterangan"
-                                  class="form-control"
-                                  rows="4"
-                                  required>{{ old('keterangan') }}</textarea>
-
-                    </div>
-
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            File
-                        </label>
-
-                        <input type="file"
-                               name="file"
-                               class="form-control"
-                               accept="image/*"
-                               required>
-
-                        <small class="text-muted">
-                            JPG, JPEG, PNG maksimal 2 MB.
-                        </small>
-
-                    </div>
-
-
-                    <div class="row">
-
-                        <div class="col-md-6">
-
-                            <div class="mb-3">
-
-                                <label class="form-label">
-                                    Kategori
-                                </label>
-
-                                <select name="kategori"
-                                        class="form-select"
-                                        required>
-
-                                    <option value="">
-                                        -- Pilih Kategori --
-                                    </option>
-
-                                    <option value="Foto"
-                                        {{ old('kategori') == 'Foto' ? 'selected' : '' }}>
-                                        Foto
-                                    </option>
-
-                                    <option value="Video"
-                                        {{ old('kategori') == 'Video' ? 'selected' : '' }}>
-                                        Video
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="col-md-6">
-
-                            <div class="mb-3">
-
-                                <label class="form-label">
-                                    Tanggal
-                                </label>
-
-                                <input type="date"
-                                       name="tanggal"
-                                       class="form-control"
-                                       value="{{ old('tanggal', date('Y-m-d')) }}"
-                                       required>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <button type="submit"
-                            class="btn btn-primary">
-
-                        <i class="bi bi-plus-circle"></i>
-                        Tambah Galeri
-
-                    </button>
-
-                </form>
-
-            </div>
-
-        </div>
-
-    </section>
-
 
     {{-- DATA GALERI --}}
 
@@ -245,9 +102,17 @@
                     Data Galeri
                 </h4>
 
+                @if(auth()->user()->role === 'Admin')
+                    <a href="{{ route('admin.galeri.create') }}"
+                       class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i>
+                        Tambah Galeri
+                    </a>
+                @endif
+            </div>
             </div>
 
-        </div>
+
 
             <div class="card-body">
 
@@ -388,6 +253,7 @@
 
                                             <i class="bi bi-pencil"></i>
 
+                                            Edit
                                         </a>
 
 
@@ -405,6 +271,7 @@
 
                                                 <i class="bi bi-trash"></i>
 
+                                                Hapus
                                             </button>
 
                                         </form>
