@@ -3,215 +3,126 @@
 @section('title', 'Edit Berita')
 
 @section('content')
-
 <div class="page-heading">
-
     <h3>Edit Berita</h3>
-
-    <p class="text-subtitle text-muted">
-        Ubah data berita sekolah
-    </p>
-
+    <p class="text-subtitle text-muted">Ubah data berita sekolah</p>
 </div>
 
 <div class="page-content">
-
+    {{-- PESAN ERROR --}}
     @if($errors->any())
-
         <div class="alert alert-danger">
-
             <ul class="mb-0">
-
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
-
             </ul>
-
         </div>
-
     @endif
 
     <section class="section">
-
         <div class="card">
-
             <div class="card-header">
-
-                <h4 class="card-title">
-                    Edit Data Berita
-                </h4>
-
+                <h4 class="card-title">Edit Data Berita</h4>
             </div>
-
             <div class="card-body">
-
                 <form action="{{ route('admin.berita.update', $berita->id_berita) }}"
-                    method="POST"
-                    enctype="multipart/form-data">
-
+                    method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
                     <div class="row">
-
                         {{-- JUDUL --}}
                         <div class="col-md-8">
-
                             <div class="form-group mb-3">
-
-                                <label for="judul">
-                                    Judul Berita
-                                </label>
-
-                                <input type="text"
-                                       id="judul"
-                                       name="judul"
-                                       class="form-control"
-                                       value="{{ old('judul', $berita->judul) }}"
-                                       placeholder="Masukkan judul berita">
-
+                                <label for="judul">Judul Berita</label>
+                                <input type="text" id="judul" name="judul" class="form-control"
+                                    value="{{ old('judul', $berita->judul) }}"
+                                    placeholder="Masukkan judul berita">
+                                @error('judul')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-
                         </div>
 
                         {{-- TANGGAL --}}
                         <div class="col-md-4">
-
                             <div class="form-group mb-3">
-
-                                <label for="tanggal">
-                                    Tanggal
-                                </label>
-
-                                <input type="date"
-                                       id="tanggal"
-                                       name="tanggal"
-                                       class="form-control"
-                                       value="{{ old('tanggal', $berita->tanggal) }}">
-
+                                <label for="tanggal">Tanggal</label>
+                                <input type="date" id="tanggal" name="tanggal" class="form-control"
+                                    value="{{ old('tanggal', $berita->tanggal) }}">
+                                @error('tanggal')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-
                         </div>
-
 
                         {{-- GAMBAR --}}
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-
                                 <label for="gambar">Gambar Berita</label>
-
-                                {{-- Tampilkan gambar saat ini --}}
                                 @if($berita->gambar)
                                     <div class="mb-3">
                                         <img src="{{ asset('storage/' . $berita->gambar) }}"
-                                            alt="Gambar Berita"
+                                            alt="Gambar {{ $berita->judul }}"
                                             style="max-width: 250px; max-height: 200px; object-fit: cover;"
                                             class="img-thumbnail d-block">
                                         <small class="text-muted">Gambar saat ini</small>
                                     </div>
                                 @endif
-
-                                {{-- Pilih gambar baru --}}
-                                <input type="file"
-                                    id="gambar"
-                                    name="gambar"
-                                    class="form-control"
+                                <input type="file" id="gambar" name="gambar" class="form-control"
                                     accept="image/*">
-
-                                <small class="text-muted">
-                                    Kosongkan jika tidak ingin mengganti gambar.
-                                </small>
-
+                                <small class="text-muted">Kosongkan jika tidak ingin mengganti gambar.</small>
                                 @error('gambar')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
-
                             </div>
                         </div>
 
-
-
-                        {{-- ISI --}}
+                        {{-- ISI BERITA --}}
                         <div class="col-12">
-
                             <div class="form-group mb-3">
-
-                                <label for="isi">
-                                    Isi Berita
-                                </label>
-
-                                <textarea name="isi"
-                                          id="isi"
-                                          rows="7"
-                                          class="form-control"
-                                          placeholder="Masukkan isi berita">{{ old('isi', $berita->isi) }}</textarea>
-
+                                <label for="isi">Isi Berita</label>
+                                <textarea name="isi" id="isi" rows="7" class="form-control"
+                                    placeholder="Masukkan isi berita">{{ old('isi', $berita->isi) }}</textarea>
+                                @error('isi')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-
                         </div>
-
 
                         {{-- STATUS --}}
                         <div class="col-md-6">
-
                             <div class="form-group mb-3">
-
-                                <label for="status">
-                                    Status Berita
-                                </label>
-
-                                <select name="status"
-                                        id="status"
-                                        class="form-select">
-
+                                <label for="status">Status Berita</label>
+                                <select name="status" id="status" class="form-select">
                                     <option value="Publish"
                                         {{ old('status', $berita->status) == 'Publish' ? 'selected' : '' }}>
                                         Publish
                                     </option>
-
                                     <option value="Draft"
                                         {{ old('status', $berita->status) == 'Draft' ? 'selected' : '' }}>
                                         Draft
                                     </option>
-
                                 </select>
-
                                 @error('status')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
-
                             </div>
-
                         </div>
-
-
-
                     </div>
 
-                    <button type="submit"
-                            class="btn btn-primary">
-
-                        <i class="bi bi-save"></i>
-                        Update Berita
-
+                    {{-- BUTTON --}}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Update Berita
                     </button>
-
-                    <a href="{{ route('admin.berita.create') }}"
-                       class="btn btn-secondary">
-
+                    <a href="{{ route('admin.berita.create') }}" class="btn btn-secondary">
                         Kembali
-
                     </a>
-
                 </form>
-
             </div>
-
         </div>
-
     </section>
-
 </div>
-
 @endsection
+

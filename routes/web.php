@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -16,27 +17,32 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\LandingController;
 
 
+// ==================================================
 // HALAMAN UTAMA
+// ==================================================
+
 Route::get('/', [LandingController::class, 'index'])
     ->name('landing');
 
-    Route::get('/berita/{id}', [BeritaController::class, 'show'])
+Route::get('/berita/{id}', [BeritaController::class, 'show'])
     ->name('berita.show');
 
-    Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])
+Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])
     ->name('pengumuman.show');
 
-    Route::get('/guru/{id}', [GuruController::class, 'show'])
+Route::get('/guru/{id}', [GuruController::class, 'show'])
     ->name('guru.show');
 
-    Route::get('/ekstrakurikuler/{id}', [EkstrakurikulerController::class, 'show'])
+Route::get('/ekstrakurikuler/{id}', [EkstrakurikulerController::class, 'show'])
     ->name('ekstrakurikuler.show');
 
-    Route::get('/prestasi/{id}', [PrestasiController::class, 'show'])
+Route::get('/prestasi/{id}', [PrestasiController::class, 'show'])
     ->name('prestasi.show');
 
 
+// ==================================================
 // HALAMAN PUBLIC
+// ==================================================
 
 Route::get('/berita', function () {
     return view('public.berita');
@@ -61,6 +67,8 @@ Route::get('/galeri', function () {
 Route::get('/ekstrakurikuler', function () {
     return view('public.ekstrakurikuler');
 })->name('public.ekstrakurikuler');
+
+
 /*
 |--------------------------------------------------------------------------
 | LOGIN
@@ -88,25 +96,22 @@ Route::post('/logout', [AuthController::class, 'logout'])
 */
 
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
-
     Route::get('/admin', [AdminController::class, 'index'])
         ->name('admin.index');
-
 });
+
 
 /*
 |--------------------------------------------------------------------------
 | USER
 |--------------------------------------------------------------------------
-| Admin      = lihat + tambah + edit + hapus
-| Operator   = hanya lihat
+| Admin    = lihat + tambah + edit + hapus
+| Operator = hanya lihat
 |--------------------------------------------------------------------------
 */
 
-
 // ADMIN - CRUD USER
 Route::middleware(['auth', 'role:Admin'])->group(function () {
-
     Route::get('/admin/user/create', [UserController::class, 'create'])
         ->name('admin.user.create');
 
@@ -121,35 +126,29 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::delete('/admin/user/{user}', [UserController::class, 'destroy'])
         ->name('admin.user.destroy');
-
 });
 
 // ADMIN + OPERATOR - LIHAT USER
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
-
     Route::get('/admin/user', [UserController::class, 'index'])
         ->name('admin.user.index');
 
     Route::get('/admin/user/{user}', [UserController::class, 'show'])
         ->name('admin.user.show');
-
 });
-
 
 
 /*
 |--------------------------------------------------------------------------
 | SISWA
 |--------------------------------------------------------------------------
-| Admin      = lihat + tambah + edit + hapus
-| Operator   = hanya lihat
+| Admin    = lihat + tambah + edit + hapus
+| Operator = hanya lihat
 |--------------------------------------------------------------------------
 */
 
-
 // ADMIN - CRUD SISWA
 Route::middleware(['auth', 'role:Admin'])->group(function () {
-
     Route::get('/admin/siswa/create', [SiswaController::class, 'create'])
         ->name('admin.siswa.create');
 
@@ -164,19 +163,15 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::delete('/admin/siswa/{siswa}', [SiswaController::class, 'destroy'])
         ->name('admin.siswa.destroy');
-
 });
-
 
 // ADMIN + OPERATOR - LIHAT SISWA
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
-
     Route::get('/admin/siswa', [SiswaController::class, 'index'])
         ->name('admin.siswa.index');
 
     Route::get('/admin/siswa/{siswa}', [SiswaController::class, 'show'])
         ->name('admin.siswa.show');
-
 });
 
 
@@ -184,15 +179,13 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 |--------------------------------------------------------------------------
 | GURU
 |--------------------------------------------------------------------------
-| Admin      = lihat + tambah + edit + hapus
-| Operator   = hanya lihat
+| Admin    = lihat + tambah + edit + hapus
+| Operator = hanya lihat
 |--------------------------------------------------------------------------
 */
 
-
 // ADMIN - CRUD GURU
 Route::middleware(['auth', 'role:Admin'])->group(function () {
-
     Route::get('/admin/guru/create', [GuruController::class, 'create'])
         ->name('admin.guru.create');
 
@@ -207,23 +200,16 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::delete('/admin/guru/{guru}', [GuruController::class, 'destroy'])
         ->name('admin.guru.destroy');
-
 });
-
 
 // ADMIN + OPERATOR - LIHAT GURU
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
-
     Route::get('/admin/guru', [GuruController::class, 'index'])
         ->name('admin.guru.index');
 
     Route::get('/admin/guru/{guru}', [GuruController::class, 'show'])
         ->name('admin.guru.show');
-
 });
-
-
-
 
 
 /*
@@ -235,7 +221,6 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 */
 
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
-
     Route::get('/admin/profil-sekolah', [ProfilController::class, 'index'])
         ->name('profil.profil-sekolah.index');
 
@@ -244,7 +229,6 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 
     Route::put('/admin/profil-sekolah', [ProfilController::class, 'update'])
         ->name('profil.profil-sekolah.update');
-
 });
 
 
@@ -255,10 +239,10 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 */
 
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
-
-    Route::resource('admin/ekstrakurikuler', EkstrakurikulerController::class)
-        ->names('admin.ekstrakurikuler');
-
+    Route::resource(
+        'admin/ekstrakurikuler',
+        EkstrakurikulerController::class
+    )->names('admin.ekstrakurikuler');
 });
 
 
@@ -269,10 +253,8 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 */
 
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
-
     Route::resource('admin/prestasi', PrestasiController::class)
         ->names('admin.prestasi');
-
 });
 
 
@@ -283,10 +265,8 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 */
 
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
-
     Route::resource('admin/berita', BeritaController::class)
         ->names('admin.berita');
-
 });
 
 
@@ -297,10 +277,8 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 */
 
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
-
-   Route::resource('admin/pengumuman', PengumumanController::class)
-    ->names('admin.pengumuman');
-
+    Route::resource('admin/pengumuman', PengumumanController::class)
+        ->names('admin.pengumuman');
 });
 
 
@@ -311,15 +289,14 @@ Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
 */
 
 Route::middleware(['auth', 'role:Admin,Operator'])->group(function () {
-
     Route::resource('admin/galeri', GaleriController::class)
         ->names('admin.galeri');
-
 });
 
-// ==============================
+
+// ==================================================
 // HALAMAN PUBLIK
-// ==============================
+// ==================================================
 
 Route::get('/berita', [BeritaController::class, 'publicIndex'])
     ->name('berita.public');
@@ -330,8 +307,10 @@ Route::get('/pengumuman', [PengumumanController::class, 'publicIndex'])
 Route::get('/guru-staff', [GuruController::class, 'publicIndex'])
     ->name('guru.public');
 
-Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'publicIndex'])
-    ->name('ekstrakurikuler.public');
+Route::get('/ekstrakurikuler', [
+    EkstrakurikulerController::class,
+    'publicIndex',
+])->name('ekstrakurikuler.public');
 
 Route::get('/prestasi', [PrestasiController::class, 'publicIndex'])
     ->name('prestasi.public');
@@ -341,3 +320,4 @@ Route::get('/galeri', [GaleriController::class, 'publicIndex'])
 
 Route::get('/admin/galeri/create', [GaleriController::class, 'create'])
     ->name('admin.galeri.create');
+

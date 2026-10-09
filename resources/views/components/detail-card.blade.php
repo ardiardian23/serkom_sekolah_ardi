@@ -1,14 +1,14 @@
 @props([
-    'label' => null,
-    'icon' => 'file-text',
-    'title' => '',
-    'date' => null,
-    'image' => null,
+    'label'       => null,
+    'icon'        => 'file-text',
+    'title'       => '',
+    'date'        => null,
+    'image'       => null,
     'description' => '',
-    'backUrl' => url('/'),
-    'backText' => 'Kembali',
-    'allUrl' => null,
-    'allText' => 'Lihat Semua',
+    'backUrl'     => url('/'),
+    'backText'    => 'Kembali',
+    'allUrl'      => null,
+    'allText'     => 'Lihat Semua',
 ])
 
 <div class="detail-card">
@@ -16,7 +16,7 @@
     {{-- HEADER --}}
     <div class="detail-header">
 
-        @if($label)
+        @if ($label)
             <span class="detail-label">
                 <i class="bi bi-{{ $icon }}"></i>
                 {{ $label }}
@@ -27,7 +27,7 @@
             {{ $title }}
         </h1>
 
-        @if($date)
+        @if ($date)
             <div class="detail-date">
                 <i class="bi bi-calendar3"></i>
                 {{ $date }}
@@ -36,66 +36,48 @@
 
     </div>
 
-
     {{-- CONTENT --}}
     <div class="detail-content">
 
-        @if($image)
-
+        @if ($image)
             <div class="detail-image-wrapper">
-
                 <img
                     src="{{ $image }}"
                     alt="{{ $title }}"
                     class="detail-image"
                 >
-
             </div>
-
         @endif
 
-
         <div class="detail-description">
-
             {!! nl2br(e($description)) !!}
-
         </div>
 
     </div>
 
-
     {{-- FOOTER --}}
     <div class="detail-footer">
 
-        {{-- KIRI --}}
-        @if($allUrl)
-
-            <a href="{{ $allUrl }}"
-               class="btn-detail-back">
-
+        {{-- TOMBOL KIRI: LIHAT SEMUA --}}
+        @if ($allUrl)
+            <a
+                href="{{ $allUrl }}"
+                class="btn-detail-back"
+            >
                 <i class="bi bi-newspaper"></i>
-
                 {{ $allText }}
-
             </a>
-
         @else
-
             <div></div>
-
         @endif
 
-
-        {{-- KANAN --}}
-        <a href="{{ $backUrl }}"
-           class="btn-detail-back">
-
+        {{-- TOMBOL KANAN: KEMBALI --}}
+        <a
+            href="{{ $backUrl }}"
+            class="btn-detail-back"
+        >
             <i class="bi bi-arrow-left"></i>
-
             {{ $backText }}
-
         </a>
-
     </div>
-
 </div>

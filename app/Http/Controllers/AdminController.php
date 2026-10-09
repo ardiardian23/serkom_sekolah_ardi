@@ -27,15 +27,11 @@ class AdminController extends Controller
         $totalBerita = Berita::count();
         $totalPengumuman = Pengumuman::count();
         $totalGaleri = Galeri::count();
-
         // Data user
         $users = User::orderByDesc('id_user')->get();
-
         // Data terbaru untuk ditampilkan gambarnya
         $eskulTerbaru = Ekstrakurikuler::orderByDesc('id_ekskul')->first();
-
         $prestasiTerbaru = Prestasi::orderByDesc('id')->first();
-
         return view('admin.index', compact(
             'profil',
             'totalGuru',

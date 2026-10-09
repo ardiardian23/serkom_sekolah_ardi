@@ -91,68 +91,94 @@
         transform: translateY(-3px);
     }
 
-    /* =========================================================
-       STATISTIK
-    ========================================================= */
 
-    .school-stats {
-        position: relative;
-        z-index: 5;
-        margin-top: -55px;
-        padding-bottom: 70px;
+    /* STATISTIK */
+    .statistik-section {
+        padding: 35px 0;
+        background: #f4f7fb;
     }
 
-    .stats-wrapper {
+    .statistik-section .container {
+        max-width: 1200px;
+    }
+
+    .statistik-grid {
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 15px;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 14px;
     }
 
-    .stat-card {
-        background: #fff;
-        border-radius: 16px;
-        padding: 22px 15px;
+    .statistik-card {
         display: flex;
         align-items: center;
-        gap: 13px;
-        box-shadow: 0 10px 30px rgba(0,0,0,.08);
-        transition: .3s ease;
+        gap: 10px;
+        padding: 16px 12px;
+        min-width: 0;
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
     }
 
-    .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(0,0,0,.12);
-    }
-
-    .stat-icon {
-        width: 48px;
-        height: 48px;
-        min-width: 48px;
-
+    .statistik-icon {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-
         border-radius: 12px;
-
-        background: rgba(13,110,253,.1);
+        background: #eaf1ff;
         color: #0d6efd;
-
-        font-size: 21px;
+        font-size: 20px;
     }
 
-    .stat-content h2 {
-        font-size: 25px;
+    .statistik-info h3 {
         margin: 0;
-        font-weight: 800;
-        color: #1f2937;
+        font-size: 24px;
+        font-weight: 700;
+        color: #17365d;
     }
 
-    .stat-content p {
-        margin: 0;
-        color: #6b7280;
-        font-size: 13px;
+    .statistik-info p {
+        margin: 3px 0 0;
+        font-size: 12px;
+        color: #64748b;
     }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .statistik-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .statistik-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+                }
+
+        .statistik-card {
+            padding: 12px 9px;
+            gap: 8px;
+        }
+
+        .statistik-icon {
+            width: 34px;
+            height: 34px;
+            font-size: 17px;
+        }
+
+        .statistik-info h3 {
+            font-size: 20px;
+        }
+
+        .statistik-info p {
+            font-size: 11px;
+        }
+    }
+
+
 
     /* =========================================================
        SECTION

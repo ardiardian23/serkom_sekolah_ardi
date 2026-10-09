@@ -3,161 +3,80 @@
 @section('title', 'Tambah User')
 
 @section('content')
-
 <div class="page-heading">
-
     <div class="page-title">
         <div class="row">
-
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Tambah User</h3>
-                <p class="text-subtitle text-muted">
-                    Tambahkan pengguna baru
-                </p>
+                <p class="text-subtitle text-muted">Tambahkan pengguna baru</p>
             </div>
-
             <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb"
-                     class="breadcrumb-header float-start float-lg-end">
-
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.index') }}">
-                                Dashboard
-                            </a>
+                            <a href="{{ route('admin.index') }}">Dashboard</a>
                         </li>
-
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.user.index') }}">
-                                Data User
-                            </a>
+                            <a href="{{ route('admin.user.index') }}">Data User</a>
                         </li>
-
-                        <li class="breadcrumb-item active">
-                            Tambah
-                        </li>
-
+                        <li class="breadcrumb-item active">Tambah</li>
                     </ol>
                 </nav>
             </div>
-
         </div>
     </div>
 
     <section class="section">
-
         <div class="card">
-
             <div class="card-header">
-                <h4 class="card-title">
-                    Form Tambah User
-                </h4>
+                <h4 class="card-title">Form Tambah User</h4>
             </div>
-
             <div class="card-body">
-
                 @if($errors->any())
                     <div class="alert alert-danger">
                         <ul class="mb-0">
-
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
-
                         </ul>
                     </div>
                 @endif
 
-                <form action="{{ route('admin.user.store') }}"
-                      method="POST">
-
+                <form action="{{ route('admin.user.store') }}" method="POST">
                     @csrf
 
                     <div class="form-group mb-3">
-
-                        <label for="username">
-                            Username
-                        </label>
-
-                        <input type="text"
-                               name="username"
-                               id="username"
-                               class="form-control"
-                               value="{{ old('username') }}"
-                               placeholder="Masukkan username"
-                               required>
-
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" class="form-control" value="{{ old('username') }}" placeholder="Masukkan username" required>
                     </div>
 
                     <div class="form-group mb-3">
-
-                        <label for="password">
-                            Password
-                        </label>
-
-                        <input type="password"
-                               name="password"
-                               id="password"
-                               class="form-control"
-                               placeholder="Minimal 6 karakter"
-                               required>
-
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Minimal 6 karakter" required>
                     </div>
 
                     <div class="form-group mb-3">
-
-                        <label for="role">
-                            Role
-                        </label>
-
-                        <select name="role"
-                                id="role"
-                                class="form-select"
-                                required>
-
-                            <option value="">
-                                -- Pilih Role --
-                            </option>
-
-                            <option value="Operator"
-                                {{ old('role') == 'Operator' ? 'selected' : '' }}>
-                                Operator
-                            </option>
-
-                            <option value="Admin"
-                                {{ old('role') == 'Admin' ? 'selected' : '' }}>
-                                Admin
-                            </option>
-
+                        <label for="role">Role</label>
+                        <select name="role" id="role" class="form-select" required>
+                            <option value="">-- Pilih Role --</option>
+                            <option value="Operator" {{ old('role') == 'Operator' ? 'selected' : '' }}>Operator</option>
+                            <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
                         </select>
-
                     </div>
 
                     <div class="d-flex gap-2">
-
-                        <a href="{{ route('admin.user.index') }}"
-                           class="btn btn-secondary">
-                            <i class="bi bi-arrow-left"></i>
-                            Kembali
+                        <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Kembali
                         </a>
-
-                        <button type="submit"
-                                class="btn btn-primary">
-                            <i class="bi bi-save"></i>
-                            Simpan
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Simpan
                         </button>
-
+                        
                     </div>
-
                 </form>
-
             </div>
-
         </div>
-
     </section>
-
 </div>
-
 @endsection
+
