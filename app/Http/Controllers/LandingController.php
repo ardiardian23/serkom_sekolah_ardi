@@ -25,6 +25,10 @@ class LandingController extends Controller
             ->take(3)
             ->get();
 
+        $galeris = Galeri::orderBy('id_galeri', 'desc')
+        ->take(4)
+        ->get();
+        
         $guru = Guru::take(3)->get();
         $ekskuls = Ekstrakurikuler::take(3)->get();
         $prestasi = Prestasi::take(3)->get();
@@ -48,6 +52,7 @@ class LandingController extends Controller
             'guru',
             'ekskuls',
             'prestasi',
+            'galeris',
             'siswa',
             'galeris',
             'totalGuru',

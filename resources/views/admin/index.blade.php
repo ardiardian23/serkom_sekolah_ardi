@@ -37,36 +37,24 @@
 
                     <div class="row align-items-center">
 
-                         {{-- logo --}}
-                        <div class="col-md-3 text-center">
-
-                            @if($profil && $profil->logo)
-
+                        {{-- FOTO KEPALA SEKOLAH --}}
+                        <div class="col-lg-3 col-md-4 d-flex justify-content-center align-items-center">
+                            @if($profil && $profil->foto_kepala_sekolah)
                                 <img
-                                    src="{{ asset('storage/' . $profil->logo) }}"
-                                    alt="Logo Sekolah"
-                                    style="
-                                        width: 130px;
-                                        height: 130px;
-                                        object-fit: contain;
-                                    "
+                                    src="{{ asset('storage/' . $profil->foto_kepala_sekolah) }}"
+                                    alt="Foto Kepala Sekolah"
+                                    class="foto-kepala-dashboard"
                                 >
-
                             @else
-                                <div
-                                    class="d-flex align-items-center justify-content-center bg-light rounded mx-auto"
-                                    style="
-                                        width: 130px;
-                                        height: 130px;
-                                    "
+                                <img
+                                    src="{{ asset('assets/images/faces/kepsek.png') }}"
+                                    alt="Foto Kepala Sekolah"
+                                    class="foto-kepala-dashboard"
                                 >
-                                    <i
-                                        class="bi bi-building text-primary"
-                                        style="font-size: 60px;"
-                                    ></i>
-                                </div>
                             @endif
                         </div>
+
+
                         <div class="col-md-6">
                             <h6 class="text-muted mb-1">
                                 PROFIL SEKOLAH

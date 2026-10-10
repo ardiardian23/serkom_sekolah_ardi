@@ -4,23 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Galeri;
 use App\Models\ProfilSekolah;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 
 class GaleriController extends Controller
 {
 
-    public function publicIndex()
-    {
-        $profil = ProfilSekolah::first();
+public function publicIndex()
+{
+     $profil = ProfilSekolah::first();
+    $galeri = Galeri::orderBy('id_galeri', 'desc')
+    ->paginate(6);
 
-        $galeris = Galeri::get();
-
-        return view('public.galeri', compact(
-            'profil',
-            'galeris'
-        ));
-    }
+    return view('public.galeri', compact('profil', 'galeri')); }
 
     public function index(Request $request)
     {
@@ -83,15 +81,33 @@ class GaleriController extends Controller
             ->with('success', 'Galeri berhasil ditambahkan.');
     }
 
-    public function show($id)
-    {
-    }
+
+
+public function show($id)
+{
+    $profil = ProfilSekolah::first();
+    $galeri = Galeri::findOrFail($id);
+
+    return view('landing.galeri.show', compact('profil', 'galeri'));
+}
+
+
+
+
+
+
 
     public function edit($id)
     {
-        $galeri = Galeri::findOrFail($id);
+        try{
+            $galeri = Galeri::findOrFail(Crypt::decrypt($id));
 
-        return view('admin.galeri.edit', compact('galeri'));
+            return view('admin.galeri.edit', compact('galeri'));
+        }catch(Exception $e){
+            return redirect()
+            ->route('admin.galeri.index')
+            ->with('error', 'Data Galeri tidak di temukan');
+        }
     }
 
     public function update(Request $request, $id)

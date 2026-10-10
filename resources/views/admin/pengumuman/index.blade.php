@@ -32,6 +32,15 @@
         </div>
     @endif
 
+    {{-- PESAN ERROR --}}
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <i class="bi bi-exclamation-circle me-2"></i>
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
     {{-- ERROR --}}
     @if($errors->any())
         <div class="alert alert-danger">
@@ -111,7 +120,7 @@
                                     </td>
                                     <td>
                                         {{-- EDIT --}}
-                                        <a href="{{ route('admin.pengumuman.edit', $pengumuman->id_pengumuman) }}" class="btn btn-warning btn-sm">
+                                        <a href="{{ route('admin.pengumuman.edit', Crypt::encrypt($pengumuman->id_pengumuman)) }}" class="btn btn-warning btn-sm">
                                             <i class="bi bi-pencil"></i> Edit
                                         </a>
 

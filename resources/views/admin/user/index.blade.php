@@ -14,6 +14,14 @@
         </div>
     @endif
 
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <i class="bi bi-exclamation-circle me-2"></i>
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
     <div class="card">
         <div class="card-header">
             <h4>Data User</h4>
@@ -40,8 +48,10 @@
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->role }}</td>
                                 <td>
-                                    <a href="{{ route('admin.user.edit', $user->id_user) }}" class="btn btn-warning btn-sm">
-                                        <i class="bi bi-pencil"></i> Edit
+                                    <a href="{{ route('admin.user.edit', [
+                                        'user' => Crypt::encryptString((string) $user->id_user)
+                                    ]) }}" class="btn btn-warning btn-sm">
+                                        Edit
                                     </a>
                                     <form action="{{ route('admin.user.destroy', $user->id_user) }}" method="POST" class="d-inline">
                                         @csrf

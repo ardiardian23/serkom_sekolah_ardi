@@ -74,6 +74,10 @@
                 @endforelse
             </div>
 
+            <div class="d-flex justify-content-center mt-4">
+                {{ $ekskuls->links('pagination::bootstrap-5') }}
+            </div>
+
             {{-- KEMBALI --}}
             <div class="text-center mt-5">
                 <a href="{{ url('/') }}" class="btn btn-outline-primary">

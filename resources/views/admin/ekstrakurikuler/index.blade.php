@@ -20,13 +20,11 @@
     @endif
 
     {{-- PESAN ERROR --}}
-    @if($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <i class="bi bi-exclamation-circle me-2"></i>
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     @endif
 
@@ -88,7 +86,7 @@
                                     <td>
                                         @if(auth()->user()->role === 'Admin')
                                             {{-- EDIT --}}
-                                            <a href="{{ route('admin.ekstrakurikuler.edit', $ekskul->id_ekskul) }}"
+                                            <a href="{{ route('admin.ekstrakurikuler.edit', Crypt::encrypt($ekskul->id_ekskul) ) }}"
                                                 class="btn btn-warning btn-sm" title="Edit">
                                                 <i class="bi bi-pencil-square"></i> Edit
                                             </a>

@@ -24,9 +24,10 @@
         </div>
     @endif
 
-    {{-- ALERT ERROR --}}
+
+    {{-- PESAN ERROR --}}
     @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show">
             <i class="bi bi-exclamation-circle me-2"></i>
             {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -105,8 +106,9 @@
                                 <td>{{ $prestasi->tahun_ajaran }}</td>
                                 {{-- AKSI --}}
                                 <td>
-                                    <a href="{{ route('admin.prestasi.edit', ['prestasi' => $prestasi->id]) }}"
-                                        class="btn btn-warning btn-sm">
+                                    <a href="{{ route('admin.prestasi.edit', [
+                                        'prestasi' => Crypt::encryptString((string) $prestasi->id)
+                                    ]) }}" class="btn btn-warning btn-sm">
                                         <i class="bi bi-pencil-square"></i> Edit
                                     </a>
                                     <form action="{{ route('admin.prestasi.destroy', ['prestasi' => $prestasi->id]) }}"

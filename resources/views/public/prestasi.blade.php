@@ -79,6 +79,10 @@
                 @endforelse
             </div>
 
+            <div class="d-flex justify-content-center mt-4">
+                {{ $prestasi->links('pagination::bootstrap-5') }}
+            </div>
+
             <!-- KEMBALI -->
             <div class="text-center mt-5">
                 <a

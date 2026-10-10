@@ -116,7 +116,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="bi bi-save"></i> Update Berita
                     </button>
-                    <a href="{{ route('admin.berita.create') }}" class="btn btn-secondary">
+                    <a href="{{ route('admin.berita.index') }}" class="btn btn-secondary">
                         Kembali
                     </a>
                 </form>

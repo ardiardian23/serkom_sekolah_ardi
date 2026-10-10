@@ -16,6 +16,15 @@
         </div>
     @endif
 
+    {{-- PESAN ERROR --}}
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <i class="bi bi-exclamation-circle me-2"></i>
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
     <section class="section">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -53,7 +62,6 @@
                                 <th>No</th>
                                 <th>NIP</th>
                                 <th>Nama Guru</th>
-                                <th>Jenis Kelamin</th>
                                 <th>Mata Pelajaran</th>
                                 <th>Foto</th>
                                 <th>Aksi</th>
@@ -65,7 +73,6 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $guru->nip }}</td>
                                     <td>{{ $guru->nama_guru }}</td>
-                                    <td>{{ $guru->jenis_kelamin ?? '-' }}</td>
                                     <td>{{ $guru->mapel ?? '-' }}</td>
                                     <td>
                                         @if($guru->foto)
@@ -81,7 +88,7 @@
                                     <td>
                                         {{-- ADMIN ONLY --}}
                                         @if(auth()->user()->role === 'Admin')
-                                            <a href="{{ route('admin.guru.edit', $guru->id_guru) }}"
+                                            <a href="{{ route('admin.guru.edit',Crypt::encrypt ($guru->id_guru)) }}"
                                                 class="btn btn-warning btn-sm" title="Edit">
                                                 <i class="bi bi-pencil"></i> Edit
                                             </a>

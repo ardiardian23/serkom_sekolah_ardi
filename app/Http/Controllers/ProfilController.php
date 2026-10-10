@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProfilSekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 
 class ProfilController extends Controller
 {
@@ -27,6 +28,13 @@ class ProfilController extends Controller
 
         return view('profil.profil-sekolah.edit', compact('profil'));
     }
+
+    public function show()
+{
+    $profil = ProfilSekolah::first();
+
+    return view('landing.profil.show', compact('profil'));
+}
 
     /**
      * Menyimpan profil sekolah

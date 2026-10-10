@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use App\Models\ProfilSekolah;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class BeritaController extends Controller
 {
@@ -16,6 +18,9 @@ class BeritaController extends Controller
         $profil = ProfilSekolah::first();
 
         $berita = Berita::orderBy('tanggal', 'desc')->get();
+
+        $berita = Berita::latest('tanggal')
+        ->paginate(6);
 
         return view('public.berita', compact(
             'profil',
@@ -91,9 +96,15 @@ class BeritaController extends Controller
 
     public function edit($id)
     {
-        $berita = Berita::findOrFail($id);
+        try{
+            $berita = Berita::findOrFail(Crypt::decrypt($id));
 
-        return view('admin.berita.edit', compact('berita'));
+            return view('admin.berita.edit', compact('berita'));
+        }catch(Exception $e){
+            return redirect()
+            ->route('admin.berita.index')
+            ->with('error', 'Data Berita tidak di temukan');
+        }
     }
 
 

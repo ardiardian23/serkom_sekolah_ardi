@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class SiswaController extends Controller
 {
@@ -74,9 +76,15 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        $siswa = Siswa::findOrFail($id);
+        try{
+            $siswa = Siswa::findOrFail(Crypt::decrypt($id));
 
-        return view('admin.siswa.edit', compact('siswa'));
+            return view('admin.siswa.edit', compact('siswa'));
+        }catch(Exception $e){
+            return redirect()
+            ->route('admin.siswa.index')
+            ->with('error', 'Data Siswa tidak di temukan');
+        }
     }
 
     /**

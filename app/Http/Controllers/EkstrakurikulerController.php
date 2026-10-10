@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Ekstrakurikuler;
 use App\Models\ProfilSekolah;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 
 class EkstrakurikulerController extends Controller
 {
@@ -14,7 +16,7 @@ class EkstrakurikulerController extends Controller
     {
         $profil = ProfilSekolah::first();
 
-        $ekskuls = Ekstrakurikuler::get();
+        $ekskuls = Ekstrakurikuler::paginate(6);
 
         return view('public.ekstrakurikuler', compact(
             'profil',
@@ -113,9 +115,16 @@ class EkstrakurikulerController extends Controller
      */
     public function edit($id)
     {
-        $ekskul = Ekstrakurikuler::findOrFail($id);
+        try{
+            $ekskul = Ekstrakurikuler::findOrFail( Crypt::decrypt($id));
 
-        return view('admin.ekstrakurikuler.edit', compact('ekskul'));
+            return view('admin.ekstrakurikuler.edit', compact('ekskul'));
+        }catch(Exception $e){
+            return redirect()
+            ->route('admin.ekstrakurikuler.index')
+            ->with('error', 'Data Ekstrakurikuler tidak di temukan');
+
+        }
     }
 
     /**

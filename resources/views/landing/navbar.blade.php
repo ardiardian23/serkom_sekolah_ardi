@@ -2,7 +2,10 @@
     <div class="container">
         {{-- LOGO --}}
         <a class="navbar-brand d-flex align-items-center" href="{{ route('landing') }}">
-            <img src="{{ asset('assets/images/logo/logosekolah.png') }}" alt="Logo Sekolah">
+            <img
+                src="{{ asset('assets/images/logo/logosekolah.png') }}"
+                alt="Logo Sekolah"
+            >
             <div class="ms-2">
                 <strong class="d-block">
                     {{ $profil->nama_sekolah ?? 'Website Sekolah' }}
@@ -26,6 +29,7 @@
 
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav ms-auto align-items-lg-center">
+
                 {{-- BERANDA --}}
                 <li class="nav-item">
                     <a
@@ -38,7 +42,10 @@
 
                 {{-- PROFIL --}}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('landing') }}#profil">
+                    <a
+                        class="nav-link {{ request()->routeIs('profil.public') ? 'active' : '' }}"
+                        href="{{ route('profil.public') }}"
+                    >
                         Profil
                     </a>
                 </li>
@@ -46,7 +53,8 @@
                 {{-- INFORMASI --}}
                 <li class="nav-item dropdown">
                     <a
-                        class="nav-link dropdown-toggle {{ request()->routeIs('berita.public', 'pengumuman.public') ? 'active' : '' }}"
+                        class="nav-link dropdown-toggle
+                        {{ request()->routeIs('berita.public', 'pengumuman.public') ? 'active' : '' }}"
                         href="#"
                         role="button"
                         data-bs-toggle="dropdown"
@@ -56,17 +64,21 @@
                     </a>
 
                     <ul class="dropdown-menu">
-                        {{-- BERITA --}}
                         <li>
-                            <a class="dropdown-item" href="{{ route('berita.public') }}">
+                            <a
+                                class="dropdown-item {{ request()->routeIs('berita.public') ? 'active' : '' }}"
+                                href="{{ route('berita.public') }}"
+                            >
                                 <i class="bi bi-newspaper me-2"></i>
                                 Berita
                             </a>
                         </li>
 
-                        {{-- PENGUMUMAN --}}
                         <li>
-                            <a class="dropdown-item" href="{{ route('pengumuman.public') }}">
+                            <a
+                                class="dropdown-item {{ request()->routeIs('pengumuman.public') ? 'active' : '' }}"
+                                href="{{ route('pengumuman.public') }}"
+                            >
                                 <i class="bi bi-megaphone me-2"></i>
                                 Pengumuman
                             </a>
@@ -97,7 +109,7 @@
                 {{-- PRESTASI --}}
                 <li class="nav-item">
                     <a
-                        class="nav-link {{ request()->routeIs('prestasi.public') ? 'active' : '' }}"
+                        class="nav-link {{ request()->routeIs('prestasi.public', 'prestasi.show') ? 'active' : '' }}"
                         href="{{ route('prestasi.public') }}"
                     >
                         Prestasi
@@ -113,6 +125,7 @@
                         Galeri
                     </a>
                 </li>
+
             </ul>
         </div>
     </div>

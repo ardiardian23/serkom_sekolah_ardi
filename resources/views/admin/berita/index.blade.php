@@ -132,7 +132,7 @@
 
                                     {{-- AKSI --}}
                                     <td>
-                                        <a href="{{ route('admin.berita.edit', $berita->id_berita) }}"
+                                        <a href="{{ route('admin.berita.edit',Crypt::encrypt($berita->id_berita) ) }}"
                                             class="btn btn-warning btn-sm" title="Edit berita">
                                             <i class="bi bi-pencil-square"></i> Edit
                                         </a>

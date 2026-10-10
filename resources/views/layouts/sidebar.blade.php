@@ -122,12 +122,14 @@
                                 <span>Galeri</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.user.index') }}" class="sidebar-link">
-                                <i class="bi bi-images"></i>
-                                <span>User</span>
-                            </a>
-                        </li>
+                        @if(Auth::check() && Auth::user()->role === 'Admin')
+                            <li class="sidebar-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.user.index') }}" class="sidebar-link">
+                                    <i class="bi bi-person"></i>
+                                    <span>Data User</span>
+                                </a>
+                            </li>
+                        @endif
 
 
                 <li class="sidebar-item">

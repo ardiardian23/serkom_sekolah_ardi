@@ -51,19 +51,6 @@
                                 value="{{ old('nama_guru', $guru->nama_guru) }}" required>
                         </div>
 
-                        {{-- JENIS KELAMIN --}}
-                        <div class="col-md-6 mb-3">
-                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                            <select name="jenis_kelamin" id="jenis_kelamin" class="form-select" required>
-                                <option value="">-- Pilih Jenis Kelamin --</option>
-                                <option value="Laki-laki" {{ old('jenis_kelamin', $guru->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>
-                                    Laki-Laki
-                                </option>
-                                <option value="Perempuan" {{ old('jenis_kelamin', $guru->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>
-                                    Perempuan
-                                </option>
-                            </select>
-                        </div>
 
                         {{-- MATA PELAJARAN --}}
                         <div class="col-md-6 mb-3">

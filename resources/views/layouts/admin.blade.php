@@ -1,4 +1,3 @@
-```blade
 <!DOCTYPE html>
 <html lang="id">
 
@@ -202,6 +201,29 @@
             transform: translateY(-2px);
         }
 
+        .foto-kepala-dashboard {
+            width: 280px !important;
+            height: 320px !important;
+            max-width: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            margin: 0 auto;
+            border-radius: 12px;
+            transform: translateY(-50px);
+        }
+
+
+
+        @media (max-width: 767px) {
+            .foto-kepala-dashboard {
+                width: 200px !important;
+                height: 240px !important;
+            }
+        }
+
+
+
         /* =========================================
            RESPONSIVE
         ========================================= */
@@ -264,8 +286,7 @@
                 @yield('content')
             </main>
 
-            {{-- FOOTER ADMIN --}}
-            @include('admin.footer')
+
         </div>
     </div>
 
@@ -278,4 +299,4 @@
 </body>
 
 </html>
-```
+

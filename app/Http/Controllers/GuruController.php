@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Guru;
 use App\Models\ProfilSekolah;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 
 class GuruController extends Controller
 {
@@ -15,6 +17,7 @@ class GuruController extends Controller
         $profil = ProfilSekolah::first();
 
         $guru = Guru::get();
+        $guru = Guru::paginate(6);
 
         return view('public.guru', compact(
             'profil',
@@ -40,9 +43,16 @@ class GuruController extends Controller
 
     public function edit($id)
     {
-        $guru = Guru::findOrFail($id);
+        try{
+            $guru = Guru::findOrFail(Crypt::decrypt($id));
 
-        return view('admin.guru.edit', compact('guru'));
+            return view('admin.guru.edit', compact('guru'));
+
+        }catch(Exception $e){
+            return redirect()
+            ->route('admin.guru.index')
+            ->with('error','Data Guru Tidak di temukan');
+        }
     }
 
     public function create()
@@ -57,7 +67,6 @@ class GuruController extends Controller
         $request->validate([
             'nama_guru' => 'required|string|max:100',
             'nip' => 'required|string|max:20',
-            'jenis_kelamin' => 'required|string',
             'mapel' => 'required|string|max:100',
             'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
@@ -67,7 +76,6 @@ class GuruController extends Controller
         Guru::create([
             'nama_guru' => $request->nama_guru,
             'nip' => $request->nip,
-            'jenis_kelamin' => $request->jenis_kelamin,
             'mapel' => $request->mapel,
             'foto' => $foto,
         ]);
@@ -96,14 +104,12 @@ class GuruController extends Controller
         $request->validate([
             'nama_guru' => 'required|string|max:40',
             'nip' => 'required|string|max:15',
-            'jenis_kelamin' => 'required|string|max:20',
             'mapel' => 'required|string|max:40',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $guru->nama_guru = $request->nama_guru;
         $guru->nip = $request->nip;
-        $guru->jenis_kelamin = $request->jenis_kelamin;
         $guru->mapel = $request->mapel;
 
         // Jika memilih foto baru

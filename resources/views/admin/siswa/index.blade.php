@@ -32,15 +32,15 @@
     @endif
 
     {{-- PESAN ERROR --}}
-    @if($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <i class="bi bi-exclamation-circle me-2"></i>
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     @endif
+
+    
 
     <section class="section">
         <div class="card">
@@ -121,7 +121,7 @@
                                     <td>
                                         {{-- AKSI KHUSUS ADMIN --}}
                                         @if(auth()->user()->role === 'Admin')
-                                            <a href="{{ route('admin.siswa.edit', $siswa->id_siswa) }}"
+                                            <a href="{{ route('admin.siswa.edit',Crypt::encrypt ($siswa->id_siswa)) }}"
                                                 class="btn btn-warning btn-sm">
                                                 <i class="bi bi-pencil"></i> Edit
                                             </a>

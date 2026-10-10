@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Prestasi;
 use App\Models\ProfilSekolah;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+
 
 class PrestasiController extends Controller
 {
@@ -13,7 +17,7 @@ class PrestasiController extends Controller
     {
         $profil = ProfilSekolah::first();
 
-        $prestasi = Prestasi::take(3)->get();
+        $prestasi = Prestasi::take(3)->paginate(6);
 
         return view('public.prestasi', compact(
             'profil',
@@ -91,21 +95,35 @@ class PrestasiController extends Controller
      */
     public function show($id)
     {
-        $prestasi = Prestasi::findOrFail($id);
+        try{
+            $prestasi = Prestasi::findOrFail($id);
 
-        $profil = ProfilSekolah::first();
+            $profil = ProfilSekolah::first();
 
-        return view('landing.prestasi.show', compact(
-            'prestasi',
-            'profil'
-        ));
+            return view('landing.prestasi.show', compact(
+                'prestasi',
+                'profil'
+            ));
+        }catch(Exception $e){
+            return redirect()
+            ->route('admin.prestasi.index')
+            ->with('error', 'Data Prestasi tidak di temukan');
+        }
     }
 
     /**
      * Menampilkan form edit prestasi
      */
-    public function edit($id)
+    public function edit($prestasi)
     {
+        try {
+            $id = Crypt::decryptString($prestasi);
+        } catch (DecryptException $e) {
+            return redirect()
+            ->route('admin.prestasi.index')
+            ->with('Error' , 'Data tidak di temukan');
+        }
+
         $prestasi = Prestasi::findOrFail($id);
 
         return view('admin.prestasi.edit', compact('prestasi'));

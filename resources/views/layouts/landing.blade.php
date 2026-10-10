@@ -197,201 +197,470 @@
         color: #6b7280;
     }
 
-    /* =========================================================
-       PROFILE
-    ========================================================= */
-
-    .profile-modern {
-        padding: 90px 0;
-        background: #f8fafc;
+/* PAGINATION SIMPLE */
+    .pagination {
+        justify-content: center;
+        margin-top: 20px;
     }
 
-    .profile-header-modern,
-    .visi-header {
-        text-align: center;
-        margin-bottom: 45px;
-    }
-
-    .profile-label {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-
+    .pagination .page-link {
         color: #0d6efd;
-        font-weight: 700;
-        margin-bottom: 12px;
+        border-radius: 5px;
     }
 
-    .profile-header-modern h2,
-    .visi-header h2 {
-        font-size: 36px;
-        font-weight: 800;
-        color: #172033;
-        margin-bottom: 10px;
-    }
-
-    .profile-header-modern p,
-    .visi-header p {
-        color: #6b7280;
-        margin-bottom: 15px;
-    }
-
-    .title-line,
-    .visi-line {
-        width: 60px;
-        height: 4px;
-        border-radius: 20px;
+    .pagination .page-item.active .page-link {
         background: #0d6efd;
-        margin: auto;
+        border-color: #0d6efd;
+        color: white;
+    }
+
+
+
+
+
+/```css
+/* =========================================================
+   PERBAIKAN LAYOUT PROFIL SEKOLAH
+========================================================= */
+
+.profile-modern {
+    padding: 65px 0;
+    background: #f5f8fc;
+}
+
+.profile-modern .container {
+    max-width: 1200px;
+}
+
+/* HEADER PROFIL */
+
+.profile-header-modern {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.profile-header-modern .profile-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    margin-bottom: 14px;
+    border-radius: 30px;
+    background: #eaf2ff;
+    color: #1769e0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.profile-header-modern h2 {
+    margin-bottom: 10px;
+    color: #10204e;
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.profile-header-modern p {
+    margin-bottom: 16px;
+    color: #718096;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.profile-header-modern .title-line {
+    width: 55px;
+    height: 4px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background: #1769e0;
+}
+
+/* KARTU UTAMA */
+
+.profile-modern-card {
+    padding: 25px;
+    background: #fff;
+    border: 1px solid #e8edf5;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(15, 31, 77, 0.06);
+}
+
+.profile-modern-card > .row {
+    align-items: stretch;
+}
+
+.profile-modern-card > .row > [class*="col-"] {
+    min-width: 0;
+}
+
+/* IDENTITAS SEKOLAH */
+
+.school-profile-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    min-height: 400px;
+    padding: 25px 22px;
+
+    text-align: center;
+    overflow: hidden;
+
+    background: linear-gradient(145deg, #edf5ff, #fff);
+    border: 1px solid #e2ebf8;
+    border-radius: 18px;
+}
+
+.school-profile-box::before,
+.school-profile-box::after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.05);
+    pointer-events: none;
+}
+
+.school-profile-box::before {
+    top: -75px;
+    left: -65px;
+}
+
+.school-profile-box::after {
+    right: -70px;
+    bottom: -75px;
+}
+
+/* FOTO KEPALA SEKOLAH
+   Mengikuti class school-headmaster-photo pada Blade */
+
+.school-profile-box img.school-headmaster-photo {
+    display: block;
+    position: relative;
+    z-index: 2;
+
+    width: 145px;
+    height: 175px;
+    max-width: 100%;
+
+    margin: -8px auto 18px;
+    padding: 0;
+
+    object-fit: contain;
+    object-position: center top;
+
+    background: #fff;
+    border: 3px solid #fff;
+    border-radius: 14px;
+
+    box-shadow: 0 8px 22px rgba(15, 31, 77, 0.12);
+}
+
+.school-profile-box h3 {
+    position: relative;
+    z-index: 1;
+
+    max-width: 100%;
+    margin-bottom: 8px;
+
+    color: #10204e;
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+.school-profile-box .npsn {
+    position: relative;
+    z-index: 1;
+    color: #718096;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.school-profile-box .profile-divider {
+    position: relative;
+    z-index: 1;
+
+    width: 48px;
+    height: 4px;
+    margin: 18px auto;
+
+    background: #1769e0;
+    border-radius: 10px;
+}
+
+.school-profile-box .profile-quote {
+    position: relative;
+    z-index: 1;
+
+    max-width: 280px;
+    margin: 0;
+
+    color: #5b6780;
+    font-size: 14px;
+    line-height: 1.8;
+    font-style: italic;
+}
+
+/* INFORMASI SEKOLAH */
+
+.about-school-modern {
+    height: 100%;
+    min-width: 0;
+    padding: 15px 10px 15px 20px;
+}
+
+.about-title-modern {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.about-icon-modern {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    color: #1769e0;
+    background: #eaf2ff;
+    border-radius: 13px;
+    font-size: 21px;
+}
+
+.about-title-modern h3 {
+    margin: 0;
+    color: #10204e;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.about-description-modern {
+    margin-bottom: 25px;
+    color: #5b6780;
+    font-size: 15px;
+    line-height: 1.9;
+    text-align: justify;
+    overflow-wrap: anywhere;
+}
+
+/* INFORMASI KEPALA SEKOLAH DAN TAHUN BERDIRI */
+
+.profile-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.profile-info-item,
+.profile-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    min-width: 0;
+    padding: 17px;
+
+    background: #f8faff;
+    border: 1px solid #e5edf8;
+    border-radius: 14px;
+
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.profile-info-item:hover,
+.profile-address:hover {
+    border-color: #cbdcf5;
+    box-shadow: 0 5px 16px rgba(37, 99, 235, 0.06);
+}
+
+.profile-info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 40px;
+
+    width: 40px;
+    height: 40px;
+
+    color: #1769e0;
+    background: #eaf2ff;
+    border-radius: 11px;
+    font-size: 17px;
+}
+
+.profile-info-item > div:last-child,
+.profile-address > div:last-child {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-info-item small,
+.profile-address small {
+    display: block;
+    margin-bottom: 6px;
+    color: #718096;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.profile-info-item strong,
+.profile-address strong {
+    display: block;
+    color: #172554;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.profile-address {
+    margin-top: 0;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991.98px) {
+    .profile-modern {
+        padding: 55px 0;
     }
 
     .profile-modern-card {
-        background: #fff;
-        border-radius: 22px;
-        padding: 30px;
-        box-shadow: 0 15px 40px rgba(0,0,0,.07);
+        padding: 20px;
     }
 
     .school-profile-box {
-        height: 100%;
-        min-height: 380px;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        text-align: center;
-
-        padding: 35px 25px;
-
-        background: linear-gradient(
-            145deg,
-            #f8fbff,
-            #eef5ff
-        );
-
-        border-radius: 18px;
-    }
-
-    .school-logo-modern {
-        width: 130px;
-        height: 130px;
-        object-fit: contain;
-        margin-bottom: 20px;
-    }
-
-    .school-profile-box h3 {
-        font-size: 23px;
-        font-weight: 800;
-        color: #172033;
-    }
-
-    .npsn {
-        color: #6b7280;
-        font-size: 14px;
-    }
-
-    .profile-divider {
-        width: 60px;
-        height: 3px;
-        background: #0d6efd;
-        border-radius: 10px;
-        margin: 20px auto;
-    }
-
-    .profile-quote {
-        color: #0d6efd;
-        font-style: italic;
-        font-size: 14px;
-        line-height: 1.6;
+        min-height: 350px;
     }
 
     .about-school-modern {
-        height: 100%;
-        padding: 15px 10px;
-    }
-
-    .about-title-modern {
-        display: flex;
-        align-items: center;
-        gap: 13px;
-        margin-bottom: 22px;
+        padding: 10px 0 0;
     }
 
     .about-title-modern h3 {
-        margin: 0;
-        font-weight: 800;
-        color: #172033;
-    }
-
-    .about-icon-modern {
-        width: 45px;
-        height: 45px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 12px;
-
-        background: rgba(13,110,253,.1);
-        color: #0d6efd;
+        font-size: 23px;
     }
 
     .about-description-modern {
-        color: #667085;
         line-height: 1.8;
-        margin-bottom: 30px;
+    }
+}
+
+/* =========================================================
+   HP
+========================================================= */
+
+@media (max-width: 767.98px) {
+    .profile-modern {
+        padding: 45px 0;
+    }
+
+    .profile-header-modern {
+        margin-bottom: 25px;
+    }
+
+    .profile-header-modern h2 {
+        font-size: 27px;
+    }
+
+    .profile-header-modern p {
+        font-size: 14px;
+    }
+
+    .profile-modern-card {
+        padding: 14px;
+        border-radius: 16px;
+    }
+
+    .school-profile-box {
+        height: auto;
+        min-height: 0;
+        padding: 28px 18px;
+    }
+
+    .school-profile-box img.school-headmaster-photo {
+        width: 130px;
+        height: 155px;
+        margin: 0 auto 15px;
+    }
+
+    .school-profile-box h3 {
+        font-size: 19px;
+    }
+
+    .about-school-modern {
+        padding: 12px 2px 2px;
+    }
+
+    .about-title-modern {
+        gap: 11px;
+        margin-bottom: 15px;
+    }
+
+    .about-title-modern h3 {
+        font-size: 21px;
+    }
+
+    .about-icon-modern {
+        width: 42px;
+        height: 42px;
+    }
+
+    .about-description-modern {
+        font-size: 14px;
+        line-height: 1.8;
+        margin-bottom: 20px;
     }
 
     .profile-info-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 18px;
-        margin-bottom: 20px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
     }
 
     .profile-info-item,
     .profile-address {
-        display: flex;
-        align-items: flex-start;
-        gap: 14px;
+        padding: 14px;
+    }
+}
 
-        padding: 18px;
+/* HP LAYAR KECIL */
 
-        border: 1px solid #edf0f5;
-        border-radius: 14px;
-        background: #fff;
+@media (max-width: 380px) {
+    .profile-modern-card {
+        padding: 10px;
     }
 
-    .profile-info-icon {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 10px;
-
-        background: rgba(13,110,253,.1);
-        color: #0d6efd;
+    .school-profile-box {
+        padding: 24px 14px;
     }
 
-    .profile-info-item small,
-    .profile-address small {
-        display: block;
-        color: #8a94a6;
-        margin-bottom: 4px;
+    .profile-info-item,
+    .profile-address {
+        gap: 10px;
+        padding: 12px;
     }
 
     .profile-info-item strong,
     .profile-address strong {
-        display: block;
-        color: #172033;
+        font-size: 13px;
     }
+}
+```
+
 
     /* =========================================================
        VISI MISI

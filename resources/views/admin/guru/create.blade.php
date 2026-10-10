@@ -7,7 +7,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Guru</h3>
+                <h3>Tambah Guru</h3>
                 <p class="text-subtitle text-muted">Kelola data guru sekolah</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
@@ -73,21 +73,6 @@
                             </div>
                         </div>
 
-                        {{-- JENIS KELAMIN --}}
-                        <div class="col-md-6">
-                            <div class="form-group mb-3">
-                                <label for="jenis_kelamin">Jenis Kelamin</label>
-                                <select id="jenis_kelamin" name="jenis_kelamin" class="form-select" required>
-                                    <option value="">-- Pilih Jenis Kelamin --</option>
-                                    <option value="Laki-Laki" {{ old('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>
-                                        Laki-Laki
-                                    </option>
-                                    <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>
-                                        Perempuan
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
 
                         {{-- MATA PELAJARAN --}}
                         <div class="col-md-6">

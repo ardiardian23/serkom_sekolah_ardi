@@ -94,102 +94,142 @@
 </section>
 
 
-
 <!-- PROFIL SEKOLAH -->
+
 <section class="profile-modern" id="profil">
     <div class="container">
-        <div class="profile-header-modern">
+
+        {{-- Header Profil --}}
+        <div class="profile-header-modern text-center">
             <div class="profile-label">
                 <i class="bi bi-building"></i>
                 Profil Sekolah
             </div>
+
             <h2>Mengenal Lebih Dekat Sekolah Kami</h2>
             <p>Informasi mengenai identitas dan profil sekolah</p>
             <div class="title-line"></div>
         </div>
 
+        {{-- Kartu Profil Sekolah --}}
         <div class="profile-modern-card">
             <div class="row g-4 align-items-stretch">
-                <!-- KIRI -->
-                <div class="col-lg-4">
-                    <div class="school-profile-box">
-                        @if($profil && $profil->logo)
+
+                {{-- Kolom Kiri: Identitas Sekolah --}}
+                <div class="col-lg-4 col-md-5">
+                    <div class="school-profile-box h-100">
+
+                        {{-- Foto Kepala Sekolah --}}
+                        @if(!empty($profil?->foto_kepala_sekolah))
                             <img
-                                src="{{ asset('storage/' . $profil->logo) }}"
-                                class="school-logo-modern"
-                                alt="Logo {{ $profil->nama_sekolah }}"
+                                src="{{ asset('storage/' . $profil->foto_kepala_sekolah) }}"
+                                class="school-headmaster-photo"
+                                alt="Foto Kepala Sekolah"
+                                loading="lazy"
                             >
                         @else
                             <img
-                                src="{{ asset('assets/images/logo/logosekolah.png') }}"
-                                class="school-logo-modern"
-                                alt="Logo Sekolah"
+                                src="{{ asset('assets/images/faces/kepsek.png') }}"
+                                class="school-headmaster-photo"
+                                alt="Foto Kepala Sekolah"
+                                loading="lazy"
                             >
                         @endif
 
-                        <h3>{{ $profil->nama_sekolah ?? 'SMA Negeri 9 Sijunjung' }}</h3>
-                        <div class="npsn">NPSN: {{ $profil->npsn ?? '-' }}</div>
-                        <div class="profile-divider"></div>
-                        <div class="profile-quote">
-                            “Bersama Mewujudkan Pendidikan Berkualitas”
+                        <h3>
+                            {{ $profil?->nama_sekolah ?? 'SMA Negeri 9 Sijunjung' }}
+                        </h3>
+
+                        <div class="npsn">
+                            <i class="bi bi-patch-check-fill"></i>
+                            NPSN: {{ $profil?->npsn ?? '-' }}
                         </div>
+
+                        <div class="profile-divider"></div>
+
+                        <div class="profile-quote">
+                            <i class="bi bi-quote"></i>
+                            Bersama Mewujudkan Pendidikan Berkualitas
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- KANAN -->
-                <div class="col-lg-8">
-                    <div class="about-school-modern">
+                {{-- Kolom Kanan: Informasi Sekolah --}}
+                <div class="col-lg-8 col-md-7">
+                    <div class="about-school-modern h-100">
+
                         <div class="about-title-modern">
                             <div class="about-icon-modern">
                                 <i class="bi bi-building"></i>
                             </div>
-                            <h3>Tentang Sekolah</h3>
+
+                            <div>
+                                <h3>Tentang Sekolah</h3>
+                                <p>Informasi umum dan identitas sekolah</p>
+                            </div>
                         </div>
 
-                        <p class="about-description-modern">
-                            {{ $profil->deskripsi ?? 'Belum ada deskripsi sekolah.' }}
-                        </p>
+                        {{-- Deskripsi Sekolah --}}
+                        <div class="about-description-modern">
+                            {{ $profil?->deskripsi ?? 'Informasi deskripsi sekolah belum tersedia.' }}
+                        </div>
 
+                        {{-- Informasi Kepala Sekolah dan Tahun Berdiri --}}
                         <div class="profile-info-grid">
-                            <!-- KEPALA SEKOLAH -->
+
                             <div class="profile-info-item">
                                 <div class="profile-info-icon">
                                     <i class="bi bi-person-fill"></i>
                                 </div>
-                                <div>
+
+                                <div class="profile-info-content">
                                     <small>Kepala Sekolah</small>
-                                    <strong>{{ $profil->kepala_sekolah ?? '-' }}</strong>
+                                    <strong>
+                                        {{ $profil?->kepala_sekolah ?? '-' }}
+                                    </strong>
                                 </div>
                             </div>
 
-                            <!-- TAHUN BERDIRI -->
                             <div class="profile-info-item">
                                 <div class="profile-info-icon">
                                     <i class="bi bi-calendar-event-fill"></i>
                                 </div>
-                                <div>
+
+                                <div class="profile-info-content">
                                     <small>Tahun Berdiri</small>
-                                    <strong>{{ $profil->tahun_berdiri ?? '-' }}</strong>
+                                    <strong>
+                                        {{ $profil?->tahun_berdiri ?? '-' }}
+                                    </strong>
                                 </div>
                             </div>
+
                         </div>
 
-                        <!-- ALAMAT -->
+                        {{-- Alamat Sekolah --}}
                         <div class="profile-address">
                             <div class="profile-info-icon">
                                 <i class="bi bi-geo-alt-fill"></i>
                             </div>
-                            <div>
+
+                            <div class="profile-info-content">
                                 <small>Alamat Sekolah</small>
-                                <strong>{{ $profil->alamat ?? '-' }}</strong>
+                                <strong>
+                                    {{ $profil?->alamat ?? '-' }}
+                                </strong>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
             </div>
         </div>
+
     </div>
 </section>
+
+
 
 <!-- VISI & MISI -->
 <section class="visi-misi-modern">
@@ -490,68 +530,74 @@
     </div>
 </section>
 
+
+
 <!-- PRESTASI -->
 <section class="section-padding bg-white" id="prestasi">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-5">
             <div>
                 <h2 class="section-title mb-1">Prestasi Sekolah</h2>
-                <p class="text-muted mb-0">Prestasi dan pencapaian siswa</p>
+                <p class="text-muted mb-0">
+                    Prestasi dan pencapaian siswa
+                </p>
             </div>
-            <a href="{{ route('prestasi.public') }}" class="btn btn-outline-primary">
+
+            <a href="{{ route('prestasi.public') }}"
+               class="btn btn-outline-primary">
                 Lihat Semua
                 <i class="bi bi-arrow-right ms-1"></i>
             </a>
         </div>
 
         <div class="row g-4">
-            @forelse($prestasi as $item)
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm news-card">
-                        {{-- FOTO --}}
-                        <div class="overflow-hidden">
+            @forelse ($prestasi as $item)
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                        @if ($item->foto)
                             <img
-                                src="{{ $item->foto ? asset('storage/' . $item->foto) : asset('assets/images/logo/logosekolah.png') }}"
+                                src="{{ asset('storage/' . $item->foto) }}"
+                                class="gallery-image"
                                 alt="{{ $item->nama_prestasi }}"
-                                class="w-100"
-                                style="height: 220px; object-fit: cover;"
+                                style="width: 100%; height: 220px; object-fit: cover;"
                             >
-                        </div>
+                        @else
+                            <div class="gallery-image bg-light d-flex align-items-center justify-content-center">
+                                <i class="bi bi-trophy fs-1 text-secondary"></i>
+                            </div>
+                        @endif
 
-                        <div class="card-body p-4">
-                            {{-- NAMA PRESTASI --}}
-                            <h5 class="fw-bold mb-2">{{ $item->nama_prestasi }}</h5>
+                        <div class="card-body">
+                            <h6 class="fw-bold mb-2">
+                                {{ $item->nama_prestasi }}
+                            </h6>
 
-                            {{-- TAHUN --}}
-                            <p class="text-primary fw-semibold mb-2">
-                                <i class="bi bi-calendar3 me-1"></i>
-                                {{ $item->tahun_ajaran ?: '-' }}
+                            <p class="text-muted small mb-1">
+                                {{ $item->deskripsi }}
                             </p>
 
-                            {{-- DESKRIPSI --}}
-                            <p class="text-muted mb-3">
-                                {{ \Illuminate\Support\Str::limit(strip_tags($item->deskripsi), 100) }}
-                            </p>
-
-                            {{-- LIHAT DETAIL --}}
-                            <a
-                                href="{{ route('prestasi.show', ['id' => $item->id]) }}"
-                                class="text-primary text-decoration-none fw-semibold"
-                            >
-                                Lihat Detail
-                                <i class="bi bi-arrow-right ms-1"></i>
-                            </a>
+                            <small class="text-muted">
+                                Tahun ajaran: {{ $item->tahun_ajaran }}
+                            </small>
                         </div>
                     </div>
                 </div>
             @empty
                 <div class="col-12 text-center">
-                    <p class="text-muted">Belum ada data prestasi.</p>
+                    <p class="text-muted">
+                        Belum ada data prestasi.
+                    </p>
                 </div>
             @endforelse
         </div>
     </div>
 </section>
+
+
+
+
+
+
 
 <!-- GALERI -->
 <section class="section-padding bg-light" id="galeri">
@@ -559,42 +605,64 @@
         <div class="d-flex justify-content-between align-items-center mb-5">
             <div>
                 <h2 class="section-title mb-1">Galeri Sekolah</h2>
-                <p class="text-muted mb-0">Dokumentasi kegiatan sekolah</p>
+                <p class="text-muted mb-0">
+                    Dokumentasi kegiatan sekolah
+                </p>
             </div>
-            <a href="{{ route('galeri.public') }}" class="btn btn-outline-primary">
+
+            <a href="{{ route('galeri.public') }}"
+               class="text-primary text-decoration-none fw-semibold">
                 Lihat Semua
                 <i class="bi bi-arrow-right ms-1"></i>
             </a>
         </div>
 
         <div class="row g-4">
-            @forelse($galeris as $item)
+            @forelse ($galeris as $item)
                 <div class="col-lg-3 col-md-4 col-6">
-                    @if($item->file)
-                        <img
-                            src="{{ asset('storage/' . $item->file) }}"
-                            class="gallery-image"
-                            alt="{{ $item->judul }}"
-                        >
-                    @else
-                        <div class="gallery-image bg-white d-flex align-items-center justify-content-center">
-                            <i class="bi bi-images fs-1 text-secondary"></i>
-                        </div>
-                    @endif
+                    <div class="card h-100 border-0 shadow-sm">
+                        @if ($item->file)
+                            <img
+                                src="{{ asset('storage/' . $item->file) }}"
+                                class="gallery-image"
+                                alt="{{ $item->judul }}"
+                            >
+                        @else
+                            <div class="gallery-image bg-white d-flex align-items-center justify-content-center">
+                                <i class="bi bi-images fs-1 text-secondary"></i>
+                            </div>
+                        @endif
 
-                    <div class="mt-2">
-                        <h6 class="fw-bold mb-0">{{ $item->judul }}</h6>
-                        <small class="text-muted">{{ $item->kategori ?? '-' }}</small>
+                        <div class="card-body">
+                            <h6 class="fw-bold mb-1">
+                                {{ $item->judul }}
+                            </h6>
+
+                            <small class="text-muted">
+                                {{ $item->kategori ?? '-' }}
+                            </small>
+
+                            <div class="mt-3">
+                                <a href="{{ route('galeri.show', ['id' => $item->id_galeri]) }}">
+                                    Lihat Detail
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @empty
                 <div class="col-12 text-center">
-                    <p class="text-muted">Belum ada foto galeri.</p>
+                    <p class="text-muted">
+                        Belum ada foto galeri.
+                    </p>
                 </div>
             @endforelse
         </div>
     </div>
 </section>
+
+
+
 
 <!-- KONTAK -->
 <section class="section-padding bg-white" id="kontak">
@@ -633,5 +701,6 @@
         </div>
     </div>
 </section>
+
 @endsection
 

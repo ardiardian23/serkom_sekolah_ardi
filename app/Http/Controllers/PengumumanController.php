@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengumuman;
 use App\Models\ProfilSekolah;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class PengumumanController extends Controller
 {
@@ -14,7 +16,7 @@ class PengumumanController extends Controller
 
         $pengumumans = Pengumuman::where('status', 'Publish')
             ->orderBy('tanggal', 'desc')
-            ->get();
+            ->paginate(6);
 
         return view('public.pengumuman', compact(
             'profil',
@@ -95,12 +97,18 @@ class PengumumanController extends Controller
 
     public function edit($id)
     {
-        $pengumuman = Pengumuman::findOrFail($id);
+        try{
+            $pengumuman = Pengumuman::findOrFail(Crypt::decrypt($id));
 
-        return view(
-            'admin.pengumuman.edit',
-            compact('pengumuman')
-        );
+            return view(
+                'admin.pengumuman.edit',
+                compact('pengumuman')
+            );
+        }catch(Exception $e){
+            return redirect()
+            ->route('admin.pengumuman.index')
+            ->with('error', 'Data pengumuman tidak di temukan');
+        }
     }
 
     public function update(Request $request, $id)

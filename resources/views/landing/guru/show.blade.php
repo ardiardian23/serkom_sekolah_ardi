@@ -46,6 +46,7 @@
                         </div>
 
                         {{-- NIP --}}
+                        
                         <div class="guru-info-item">
                             <div class="guru-info-icon">
                                 <i class="bi bi-card-text"></i>

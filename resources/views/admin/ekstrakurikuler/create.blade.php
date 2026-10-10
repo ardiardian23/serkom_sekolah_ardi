@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="page-heading">
-    <h3>Data Ekstrakurikuler</h3>
+    <h3>Tambah Ekstrakurikuler</h3>
     <p class="text-subtitle text-muted">Kelola data ekstrakurikuler sekolah</p>
 </div>
 
